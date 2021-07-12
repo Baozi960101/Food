@@ -61,12 +61,12 @@ const Selected = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 191px;
-  margin-bottom: 78px;
+  margin-bottom: 333px;
 `;
 
 const SelectedImgSize = styled.img`
-  width: 1330px;
-  height: 550px;
+  height: auto;
+  max-width: 100%;
 `;
 
 export default function Headder() {
