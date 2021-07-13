@@ -1,5 +1,10 @@
 import styled from "styled-components";
 import React from "react";
+import FoodImg1 from "./images/pexels-photo-1579926.png";
+import FoodImg2 from "./images/pexels-photo-704971.png";
+import FoodImg3 from "./images/pexels-photo-416471.png";
+import FoodImg4 from "./images/pexels-photo-286283.png";
+import RightArrows from "./images/right-arrows-symbol.svg";
 
 const PostTittleBox = styled.div`
   display: flex;
@@ -38,6 +43,7 @@ const PostTopTittle = styled.div`
 
 const PostBottomSubtitle = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 36px;
@@ -66,7 +72,7 @@ const PostMainProject = styled.div`
   box-sizing: border-box;
 
   & + & {
-    margin-left: 52px;
+    margin-left: 2%;
   }
 `;
 
@@ -78,7 +84,6 @@ const PostMainProjectImg = styled.img`
   justify-content: center;
   overflow: hidden;
 `;
-
 
 const PostMainProjectText = styled.div`
   display: flex;
@@ -111,14 +116,67 @@ const PostMainProjectTextSubtitleMain = ({
   return (
     <PostMainProjectTextSubtitle>
       <div style={{ display: "flex", color: "black" }}>
-        <div>{subtitle1}</div>
-        <div style={{ paddingLeft: "5px" }}>{subtitle2}</div>
-        <div style={{ paddingLeft: "5px" }}>{subtitle3}</div>
+        <div style={{ fontWeight: "800" }}>{subtitle1}</div>
+        <div style={{ paddingLeft: "7px", fontWeight: "800" }}>{subtitle2}</div>
+        <div style={{ paddingLeft: "7px", fontWeight: "800" }}>{subtitle3}</div>
       </div>
       <div>
-        <div style={{ color: "#a4a4a4" }}>{date}</div>
+        <div style={{ color: "#a4a4a4", fontFamily: "Open Sans, sans-serif" }}>
+          {date}
+        </div>
       </div>
     </PostMainProjectTextSubtitle>
+  );
+};
+
+const MainBox = styled.div`
+  display: flex;
+  max-width: 1330px;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const ReadMoreBox = styled.div`
+  display: flex;
+  max-width: 1330px;
+  justify-content: flex-end;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const ReadMoreText = styled.div`
+  display: flex;
+  width: 116px;
+  height: 22px;
+  justify-content: space-between;
+  color: #f9ac53;
+  box-sizing: border-box;
+  margin-top: 21px;
+  font-weight: 800;
+  cursor: pointer;
+`;
+
+const ReadMore = () => {
+  return (
+    <ReadMoreBox>
+      <ReadMoreText>
+        <div>點我看更多</div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={RightArrows}
+            alt="更多"
+            style={{ width: "18px", height: "10px" }}
+          />
+        </div>
+      </ReadMoreText>
+    </ReadMoreBox>
   );
 };
 
@@ -143,6 +201,11 @@ const PostMainProjectBox = ({
     </PostMainProject>
   );
 };
+
+const Block = styled.div`
+  width: 100%;
+  height: 107px;
+`;
 
 const MainPostTittle = ({
   tittleHeadder1,
@@ -170,15 +233,111 @@ export default function Post() {
         tittleHeadder2="食"
         subtitleHeadder="FOOD"
       />
-      <PostMainProjectBox
-        imgSrc={
-          "http://1.bp.blogspot.com/-JnnDhJzFRbo/VFYubaj_84I/AAAAAAAAA48/zH6zZOMSRdo/s1600/%E8%80%81%E9%B7%B9%2B%E6%94%9D%E7%90%86.jpg"
-        }
-        tittle={"我是主文"}
-        subtitle1={"#下午茶"}
-        subtitle2={"#美食"}
-        date={"2021/07/12"}
+      <MainBox>
+        <PostMainProjectBox
+          imgSrc={FoodImg1}
+          tittle={"必吃！甜點清單看見快收藏起來, 幸福感MAX"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+        <PostMainProjectBox
+          imgSrc={FoodImg2}
+          tittle={"減肥又好吃的優格清單！5種吃法讓你美味又想瘦"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+        <PostMainProjectBox
+          imgSrc={FoodImg3}
+          tittle={"低脂又健康培根捲, 懶人簡單做法, 3招輕鬆搞定"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+        <PostMainProjectBox
+          imgSrc={FoodImg4}
+          tittle={"幸福滿點！4間高雄美食日式蓋飯, 吃過的人都回不去"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+      </MainBox>
+      <ReadMore />
+      <Block />
+      <MainPostTittle
+        tittleHeadder1="熱"
+        tittleHeadder2="門"
+        subtitleHeadder="HOT"
       />
+      <MainBox>
+        <PostMainProjectBox
+          imgSrc={FoodImg1}
+          tittle={"必吃！甜點清單看見快收藏起來, 幸福感MAX"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+        <PostMainProjectBox
+          imgSrc={FoodImg2}
+          tittle={"減肥又好吃的優格清單！5種吃法讓你美味又想瘦"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+        <PostMainProjectBox
+          imgSrc={FoodImg3}
+          tittle={"低脂又健康培根捲, 懶人簡單做法, 3招輕鬆搞定"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+        <PostMainProjectBox
+          imgSrc={FoodImg4}
+          tittle={"幸福滿點！4間高雄美食日式蓋飯, 吃過的人都回不去"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+      </MainBox>
+      <ReadMore />
+      <Block />
+      <MainPostTittle
+        tittleHeadder1="熱"
+        tittleHeadder2="門"
+        subtitleHeadder="HOT"
+      />
+      <MainBox>
+        <PostMainProjectBox
+          imgSrc={FoodImg1}
+          tittle={"必吃！甜點清單看見快收藏起來, 幸福感MAX"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+        <PostMainProjectBox
+          imgSrc={FoodImg2}
+          tittle={"減肥又好吃的優格清單！5種吃法讓你美味又想瘦"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+        <PostMainProjectBox
+          imgSrc={FoodImg3}
+          tittle={"低脂又健康培根捲, 懶人簡單做法, 3招輕鬆搞定"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+        <PostMainProjectBox
+          imgSrc={FoodImg4}
+          tittle={"幸福滿點！4間高雄美食日式蓋飯, 吃過的人都回不去"}
+          subtitle1={"# 下午茶"}
+          subtitle2={"# 美食"}
+          date={"2021/07/12"}
+        />
+      </MainBox>
+      <ReadMore />
     </>
   );
 }
