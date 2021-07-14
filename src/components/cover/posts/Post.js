@@ -70,9 +70,8 @@ const PostMainProject = styled.div`
   width: 300px;
   height: 406px;
   box-sizing: border-box;
-
   & + & {
-    margin-left: 2%;
+    margin-left: 1%;
   }
 `;
 
@@ -132,9 +131,10 @@ const PostMainProjectTextSubtitleMain = ({
 const MainBox = styled.div`
   display: flex;
   max-width: 1330px;
-  justify-content: space-between;
+  box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
+  justify-content: space-between;
 `;
 
 const ReadMoreBox = styled.div`
@@ -157,7 +157,7 @@ const ReadMoreText = styled.div`
   cursor: pointer;
 `;
 
-const ReadMore = () => {
+export const ReadMore = () => {
   return (
     <ReadMoreBox>
       <ReadMoreText>
@@ -180,7 +180,7 @@ const ReadMore = () => {
   );
 };
 
-const PostMainProjectBox = ({
+export const PostMainProjectBox = ({
   imgSrc,
   tittle,
   subtitle1,
@@ -207,7 +207,7 @@ const Block = styled.div`
   height: 107px;
 `;
 
-const MainPostTittle = ({
+export const MainPostTittle = ({
   tittleHeadder1,
   tittleHeadder2,
   subtitleHeadder,
@@ -233,6 +233,7 @@ export default function Post() {
         tittleHeadder2="食"
         subtitleHeadder="FOOD"
       />
+
       <MainBox>
         <PostMainProjectBox
           imgSrc={FoodImg1}

@@ -4,7 +4,6 @@ import Slideshow from "./Slideshow";
 import selected01 from "./images/selected01.jpg";
 import selected02 from "./images/selected02.png";
 
-
 const Selected = styled.div`
   box-sizing: border-box;
   width: 100%;

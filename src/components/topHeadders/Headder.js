@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import down from "./images/down.svg";
 import search from "./images/search.svg";
+import { Link } from "react-router-dom";
 
 const MainFieldHeadder = styled.div`
   display: flex;
@@ -23,13 +24,14 @@ const CoverHeadderText = styled.div`
   margin-right: 10%;
 `;
 
-const CoverHeadderTitle = styled.div`
+const CoverHeadderTitle = styled(Link)`
   display: flex;
   align-items: center;
   font-size: 16px;
   color: white;
   cursor: pointer;
   font-family: "PingFangTC";
+  text-decoration: none;
 
   & + & {
     letter-spacing: 12px;
@@ -52,8 +54,6 @@ const SearchImg = styled.img`
   height: 14px;
 `;
 
-
-
 export default function Headder() {
   return (
     <>
@@ -67,7 +67,7 @@ export default function Headder() {
             旅遊
             <DownImg />
           </CoverHeadderTitle>
-          <CoverHeadderTitle>
+          <CoverHeadderTitle to="./food">
             美食
             <DownImg />
           </CoverHeadderTitle>
