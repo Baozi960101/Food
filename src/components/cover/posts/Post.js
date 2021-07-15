@@ -8,12 +8,14 @@ import RightArrows from "./images/right-arrows-symbol.svg";
 
 const PostTittleBox = styled.div`
   display: flex;
-  width: 100%;
+  width: 88%;
   height: 60px;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
   margin-bottom: 67px;
+  margin-right: auto;
+  margin-left: auto;
 `;
 
 const PostTittleBorder = styled.div`

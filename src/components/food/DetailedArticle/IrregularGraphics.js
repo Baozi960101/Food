@@ -10,7 +10,7 @@ export const Triangle = styled.div`
 `;
 
 export const Square = styled.div`
-  width: 350px;
-  height: 60px;
+  width: 100%;
+  height: 70px;
   background: #efda5e;
 `;

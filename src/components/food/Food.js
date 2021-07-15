@@ -7,7 +7,7 @@ export default function Bottom() {
   return (
     <>
       <Headder />
-      {/* <Post /> */}
+      <Post />
       <DetailedArticle />
     </>
   );

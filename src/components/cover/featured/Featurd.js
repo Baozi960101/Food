@@ -50,7 +50,9 @@ const BigTitle = ({ topTitle, bottomTitle }) => {
 };
 
 const FeaturdImgBox = styled.div`
-  width: 100%;
+  width: 88%;
+  margin-left: 6%;
+  margin-right: 6%;
   display: flex;
   justify-content: center;
 `;

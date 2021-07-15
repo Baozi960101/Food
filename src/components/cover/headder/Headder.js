@@ -6,11 +6,13 @@ import selected02 from "./images/selected02.png";
 
 const Selected = styled.div`
   box-sizing: border-box;
-  width: 100%;
+  width: 88%;
   display: flex;
   justify-content: center;
   margin-top: 191px;
   margin-bottom: 333px;
+  margin-right: 6%;
+  margin-left: 6%;
 `;
 
 const SelectedImgSize = styled.img`
