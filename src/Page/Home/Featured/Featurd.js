@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { PostMainProjectBox, ReadMore, MainPostTittle } from "../posts/Post";
+import { PostMainProjectBox, ReadMore, MainPostTittle } from "../Posts/Post";
 import FeaturdTitleImg1 from "./images/pexels-valeria-boltneva-842571.png";
 import FeaturdTitleImg2 from "./images/pexels-valeria-boltneva-874254.png";
-import FoodImg1 from "../posts/images/pexels-photo-1579926.png";
-import FoodImg2 from "../posts/images/pexels-photo-704971.png";
-import FoodImg3 from "../posts/images/pexels-photo-416471.png";
-import FoodImg4 from "../posts/images/pexels-photo-286283.png";
+import FoodImg1 from "../Posts/images/pexels-photo-1579926.png";
+import FoodImg2 from "../Posts/images/pexels-photo-704971.png";
+import FoodImg3 from "../Posts/images/pexels-photo-416471.png";
+import FoodImg4 from "../Posts/images/pexels-photo-286283.png";
 
 const FeaturedBigTitle = styled.div`
   width: 318px;

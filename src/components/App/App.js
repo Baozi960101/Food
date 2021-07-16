@@ -1,8 +1,8 @@
 import React from "react";
-import Cover from "./cover";
-import TopHeadder from "./topHeadders";
-import Bottom from "./bottom";
-import Food from "./food";
+import Cover from "../../Page/Home";
+import TopHeadder from "../Header";
+import Bottom from "../Bottom";
+import Food from "../../Page/Food";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function App() {

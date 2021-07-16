@@ -1,7 +1,7 @@
 import React from "react";
-import Headder from "./headder";
-import Post from "./posts";
-import Featurd from "./featured/Featurd";
+import Headder from "./Header";
+import Post from "./Posts";
+import Featurd from "./Featured/Featurd";
 
 export default function Cover() {
   return (
