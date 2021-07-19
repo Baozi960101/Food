@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FoodImg1 from "./images/pexels-photo-1579926.png";
 import FoodImg2 from "./images/pexels-photo-704971.png";
 import FoodImg3 from "./images/pexels-photo-416471.png";
@@ -9,11 +9,9 @@ import RightArrows from "./images/right-arrows-symbol.svg";
 const PostTittleBox = styled.div`
   display: flex;
   width: 88%;
-  height: 60px;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  margin-bottom: 67px;
   margin-right: auto;
   margin-left: auto;
 `;
@@ -137,6 +135,7 @@ const MainBox = styled.div`
   margin-left: auto;
   margin-right: auto;
   justify-content: space-between;
+  margin-top: 100px;
 `;
 
 const ReadMoreBox = styled.div`
@@ -228,6 +227,18 @@ export const MainPostTittle = ({
 };
 
 export default function Post() {
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+    fetch("https://www.jiantong.com.tw/test_web/Back/index.php/News/selectdata")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setPost(data);
+      });
+  });
+
   return (
     <>
       <MainPostTittle
@@ -235,36 +246,31 @@ export default function Post() {
         tittleHeadder2="食"
         subtitleHeadder="FOOD"
       />
-
       <MainBox>
-        <PostMainProjectBox
-          imgSrc={FoodImg1}
-          tittle={"必吃！甜點清單看見快收藏起來, 幸福感MAX"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg2}
-          tittle={"減肥又好吃的優格清單！5種吃法讓你美味又想瘦"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg3}
-          tittle={"低脂又健康培根捲, 懶人簡單做法, 3招輕鬆搞定"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg4}
-          tittle={"幸福滿點！4間高雄美食日式蓋飯, 吃過的人都回不去"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
+        {post.map((data) => {
+          return (
+            <PostMainProjectBox
+              key={data.ID_ettoday}
+              tittle={data.Title_ettoday}
+              subtitle1={data.Class}
+              date={data.Day}
+              imgSrc={data.Picurl_ettoday}
+            />
+          );
+        })}
+      </MainBox>
+      <MainBox>
+        {post.map((data) => {
+          return (
+            <PostMainProjectBox
+              key={data.ID_ettoday}
+              tittle={data.Title_ettoday}
+              subtitle1={data.Class}
+              date={data.Day}
+              imgSrc={FoodImg1}
+            />
+          );
+        })}
       </MainBox>
       <ReadMore />
       <Block />

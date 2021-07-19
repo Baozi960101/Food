@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import down from "./images/down.svg";
 import search from "./images/search.svg";
