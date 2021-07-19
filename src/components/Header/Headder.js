@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const MainFieldHeadder = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 48px;
@@ -54,10 +54,19 @@ const SearchImg = styled.img`
   height: 14px;
 `;
 
+const MainFieldHeadderTitle = styled(Link)`
+  font-family: "PingFangTC";
+  font-size: 25px;
+  color: white;
+  text-decoration: none;
+  margin-left: 10%;
+`;
+
 export default function Headder() {
   return (
     <>
       <MainFieldHeadder>
+        <MainFieldHeadderTitle to="/">建通股份有限公司</MainFieldHeadderTitle>
         <CoverHeadderText>
           <CoverHeadderTitle>
             戶外運動

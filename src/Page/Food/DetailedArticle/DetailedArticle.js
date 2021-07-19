@@ -43,34 +43,13 @@ const DetailedArticleBoxLeftSubtitle = styled.div`
 `;
 
 const DetailedArticleBoxLeftText = styled.div`
-  margin-top: 83px;
   width: 500px;
   display: flex;
   justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
   font-size: 21px;
   letter-spacing: 2.84px;
   font-weight: 700;
-`;
-
-const DetailedArticleBoxLeftDivider = styled.div`
-  max-width: 100%;
-  height: 2px;
-  background-color: #d8d8d8;
-  margin-top: 150px;
-  margin-bottom: 67px;
-`;
-const DetailedArticleMessageTitle = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 21px;
-  letter-spacing: 2.84px;
-  font-weight: 600;
-`;
-
-const DetailedArticleBoxRightHotTitle = styled.div`
-  width: 100%;
+  margin: 83px auto 230px auto;
 `;
 
 const IrregularGraphicsTextTop = styled.div`
@@ -188,27 +167,6 @@ const DetailedArticleBoxLeftMain = ({
         <div style={{ color: "#a4a4a4" }}>{time}</div>
       </DetailedArticleBoxLeftSubtitle>
       <DetailedArticleBoxLeftText>{text}</DetailedArticleBoxLeftText>
-      <DetailedArticleBoxLeftDivider />
-    </>
-  );
-};
-
-const DetailedArticleMessage = () => {
-  return (
-    <>
-      <DetailedArticleMessageTitle>
-        <div>留言</div>
-        <div
-          style={{
-            paddingLeft: "15px",
-            fontSize: "10px",
-            letterSpacing: "1.43px",
-            color: "#949494",
-          }}
-        >
-          共幾則
-        </div>
-      </DetailedArticleMessageTitle>
     </>
   );
 };
@@ -258,26 +216,6 @@ export default function DetailedArticle() {
             tag2="# 下午茶"
           />
           <div style={{ width: "100%", height: "50px" }}></div>
-          <IrregularGraphicsTitle title="HOT & YAMMY" subtitle="美食熱門榜" />
-
-          <DetailedArticleBoxRightTextMain
-            text="超正宗泰式料理, 酸辣香什麼都有,你吃過了嗎？"
-            srcImg={DetailedArticleImg2}
-            tag1="# 甜點"
-            tag2="# 下午茶"
-          />
-          <DetailedArticleBoxRightTextMain
-            text="超正宗泰式料理, 酸辣香什麼都有,你吃過了嗎？"
-            srcImg={DetailedArticleImg2}
-            tag1="# 甜點"
-            tag2="# 下午茶"
-          />
-          <DetailedArticleBoxRightTextMain
-            text="超正宗泰式料理, 酸辣香什麼都有,你吃過了嗎？"
-            srcImg={DetailedArticleImg2}
-            tag1="# 甜點"
-            tag2="# 下午茶"
-          />
         </DetailedArticleBoxRight>
       </DetailedArticleBox>
     </>
