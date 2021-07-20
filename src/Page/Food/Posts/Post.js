@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import foodGridImg1 from "./images/pexels-photo-315755.png";
 import foodGridImg2 from "./images/pexels-photo-3737620.png";
-import foodParallelImg1 from "./images/pexels-photo-1437590.png";
-import foodParallelImg2 from "./images/pexels-photo-704971.png";
-import foodParallelImg3 from "./images/pexels-photo-675951.png";
+import { ArticleNumber } from "../../../API";
+import { chunk } from "lodash";
+import { Link } from "react-router-dom";
 
 const FoodGridPostBox = styled.div`
   display: flex;
@@ -93,11 +93,19 @@ const FoodParallelPost = styled.div`
   height: 469px;
 `;
 
-const FoodParallelPostImg = styled.img`
-  width: 100%;
+const FoodParallelPostImgBox = styled.div`
+  width: 370px;
   height: 330px;
+  display: flex;
+  align-items: center;
+  background-color: #fff7ff;
 `;
-const FoodParallelPostText = styled.div`
+
+const FoodParallelPostImg = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
+const FoodParallelPostText = styled(Link)`
   width: 100%;
   height: 60px;
   margin-top: 19px;
@@ -106,6 +114,8 @@ const FoodParallelPostText = styled.div`
   font-size: 21px;
   letter-spacing: 2.8px;
   box-sizing: border-box;
+  text-decoration: none;
+  color: black;
 `;
 
 const FoodParallelPostTag = styled.div`
@@ -116,16 +126,29 @@ const FoodParallelPostTag = styled.div`
   font-weight: 600;
 `;
 
-const FoodParallelPostBox = ({ imgSrc, title, tag1, tag2, tag3 }) => {
+const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
   return (
     <>
       <FoodParallelPost>
-        <FoodParallelPostImg src={imgSrc} />
-        <FoodParallelPostText>{title}</FoodParallelPostText>
+        <FoodParallelPostImgBox>
+          <FoodParallelPostImg src={imgSrc} />
+        </FoodParallelPostImgBox>
+        <FoodParallelPostText to={`/food/post/${toLink}`}>
+          {title}
+        </FoodParallelPostText>
         <FoodParallelPostTag>
-          <div>{tag1}</div>
-          <div style={{ paddingLeft: "7px" }}>{tag2}</div>
-          <div style={{ paddingLeft: "7px" }}>{tag3}</div>
+          <div>
+            {tag1 ? "#" : ""}
+            {tag1}
+          </div>
+          <div style={{ paddingLeft: "7px" }}>
+            {tag2 ? "#" : ""}
+            {tag2}
+          </div>
+          <div style={{ paddingLeft: "7px" }}>
+            {tag3 ? "#" : ""}
+            {tag3}
+          </div>
         </FoodParallelPostTag>
       </FoodParallelPost>
     </>
@@ -137,9 +160,18 @@ const FoodGridPostLeftBox = ({ tag1, tag2, tag3, imgSrc, title }) => {
     <>
       <FoodGridPostLeft>
         <FoodGridPostLeftTag>
-          <div>{tag1}</div>
-          <div style={{ paddingLeft: "7px" }}>{tag2}</div>
-          <div style={{ paddingLeft: "7px" }}>{tag3}</div>
+          <div>
+            {tag1 ? "# " : ""}
+            {tag1}
+          </div>
+          <div style={{ paddingLeft: "7px" }}>
+            {tag2 ? "# " : ""}
+            {tag2}
+          </div>
+          <div style={{ paddingLeft: "7px" }}>
+            {tag3 ? "# " : ""}
+            {tag3}
+          </div>
         </FoodGridPostLeftTag>
         <FoodGridPostLeftImg src={imgSrc} />
         <FoodGridPostLeftTitle>{title}</FoodGridPostLeftTitle>
@@ -153,6 +185,15 @@ const FoodBlock = ({ number }) => {
 };
 
 export default function FoodPost() {
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+    ArticleNumber(9).then((data) => {
+      const newChunk = chunk(data, 3);
+      setPost(newChunk);
+    });
+  }, []);
+
   return (
     <>
       <FoodGridPostBox>
@@ -170,66 +211,44 @@ export default function FoodPost() {
         />
       </FoodGridPostBox>
       <FoodParallelBox>
-        <FoodParallelPostBox
-          imgSrc={foodParallelImg1}
-          title="超正宗泰式料理, 酸辣香什麼都有,你吃過了嗎？"
-          tag1="# 甜點"
-          tag2="# 下午茶"
-        />
-        <FoodParallelPostBox
-          imgSrc={foodParallelImg2}
-          title="午餐新選擇, 超值牛排商業套餐,竟然百元有找"
-          tag1="# 甜點"
-          tag2="# 下午茶"
-        />
-        <FoodParallelPostBox
-          imgSrc={foodParallelImg3}
-          title="減肥又好吃的優格清單！5種吃法讓你美味又想瘦"
-          tag1="# 甜點"
-          tag2="# 下午茶"
-        />
+        {post.map((data) => {
+          return (
+            <FoodParallelPostBox
+              key={data[0].ID_ettoday}
+              toLink={data[0].ID_ettoday}
+              imgSrc={data[0].Picurl_ettoday}
+              title={data[0].Title_ettoday}
+              tag1={data[0].Class}
+            />
+          );
+        })}
+      </FoodParallelBox>
+      <FoodParallelBox>
+        {post.map((data) => {
+          return (
+            <FoodParallelPostBox
+              key={data[1].ID_ettoday}
+              toLink={data[1].ID_ettoday}
+              imgSrc={data[1].Picurl_ettoday}
+              title={data[1].Title_ettoday}
+              tag1={data[1].Class}
+            />
+          );
+        })}
       </FoodParallelBox>
       <FoodBlock number="73px" />
       <FoodParallelBox>
-        <FoodParallelPostBox
-          imgSrc={foodParallelImg1}
-          title="超正宗泰式料理, 酸辣香什麼都有,你吃過了嗎？"
-          tag1="# 甜點"
-          tag2="# 下午茶"
-        />
-        <FoodParallelPostBox
-          imgSrc={foodParallelImg2}
-          title="午餐新選擇, 超值牛排商業套餐,竟然百元有找"
-          tag1="# 甜點"
-          tag2="# 下午茶"
-        />
-        <FoodParallelPostBox
-          imgSrc={foodParallelImg3}
-          title="減肥又好吃的優格清單！5種吃法讓你美味又想瘦"
-          tag1="# 甜點"
-          tag2="# 下午茶"
-        />
-      </FoodParallelBox>
-      <FoodBlock number="73px" />
-      <FoodParallelBox>
-        <FoodParallelPostBox
-          imgSrc={foodParallelImg1}
-          title="超正宗泰式料理, 酸辣香什麼都有,你吃過了嗎？"
-          tag1="# 甜點"
-          tag2="# 下午茶"
-        />
-        <FoodParallelPostBox
-          imgSrc={foodParallelImg2}
-          title="午餐新選擇, 超值牛排商業套餐,竟然百元有找"
-          tag1="# 甜點"
-          tag2="# 下午茶"
-        />
-        <FoodParallelPostBox
-          imgSrc={foodParallelImg3}
-          title="減肥又好吃的優格清單！5種吃法讓你美味又想瘦"
-          tag1="# 甜點"
-          tag2="# 下午茶"
-        />
+        {post.map((data) => {
+          return (
+            <FoodParallelPostBox
+              key={data[2].ID_ettoday}
+              toLink={data[2].ID_ettoday}
+              imgSrc={data[2].Picurl_ettoday}
+              title={data[2].Title_ettoday}
+              tag1={data[2].Class}
+            />
+          );
+        })}
       </FoodParallelBox>
       <FoodBlock number="650px" />
     </>

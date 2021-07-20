@@ -5,6 +5,8 @@ import FoodImg2 from "./images/pexels-photo-704971.png";
 import FoodImg3 from "./images/pexels-photo-416471.png";
 import FoodImg4 from "./images/pexels-photo-286283.png";
 import RightArrows from "./images/right-arrows-symbol.svg";
+import { Link } from "react-router-dom";
+import { ArticleNumber } from "../../../API";
 
 const PostTittleBox = styled.div`
   display: flex;
@@ -75,16 +77,20 @@ const PostMainProject = styled.div`
   }
 `;
 
-const PostMainProjectImg = styled.img`
+const PostMainProjectImgBox = styled.div`
   width: 100%;
   height: 300px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  background-color: #fff7ff;
 `;
 
-const PostMainProjectText = styled.div`
+const PostMainProjectImg = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
+
+const PostMainProjectText = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -95,6 +101,8 @@ const PostMainProjectText = styled.div`
   margin-top: 26px;
   box-sizing: border-box;
   color: black;
+  cursor: pointer;
+  text-decoration: none;
 `;
 const PostMainProjectTextSubtitle = styled.div`
   width: 100%;
@@ -115,9 +123,18 @@ const PostMainProjectTextSubtitleMain = ({
   return (
     <PostMainProjectTextSubtitle>
       <div style={{ display: "flex", color: "black" }}>
-        <div style={{ fontWeight: "800" }}>{subtitle1}</div>
-        <div style={{ paddingLeft: "7px", fontWeight: "800" }}>{subtitle2}</div>
-        <div style={{ paddingLeft: "7px", fontWeight: "800" }}>{subtitle3}</div>
+        <div style={{ fontWeight: "800" }}>
+          {subtitle1 ? "# " : ""}
+          {subtitle1}
+        </div>
+        <div style={{ paddingLeft: "7px", fontWeight: "800" }}>
+          {subtitle2 ? "# " : ""}
+          {subtitle2}
+        </div>
+        <div style={{ paddingLeft: "7px", fontWeight: "800" }}>
+          {subtitle3 ? "# " : ""}
+          {subtitle3}
+        </div>
       </div>
       <div>
         <div style={{ color: "#a4a4a4", fontFamily: "Open Sans, sans-serif" }}>
@@ -146,7 +163,7 @@ const ReadMoreBox = styled.div`
   margin-right: auto;
 `;
 
-const ReadMoreText = styled.div`
+const ReadMoreText = styled(Link)`
   display: flex;
   width: 116px;
   height: 22px;
@@ -156,12 +173,13 @@ const ReadMoreText = styled.div`
   margin-top: 21px;
   font-weight: 800;
   cursor: pointer;
+  text-decoration: none;
 `;
 
-export const ReadMore = () => {
+export const ReadMore = ({ ReadLinkTo }) => {
   return (
     <ReadMoreBox>
-      <ReadMoreText>
+      <ReadMoreText to={ReadLinkTo}>
         <div>點我看更多</div>
         <div
           style={{
@@ -182,6 +200,7 @@ export const ReadMore = () => {
 };
 
 export const PostMainProjectBox = ({
+  toLink,
   imgSrc,
   tittle,
   subtitle1,
@@ -191,8 +210,12 @@ export const PostMainProjectBox = ({
 }) => {
   return (
     <PostMainProject>
-      <PostMainProjectImg src={imgSrc} />
-      <PostMainProjectText>{tittle}</PostMainProjectText>
+      <PostMainProjectImgBox>
+        <PostMainProjectImg src={imgSrc} />
+      </PostMainProjectImgBox>
+      <PostMainProjectText to={`/food/post/${toLink}`}>
+        {tittle}
+      </PostMainProjectText>
       <PostMainProjectTextSubtitleMain
         subtitle1={subtitle1}
         subtitle2={subtitle2}
@@ -230,14 +253,8 @@ export default function Post() {
   const [post, setPost] = useState([]);
 
   useEffect(() => {
-    fetch("https://www.jiantong.com.tw/test_web/Back/index.php/News/selectdata")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setPost(data);
-      });
-  });
+    ArticleNumber(4).then((data) => setPost(data));
+  }, []);
 
   return (
     <>
@@ -251,6 +268,7 @@ export default function Post() {
           return (
             <PostMainProjectBox
               key={data.ID_ettoday}
+              toLink={data.ID_ettoday}
               tittle={data.Title_ettoday}
               subtitle1={data.Class}
               date={data.Day}
@@ -259,7 +277,8 @@ export default function Post() {
           );
         })}
       </MainBox>
-      <MainBox>
+      <ReadMore ReadLinkTo="/food" />
+      {/* <MainBox>
         {post.map((data) => {
           return (
             <PostMainProjectBox
@@ -272,7 +291,7 @@ export default function Post() {
           );
         })}
       </MainBox>
-      <ReadMore />
+      <ReadMore /> */}
       <Block />
       <MainPostTittle
         tittleHeadder1="熱"

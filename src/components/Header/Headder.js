@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import down from "./images/down.svg";
 import search from "./images/search.svg";
 import { Link } from "react-router-dom";
+import UpArrow from "./images/UpArrow.svg";
 
 const MainFieldHeadder = styled.div`
   display: flex;
@@ -62,7 +63,40 @@ const MainFieldHeadderTitle = styled(Link)`
   margin-left: 10%;
 `;
 
+const TopBottom = styled.img`
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  cursor: pointer;
+`;
+
 export default function Headder() {
+  const [topBottomArise, setTopBottomArise] = useState(false);
+
+  useEffect(() => {
+    window.onscroll = function () {
+      scrollFunction();
+    };
+  }, []);
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      setTopBottomArise(true);
+    } else {
+      setTopBottomArise(false);
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
   return (
     <>
       <MainFieldHeadder>
@@ -89,6 +123,7 @@ export default function Headder() {
           </CoverHeadderTitle>
         </CoverHeadderText>
       </MainFieldHeadder>
+      {topBottomArise && <TopBottom onClick={topFunction} src={UpArrow} />}
     </>
   );
 }
