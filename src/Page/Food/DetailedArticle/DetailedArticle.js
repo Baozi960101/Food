@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Triangle, Square } from "./IrregularGraphics";
-import { ArticleNumber } from "../../../API";
-import { Link } from "react-router-dom";
+import { ArticleNumber, ArticleId } from "../../../API";
+import { SlugContext } from "../../../context";
 
 const DetailedArticleBox = styled.div`
   display: flex;
@@ -32,7 +32,6 @@ const DetailedArticleBoxLeftTitle = styled.div`
 
 const DetailedArticleBoxLeftImgBox = styled.div`
   width: 100%;
-  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -231,20 +230,19 @@ const DetailedArticleBoxLeftMain = ({
 };
 
 export default function DetailedArticle() {
+  const { fooDSlug } = useContext(SlugContext);
   const [detailedArticlePost, setDetailedArticlePost] = useState([]);
   const [detailedArticleOnlyPost, setDetailedArticleOnlyPost] = useState([]);
 
   useEffect(() => {
+    console.log(fooDSlug);
     ArticleNumber(3).then((data) => {
       setDetailedArticlePost(data);
     });
-    ArticleNumber(1).then((data) => {
+    ArticleId(fooDSlug).then((data) => {
       setDetailedArticleOnlyPost(data);
-      console.log(data);
     });
   }, []);
-
-  //Title_ettoday
 
   return (
     <>

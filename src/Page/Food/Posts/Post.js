@@ -124,6 +124,7 @@ const FoodParallelPostTag = styled.div`
   height: 20px;
   font-size: 14px;
   font-weight: 600;
+  margin-top: 10px;
 `;
 
 const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
@@ -250,7 +251,7 @@ export default function FoodPost() {
           );
         })}
       </FoodParallelBox>
-      <FoodBlock number="650px" />
+      <FoodBlock number="250px" />
     </>
   );
 }

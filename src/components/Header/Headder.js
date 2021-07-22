@@ -110,7 +110,7 @@ export default function Headder() {
             旅遊
             <DownImg />
           </CoverHeadderTitle>
-          <CoverHeadderTitle to="./food">
+          <CoverHeadderTitle to="/food">
             美食
             <DownImg />
           </CoverHeadderTitle>
