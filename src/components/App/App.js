@@ -5,7 +5,7 @@ import Bottom from "../Bottom";
 import FoodHome from "../../Page/Food/Home/HomeIndex";
 import DetailedArticle from "../../Page/Food/Home/DetailedArticleIndex";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   useParams,
@@ -31,7 +31,7 @@ export default function App() {
         <Router>
           <ScrollToTop />
           <TopHeadder />
-          <Switch>
+            <Switch>
             <Route exact path="/">
               <Cover />
             </Route>
@@ -41,7 +41,7 @@ export default function App() {
             <Route path="/food/post/:slug">
               <BlogPost />
             </Route>
-          </Switch>
+            </Switch>
           <Bottom />
         </Router>
       </SlugContext.Provider>

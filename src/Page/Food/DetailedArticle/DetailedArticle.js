@@ -235,7 +235,6 @@ export default function DetailedArticle() {
   const [detailedArticleOnlyPost, setDetailedArticleOnlyPost] = useState([]);
 
   useEffect(() => {
-    console.log(fooDSlug);
     ArticleNumber(3).then((data) => {
       setDetailedArticlePost(data);
     });
