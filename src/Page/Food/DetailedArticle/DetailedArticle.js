@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Triangle, Square } from "./IrregularGraphics";
 import { ArticleNumber, ArticleId } from "../../../API";
 import { SlugContext } from "../../../context";
+import { Link } from "react-router-dom";
 
 const DetailedArticleBox = styled.div`
   display: flex;
@@ -139,12 +140,14 @@ const DetailedArticleBoxRightImg = styled.img`
   height: auto;
 `;
 
-const DetailedArticleBoxRightTextTitle = styled.div`
+const DetailedArticleBoxRightTextTitle = styled(Link)`
   font-size: 21px;
   letter-spacing: 2px;
   font-weight: 600;
   padding-left: 15px;
   padding-top: 10px;
+  text-decoration: none;
+  color: black;
 `;
 
 const DetailedArticleBoxRightTextTag = styled.div`
@@ -159,6 +162,7 @@ const DetailedArticleBoxRightTextMain = ({
   tag1,
   tag2,
   tag3,
+  toLink,
 }) => {
   return (
     <>
@@ -166,7 +170,7 @@ const DetailedArticleBoxRightTextMain = ({
         <DetailedArticleBoxRightImgBox>
           <DetailedArticleBoxRightImg src={srcImg} />
         </DetailedArticleBoxRightImgBox>
-        <DetailedArticleBoxRightTextTitle>
+        <DetailedArticleBoxRightTextTitle to={`/food/post/${toLink}`}>
           {text}
           <DetailedArticleBoxRightTextTag>
             <div>
@@ -270,6 +274,7 @@ export default function DetailedArticle() {
                 text={data.Title_ettoday}
                 srcImg={data.Picurl_ettoday}
                 tag1={data.Class}
+                toLink={data.ID_ettoday}
               />
             );
           })}

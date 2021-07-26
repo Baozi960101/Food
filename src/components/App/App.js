@@ -9,6 +9,7 @@ import {
   Switch,
   Route,
   useParams,
+  useLocation,
 } from "react-router-dom";
 import { SlugContext } from "../../context";
 import { ScrollToTop } from "../../ScrollToTop";
@@ -18,20 +19,20 @@ export default function App() {
 
   function BlogPost() {
     let { slug } = useParams();
+    let location = useLocation();
     useEffect(() => {
       setFooDSlug(slug);
-    }, []);
-
+    }, [location]);
     return <DetailedArticle />;
   }
 
   return (
     <>
-      <SlugContext.Provider value={{ fooDSlug }}>
+      <SlugContext.Provider value={{ fooDSlug, setFooDSlug }}>
         <Router>
           <ScrollToTop />
           <TopHeadder />
-            <Switch>
+          <Switch>
             <Route exact path="/">
               <Cover />
             </Route>
@@ -41,7 +42,7 @@ export default function App() {
             <Route path="/food/post/:slug">
               <BlogPost />
             </Route>
-            </Switch>
+          </Switch>
           <Bottom />
         </Router>
       </SlugContext.Provider>

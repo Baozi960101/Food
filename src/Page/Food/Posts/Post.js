@@ -5,6 +5,8 @@ import foodGridImg2 from "./images/pexels-photo-3737620.png";
 import { ArticleNumber } from "../../../API";
 import { chunk } from "lodash";
 import { Link } from "react-router-dom";
+import RightArrow from "./images/rightArrow.svg";
+import LeftArrow from "./images/leftArrow.svg";
 
 const FoodGridPostBox = styled.div`
   display: flex;
@@ -13,7 +15,7 @@ const FoodGridPostBox = styled.div`
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
-  margin-bottom: 170px;
+  margin-bottom: 130px;
 `;
 
 const FoodGridPostLeft = styled.div`
@@ -85,12 +87,15 @@ const FoodParallelBox = styled.div`
   max-width: 1260px;
   margin: 0 auto 0 auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 `;
 
 const FoodParallelPost = styled.div`
   width: 370px;
   height: 469px;
+  box-sizing: border-box;
+  margin: 15px 0;
 `;
 
 const FoodParallelPostImgBox = styled.div`
@@ -99,12 +104,14 @@ const FoodParallelPostImgBox = styled.div`
   display: flex;
   align-items: center;
   background-color: #fff7ff;
+  overflow: hidden;
 `;
 
 const FoodParallelPostImg = styled.img`
   max-width: 100%;
   height: auto;
 `;
+
 const FoodParallelPostText = styled(Link)`
   width: 100%;
   height: 60px;
@@ -127,6 +134,19 @@ const FoodParallelPostTag = styled.div`
   margin-top: 10px;
 `;
 
+const PrevButton = styled.img`
+  width: 35px;
+  height: 35px;
+  margin-right: 30px;
+  cursor: pointer;
+`;
+const NextButton = styled.img`
+  width: 35px;
+  height: 35px;
+  margin-left: 30px;
+  cursor: pointer;
+`;
+
 const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
   return (
     <>
@@ -139,15 +159,15 @@ const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
         </FoodParallelPostText>
         <FoodParallelPostTag>
           <div>
-            {tag1 ? "#" : ""}
+            {tag1 ? "# " : ""}
             {tag1}
           </div>
           <div style={{ paddingLeft: "7px" }}>
-            {tag2 ? "#" : ""}
+            {tag2 ? "# " : ""}
             {tag2}
           </div>
           <div style={{ paddingLeft: "7px" }}>
-            {tag3 ? "#" : ""}
+            {tag3 ? "# " : ""}
             {tag3}
           </div>
         </FoodParallelPostTag>
@@ -181,19 +201,71 @@ const FoodGridPostLeftBox = ({ tag1, tag2, tag3, imgSrc, title }) => {
   );
 };
 
+const PageBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 9%;
+  margin-top: 15px;
+  box-sizing: border-box;
+  font-size: 23px;
+`;
+
 const FoodBlock = ({ number }) => {
   return <div style={{ width: "100%", height: `${number}` }}></div>;
 };
 
 export default function FoodPost() {
   const [post, setPost] = useState([]);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
-    ArticleNumber(9).then((data) => {
-      const newChunk = chunk(data, 3);
+    ArticleNumber(18).then((data) => {
+      const newChunk = chunk(data, 9);
       setPost(newChunk);
     });
   }, []);
+
+  function renderContent() {
+    return (
+      <>
+        {post[page] &&
+          post[page].map((data) => {
+            return (
+              <FoodParallelPostBox
+                key={data.ID_ettoday}
+                toLink={data.ID_ettoday}
+                imgSrc={data.Picurl_ettoday}
+                title={data.Title_ettoday}
+                tag1={data.Class}
+              />
+            );
+          })}
+      </>
+    );
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+  function prev() {
+    if (page === 0) {
+      return;
+    }
+    setPage((prevPage) => prevPage - 1);
+    topFunction();
+  }
+
+  function next() {
+    if (page === post.length - 1) {
+      return;
+    }
+    setPage((prevPage) => prevPage + 1);
+    topFunction();
+  }
 
   return (
     <>
@@ -211,47 +283,13 @@ export default function FoodPost() {
           TextBottom="減碳新生活, 生活中實用小妙招, 原來家裡都有的「這個」可以輕鬆實現！"
         />
       </FoodGridPostBox>
-      <FoodParallelBox>
-        {post.map((data) => {
-          return (
-            <FoodParallelPostBox
-              key={data[0].ID_ettoday}
-              toLink={data[0].ID_ettoday}
-              imgSrc={data[0].Picurl_ettoday}
-              title={data[0].Title_ettoday}
-              tag1={data[0].Class}
-            />
-          );
-        })}
-      </FoodParallelBox>
-      <FoodParallelBox>
-        {post.map((data) => {
-          return (
-            <FoodParallelPostBox
-              key={data[1].ID_ettoday}
-              toLink={data[1].ID_ettoday}
-              imgSrc={data[1].Picurl_ettoday}
-              title={data[1].Title_ettoday}
-              tag1={data[1].Class}
-            />
-          );
-        })}
-      </FoodParallelBox>
-      <FoodBlock number="73px" />
-      <FoodParallelBox>
-        {post.map((data) => {
-          return (
-            <FoodParallelPostBox
-              key={data[2].ID_ettoday}
-              toLink={data[2].ID_ettoday}
-              imgSrc={data[2].Picurl_ettoday}
-              title={data[2].Title_ettoday}
-              tag1={data[2].Class}
-            />
-          );
-        })}
-      </FoodParallelBox>
-      <FoodBlock number="250px" />
+      <FoodParallelBox>{renderContent()}</FoodParallelBox>
+      <PageBox>
+        <PrevButton onClick={prev} src={LeftArrow} />
+        {page + 1}
+        <NextButton onClick={next} src={RightArrow} />
+      </PageBox>
+      <FoodBlock number="150px" />
     </>
   );
 }

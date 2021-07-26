@@ -3,8 +3,7 @@ import styled from "styled-components";
 import down from "./images/down.svg";
 import search from "./images/search.svg";
 import { Link } from "react-router-dom";
-import  UpArrow  from "./images/upArrow.svg";
-
+import UpArrow from "./images/upArrow.svg";
 
 const MainFieldHeadder = styled.div`
   display: flex;
@@ -75,7 +74,6 @@ const TopBottom = styled.img`
 
 export default function Headder() {
   const [topBottomArise, setTopBottomArise] = useState(false);
-  console.log(UpArrow);
 
   useEffect(() => {
     window.onscroll = function () {
@@ -104,11 +102,11 @@ export default function Headder() {
       <MainFieldHeadder>
         <MainFieldHeadderTitle to="/">建通股份有限公司</MainFieldHeadderTitle>
         <CoverHeadderText>
-          <CoverHeadderTitle>
+          <CoverHeadderTitle to="/">
             戶外運動
             <DownImg />
           </CoverHeadderTitle>
-          <CoverHeadderTitle>
+          <CoverHeadderTitle to="/">
             旅遊
             <DownImg />
           </CoverHeadderTitle>
@@ -116,16 +114,16 @@ export default function Headder() {
             美食
             <DownImg />
           </CoverHeadderTitle>
-          <CoverHeadderTitle>
+          <CoverHeadderTitle to="/">
             健康
             <DownImg />
           </CoverHeadderTitle>
-          <CoverHeadderTitle>
+          <CoverHeadderTitle to="/">
             <SearchImg src={search} />
           </CoverHeadderTitle>
         </CoverHeadderText>
       </MainFieldHeadder>
-      {topBottomArise && <TopBottom onClick={topFunction} src={UpArrow}/>}
+      {topBottomArise && <TopBottom onClick={topFunction} src={UpArrow} />}
     </>
   );
 }
