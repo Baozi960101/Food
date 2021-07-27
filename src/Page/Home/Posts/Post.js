@@ -16,6 +16,7 @@ const PostTittleBox = styled.div`
   box-sizing: border-box;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom:100px;
 `;
 
 const PostTittleBorder = styled.div`

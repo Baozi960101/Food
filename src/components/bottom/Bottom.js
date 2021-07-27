@@ -6,14 +6,14 @@ const Bottom = styled.div`
   align-items: center;
   justify-content: center;
   max-width: 100%;
-  height: 248px;
+  height: 200px;
   background-color: #d8d8d8;
 `;
 
 export default function HtmlBottom() {
   return (
     <>
-      <Bottom>我是底部</Bottom>
+      <Bottom/>
     </>
   );
 }

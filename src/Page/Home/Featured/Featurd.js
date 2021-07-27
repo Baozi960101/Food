@@ -113,7 +113,7 @@ const FeaturdBlock = styled.div`
 `;
 const FeaturBottomBlock = styled.div`
   width: 100%;
-  height: 613px;
+  height: 400px;
 `;
 
 const FeaturdBox = ({

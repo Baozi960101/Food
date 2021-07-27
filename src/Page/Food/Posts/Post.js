@@ -221,7 +221,7 @@ export default function FoodPost() {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    ArticleNumber(18).then((data) => {
+    ArticleNumber(40).then((data) => {
       const newChunk = chunk(data, 9);
       setPost(newChunk);
     });
