@@ -14,7 +14,7 @@ const PostTittleBox = styled.div`
   margin-left: auto;
   margin-bottom: 100px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1050px) {
     margin-bottom: 20px;
   }
 `;
@@ -42,6 +42,11 @@ const PostTopTittle = styled.div`
   box-sizing: border-box;
   padding: 0px 13px;
   font-family: "Noto Sans TC", sans-serif;
+
+  @media screen and (max-width: 1050px) {
+    font-size: 20px;
+    padding: 0;
+  }
 `;
 
 const PostBottomSubtitle = styled.div`
@@ -55,6 +60,10 @@ const PostBottomSubtitle = styled.div`
   font-weight: 600;
   font-family: "Open Sans", sans-serif;
   letter-spacing: 1px;
+
+  @media screen and (max-width: 1050px) {
+    font-size: 16px;
+  }
 `;
 
 const PostTittleText = ({ tittleHeadder1, tittleHeadder2, subtitle }) => {
@@ -78,7 +87,7 @@ const PostMainProject = styled.div`
     margin-left: 1%;
   }
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1050px) {
     width: 150px;
     height: auto;
   }
@@ -91,7 +100,7 @@ const PostMainProjectImgBox = styled.div`
   align-items: center;
   background-color: #fff7ff;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1050px) {
     max-height: 150px;
   }
 `;
@@ -115,7 +124,7 @@ const PostMainProjectText = styled(Link)`
   cursor: pointer;
   text-decoration: none;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1050px) {
     font-size: 15px;
     margin-top: 10px;
   }
@@ -130,7 +139,7 @@ const PostMainProjectTextSubtitle = styled.div`
   font-family: "Open Sans", sans-serif;
   margin-top: 18px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1050px) {
     font-size: 10px;
     margin-top: 10px;
   }
@@ -166,7 +175,7 @@ const PostMainProjectTextSubtitleMain = ({
   );
 };
 
-const MainBox = styled.div`
+export const MainBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   max-width: 1330px;
@@ -176,8 +185,9 @@ const MainBox = styled.div`
   justify-content: space-between;
   margin-top: 100px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1050px) {
     margin-top: 20px;
+    justify-content: space-evenly;
   }
 `;
 
@@ -188,9 +198,8 @@ const ReadMoreBox = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  @media screen and (max-width: 600px) {
-    width: 100%;
-    height: auto;
+  @media screen and (max-width: 1050px) {
+    width: 85%;
   }
 `;
 

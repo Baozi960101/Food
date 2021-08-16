@@ -6,20 +6,29 @@ import selected02 from "./images/selected02.png";
 
 const Selected = styled.div`
   box-sizing: border-box;
-  width: 88%;
+  width: 100%;
   display: flex;
   justify-content: center;
-  margin: 191px 6% 333px 6%;
+  margin: 191px 0 333px 0;
 
-  @media screen and (max-width: 600px) {
-    margin: 50px 0 50px 0;
+  @media screen and (max-width: 500px) {
+    margin: 50px 0;
     width: 100%;
+  }
+
+  @media screen and (min-width: 600px) and (max-width: 1600px) {
+    margin: 80px 0;
+    justify-content: center;
   }
 `;
 
 const SelectedImgSize = styled.img`
   height: auto;
-  max-width: 100%;
+  max-width: 88%;
+
+  @media screen and (max-width: 500px) {
+    max-width: 100%;
+  }
 `;
 
 export default function Headder() {

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { PostMainProjectBox, ReadMore, MainPostTittle } from "../Posts/Post";
+import {
+  PostMainProjectBox,
+  MainBox,
+  ReadMore,
+  MainPostTittle,
+} from "../Posts/Post";
 import FeaturdTitleImg1 from "./images/pexels-valeria-boltneva-842571.png";
 import FeaturdTitleImg2 from "./images/pexels-valeria-boltneva-874254.png";
-import FoodImg1 from "../Posts/images/pexels-photo-1579926.png";
-import FoodImg2 from "../Posts/images/pexels-photo-704971.png";
-import FoodImg3 from "../Posts/images/pexels-photo-416471.png";
-import FoodImg4 from "../Posts/images/pexels-photo-286283.png";
 import { ArticleNumber } from "../../../API";
 
 const FeaturedBigTitle = styled.div`
@@ -15,7 +16,7 @@ const FeaturedBigTitle = styled.div`
   margin: 243px auto 253px auto;
   box-sizing: border-box;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 500px) {
     height: auto;
     margin: 50px auto 50px auto;
   }
@@ -30,8 +31,9 @@ const FeaturedBigTitleTop = styled.div`
   letter-spacing: 10px;
   font-family: "Open Sans", sans-serif;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 500px) {
     font-size: 25px;
+    letter-spacing: 5px;
   }
 `;
 
@@ -43,18 +45,10 @@ const FeaturedBigTitleBottom = styled.div`
   font-family: "Noto Sans TC", sans-serif;
   letter-spacing: 18px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 500px) {
     font-size: 14px;
     letter-spacing: 10px;
   }
-`;
-
-const MainBox = styled.div`
-  display: flex;
-  max-width: 1330px;
-  justify-content: space-between;
-  margin-left: auto;
-  margin-right: auto;
 `;
 
 const BigTitle = ({ topTitle, bottomTitle }) => {
@@ -72,6 +66,11 @@ const FeaturdImgBox = styled.div`
   margin-right: 6%;
   display: flex;
   justify-content: center;
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    margin: 0;
+  }
 `;
 
 const FeaturdImg = styled.img`
@@ -87,6 +86,18 @@ const FeaturdImgLabel = styled.div`
   justify-content: space-between;
   box-sizing: border-box;
   margin: 16px auto 0 auto;
+  font-size: 14px;
+
+  @media screen and (max-width: 600px) {
+    justify-content: space-between;
+    margin: 16px 3% 0 3%;
+    font-size: 12px;
+  }
+
+  @media screen and (min-width: 600px) and (max-width: 1050px) {
+    justify-content: space-between;
+    margin: 16px 6% 0 6%;
+  }
 `;
 
 const FeaturdImgLabelLeft = styled.div`
@@ -94,7 +105,6 @@ const FeaturdImgLabelLeft = styled.div`
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  font-size: 14px;
   font-weight: 700;
 `;
 
@@ -116,22 +126,44 @@ const FeaturdImgBigTitle = styled.div`
   font-size: 42px;
   font-family: "Noto Sans TC", sans-serif;
   margin-top: 25px;
+
+  @media screen and (max-width: 500px) {
+    font-size: 16px;
+  }
+
+  @media screen and (min-width: 600px) {
+    font-size: 30px;
+    margin-bottom: 50px;
+  }
 `;
 const FeaturdBorder = styled.div`
-  max-width: 50px;
+  max-width: 1050px;
   height: 2px;
   background-color: #979797;
   margin: 106px auto 117px auto;
   box-sizing: border-box;
+
+  @media screen and (max-width: 1050px) {
+    background-color: white;
+    margin: 20px 0;
+  }
 `;
 
 const FeaturdBlock = styled.div`
   width: 100%;
   height: 146px;
+
+  @media screen and (max-width: 1050px) {
+    height: 80px;
+  }
 `;
 const FeaturBottomBlock = styled.div`
   width: 100%;
   height: 400px;
+
+  @media screen and (max-width: 1050px) {
+    height: 200px;
+  }
 `;
 
 const FeaturdBox = ({

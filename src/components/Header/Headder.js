@@ -14,6 +14,10 @@ const MainFieldHeadder = styled.div`
   background-color: rgba(0, 0, 0, 0.41);
   position: absolute;
   z-index: 1;
+
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const CoverHeadderText = styled.div`
@@ -61,6 +65,13 @@ const MainFieldHeadderTitle = styled(Link)`
   color: white;
   text-decoration: none;
   margin-left: 10%;
+
+  @media screen and (min-width: 600px) {
+    font-size: 20px;
+    width: 250px;
+    margin-right: 10%;
+    margin-left: 5%;
+  }
 `;
 
 const TopBottom = styled.img`
@@ -118,9 +129,9 @@ export default function Headder() {
             健康
             <DownImg />
           </CoverHeadderTitle>
-          <CoverHeadderTitle to="/">
+          {/* <CoverHeadderTitle to="/">
             <SearchImg src={search} />
-          </CoverHeadderTitle>
+          </CoverHeadderTitle> */}
         </CoverHeadderText>
       </MainFieldHeadder>
       {topBottomArise && <TopBottom onClick={topFunction} src={UpArrow} />}
