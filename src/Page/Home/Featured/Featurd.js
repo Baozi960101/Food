@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { PostMainProjectBox, ReadMore, MainPostTittle } from "../Posts/Post";
 import FeaturdTitleImg1 from "./images/pexels-valeria-boltneva-842571.png";
@@ -6,11 +7,18 @@ import FoodImg1 from "../Posts/images/pexels-photo-1579926.png";
 import FoodImg2 from "../Posts/images/pexels-photo-704971.png";
 import FoodImg3 from "../Posts/images/pexels-photo-416471.png";
 import FoodImg4 from "../Posts/images/pexels-photo-286283.png";
+import { ArticleNumber } from "../../../API";
 
 const FeaturedBigTitle = styled.div`
   width: 318px;
-  height: 113px;
+  max-height: 113px;
   margin: 243px auto 253px auto;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 600px) {
+    height: auto;
+    margin: 50px auto 50px auto;
+  }
 `;
 
 const FeaturedBigTitleTop = styled.div`
@@ -21,6 +29,10 @@ const FeaturedBigTitleTop = styled.div`
   font-weight: 700;
   letter-spacing: 10px;
   font-family: "Open Sans", sans-serif;
+
+  @media screen and (max-width: 600px) {
+    font-size: 25px;
+  }
 `;
 
 const FeaturedBigTitleBottom = styled.div`
@@ -30,6 +42,11 @@ const FeaturedBigTitleBottom = styled.div`
   font-size: 36px;
   font-family: "Noto Sans TC", sans-serif;
   letter-spacing: 18px;
+
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+    letter-spacing: 10px;
+  }
 `;
 
 const MainBox = styled.div`
@@ -101,10 +118,11 @@ const FeaturdImgBigTitle = styled.div`
   margin-top: 25px;
 `;
 const FeaturdBorder = styled.div`
-  width: 600px;
+  max-width: 50px;
   height: 2px;
   background-color: #979797;
   margin: 106px auto 117px auto;
+  box-sizing: border-box;
 `;
 
 const FeaturdBlock = styled.div`
@@ -143,6 +161,12 @@ const FeaturdBox = ({
 };
 
 export default function Featurd() {
+  const [post, setPost] = useState([]);
+
+  useEffect(() => {
+    ArticleNumber(4).then((data) => setPost(data));
+  }, []);
+
   return (
     <>
       <BigTitle topTitle="SELECTED" bottomTitle="本期精選" />
@@ -168,34 +192,18 @@ export default function Featurd() {
         subtitleHeadder="HOT"
       />
       <MainBox>
-        <PostMainProjectBox
-          imgSrc={FoodImg1}
-          tittle={"必吃！甜點清單看見快收藏起來, 幸福感MAX"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg2}
-          tittle={"減肥又好吃的優格清單！5種吃法讓你美味又想瘦"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg3}
-          tittle={"低脂又健康培根捲, 懶人簡單做法, 3招輕鬆搞定"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg4}
-          tittle={"幸福滿點！4間高雄美食日式蓋飯, 吃過的人都回不去"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
+        {post.map((data) => {
+          return (
+            <PostMainProjectBox
+              key={data.ID_ettoday}
+              toLink={data.ID_ettoday}
+              tittle={data.Title_ettoday}
+              subtitle1={data.Class}
+              date={data.Day}
+              imgSrc={data.Picurl_ettoday}
+            />
+          );
+        })}
       </MainBox>
       <ReadMore />
       <FeaturBottomBlock />

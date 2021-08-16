@@ -9,10 +9,12 @@ const Selected = styled.div`
   width: 88%;
   display: flex;
   justify-content: center;
-  margin-top: 191px;
-  margin-bottom: 333px;
-  margin-right: 6%;
-  margin-left: 6%;
+  margin: 191px 6% 333px 6%;
+
+  @media screen and (max-width: 600px) {
+    margin: 50px 0 50px 0;
+    width: 100%;
+  }
 `;
 
 const SelectedImgSize = styled.img`

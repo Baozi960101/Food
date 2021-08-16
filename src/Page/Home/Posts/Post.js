@@ -1,9 +1,5 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import FoodImg1 from "./images/pexels-photo-1579926.png";
-import FoodImg2 from "./images/pexels-photo-704971.png";
-import FoodImg3 from "./images/pexels-photo-416471.png";
-import FoodImg4 from "./images/pexels-photo-286283.png";
 import RightArrows from "./images/right-arrows-symbol.svg";
 import { Link } from "react-router-dom";
 import { ArticleNumber } from "../../../API";
@@ -16,7 +12,11 @@ const PostTittleBox = styled.div`
   box-sizing: border-box;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom:100px;
+  margin-bottom: 100px;
+
+  @media screen and (max-width: 600px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const PostTittleBorder = styled.div`
@@ -73,8 +73,14 @@ const PostMainProject = styled.div`
   width: 300px;
   height: 406px;
   box-sizing: border-box;
+
   & + & {
     margin-left: 1%;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 150px;
+    height: auto;
   }
 `;
 
@@ -84,6 +90,10 @@ const PostMainProjectImgBox = styled.div`
   display: flex;
   align-items: center;
   background-color: #fff7ff;
+
+  @media screen and (max-width: 600px) {
+    max-height: 150px;
+  }
 `;
 
 const PostMainProjectImg = styled.img`
@@ -104,6 +114,11 @@ const PostMainProjectText = styled(Link)`
   color: black;
   cursor: pointer;
   text-decoration: none;
+
+  @media screen and (max-width: 600px) {
+    font-size: 15px;
+    margin-top: 10px;
+  }
 `;
 const PostMainProjectTextSubtitle = styled.div`
   width: 100%;
@@ -114,6 +129,11 @@ const PostMainProjectTextSubtitle = styled.div`
   justify-content: space-between;
   font-family: "Open Sans", sans-serif;
   margin-top: 18px;
+
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
+    margin-top: 10px;
+  }
 `;
 const PostMainProjectTextSubtitleMain = ({
   subtitle1,
@@ -148,12 +168,17 @@ const PostMainProjectTextSubtitleMain = ({
 
 const MainBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
   max-width: 1330px;
   box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
   justify-content: space-between;
   margin-top: 100px;
+
+  @media screen and (max-width: 600px) {
+    margin-top: 20px;
+  }
 `;
 
 const ReadMoreBox = styled.div`
@@ -162,6 +187,11 @@ const ReadMoreBox = styled.div`
   justify-content: flex-end;
   margin-left: auto;
   margin-right: auto;
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const ReadMoreText = styled(Link)`
@@ -279,20 +309,6 @@ export default function Post() {
         })}
       </MainBox>
       <ReadMore ReadLinkTo="/food" />
-      {/* <MainBox>
-        {post.map((data) => {
-          return (
-            <PostMainProjectBox
-              key={data.ID_ettoday}
-              tittle={data.Title_ettoday}
-              subtitle1={data.Class}
-              date={data.Day}
-              imgSrc={FoodImg1}
-            />
-          );
-        })}
-      </MainBox>
-      <ReadMore /> */}
       <Block />
       <MainPostTittle
         tittleHeadder1="熱"
@@ -300,34 +316,18 @@ export default function Post() {
         subtitleHeadder="HOT"
       />
       <MainBox>
-        <PostMainProjectBox
-          imgSrc={FoodImg1}
-          tittle={"必吃！甜點清單看見快收藏起來, 幸福感MAX"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg2}
-          tittle={"減肥又好吃的優格清單！5種吃法讓你美味又想瘦"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg3}
-          tittle={"低脂又健康培根捲, 懶人簡單做法, 3招輕鬆搞定"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg4}
-          tittle={"幸福滿點！4間高雄美食日式蓋飯, 吃過的人都回不去"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
+        {post.map((data) => {
+          return (
+            <PostMainProjectBox
+              key={data.ID_ettoday}
+              toLink={data.ID_ettoday}
+              tittle={data.Title_ettoday}
+              subtitle1={data.Class}
+              date={data.Day}
+              imgSrc={data.Picurl_ettoday}
+            />
+          );
+        })}
       </MainBox>
       <ReadMore />
       <Block />
@@ -337,34 +337,18 @@ export default function Post() {
         subtitleHeadder="HOT"
       />
       <MainBox>
-        <PostMainProjectBox
-          imgSrc={FoodImg1}
-          tittle={"必吃！甜點清單看見快收藏起來, 幸福感MAX"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg2}
-          tittle={"減肥又好吃的優格清單！5種吃法讓你美味又想瘦"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg3}
-          tittle={"低脂又健康培根捲, 懶人簡單做法, 3招輕鬆搞定"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
-        <PostMainProjectBox
-          imgSrc={FoodImg4}
-          tittle={"幸福滿點！4間高雄美食日式蓋飯, 吃過的人都回不去"}
-          subtitle1={"# 下午茶"}
-          subtitle2={"# 美食"}
-          date={"2021/07/12"}
-        />
+        {post.map((data) => {
+          return (
+            <PostMainProjectBox
+              key={data.ID_ettoday}
+              toLink={data.ID_ettoday}
+              tittle={data.Title_ettoday}
+              subtitle1={data.Class}
+              date={data.Day}
+              imgSrc={data.Picurl_ettoday}
+            />
+          );
+        })}
       </MainBox>
       <ReadMore />
     </>

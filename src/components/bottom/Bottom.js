@@ -13,7 +13,7 @@ const Bottom = styled.div`
 export default function HtmlBottom() {
   return (
     <>
-      <Bottom/>
+      <Bottom />
     </>
   );
 }
