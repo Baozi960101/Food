@@ -227,12 +227,13 @@ export default function Featurd() {
         {post.map((data) => {
           return (
             <PostMainProjectBox
-              key={data.ID_ettoday}
-              toLink={data.ID_ettoday}
-              tittle={data.Title_ettoday}
-              subtitle1={data.Class}
-              date={data.Day}
-              imgSrc={data.Picurl_ettoday}
+              key={data.crawler_No}
+              toLink={data.crawler_No}
+              tittle={data.crawler_Title}
+              subtitle1={data.crawler_Type}
+              subtitle2={`${data.crawler_Keyword.substr(0, 10)} ...`}
+              date={data.crawler_Date}
+              imgSrc={data.crawler_PicUrl}
             />
           );
         })}

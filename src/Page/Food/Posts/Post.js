@@ -234,11 +234,12 @@ export default function FoodPost() {
           post[page].map((data) => {
             return (
               <FoodParallelPostBox
-                key={data.ID_ettoday}
-                toLink={data.ID_ettoday}
-                imgSrc={data.Picurl_ettoday}
-                title={data.Title_ettoday}
-                tag1={data.Class}
+                key={data.crawler_No}
+                toLink={data.crawler_No}
+                imgSrc={data.crawler_PicUrl}
+                title={data.crawler_Title}
+                tag1={data.crawler_Type}
+                tag2={`${data.crawler_Keyword.substr(0, 20)} ...`}
               />
             );
           })}

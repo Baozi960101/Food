@@ -125,10 +125,17 @@ const PostMainProjectText = styled(Link)`
   text-decoration: none;
 
   @media screen and (max-width: 1050px) {
-    font-size: 15px;
+    font-size: 13px;
     margin-top: 10px;
   }
 `;
+
+const PostMainProjectTextSubtitleMainRWD = styled.div`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
 const PostMainProjectTextSubtitle = styled.div`
   width: 100%;
   height: 20px;
@@ -140,7 +147,7 @@ const PostMainProjectTextSubtitle = styled.div`
   margin-top: 18px;
 
   @media screen and (max-width: 1050px) {
-    font-size: 10px;
+    font-size: 12px;
     margin-top: 10px;
   }
 `;
@@ -157,14 +164,16 @@ const PostMainProjectTextSubtitleMain = ({
           {subtitle1 ? "# " : ""}
           {subtitle1}
         </div>
-        <div style={{ paddingLeft: "7px", fontWeight: "800" }}>
-          {subtitle2 ? "# " : ""}
-          {subtitle2}
-        </div>
-        <div style={{ paddingLeft: "7px", fontWeight: "800" }}>
-          {subtitle3 ? "# " : ""}
-          {subtitle3}
-        </div>
+        <PostMainProjectTextSubtitleMainRWD>
+          <div style={{ paddingLeft: "7px", fontWeight: "800" }}>
+            {subtitle2 ? "# " : ""}
+            {subtitle2}
+          </div>
+          <div style={{ paddingLeft: "7px", fontWeight: "800" }}>
+            {subtitle3 ? "# " : ""}
+            {subtitle3}
+          </div>
+        </PostMainProjectTextSubtitleMainRWD>
       </div>
       <div>
         <div style={{ color: "#a4a4a4", fontFamily: "Open Sans, sans-serif" }}>
@@ -293,7 +302,9 @@ export default function Post() {
   const [post, setPost] = useState([]);
 
   useEffect(() => {
-    ArticleNumber(4).then((data) => setPost(data));
+    ArticleNumber(4).then((data) => {
+      setPost(data);
+    });
   }, []);
 
   return (
@@ -307,12 +318,13 @@ export default function Post() {
         {post.map((data) => {
           return (
             <PostMainProjectBox
-              key={data.ID_ettoday}
-              toLink={data.ID_ettoday}
-              tittle={data.Title_ettoday}
-              subtitle1={data.Class}
-              date={data.Day}
-              imgSrc={data.Picurl_ettoday}
+              key={data.crawler_No}
+              toLink={data.crawler_No}
+              tittle={data.crawler_Title}
+              subtitle1={data.crawler_Type}
+              subtitle2={`${data.crawler_Keyword.substr(0, 10)} ...`}
+              date={data.crawler_Date}
+              imgSrc={data.crawler_PicUrl}
             />
           );
         })}
@@ -328,12 +340,13 @@ export default function Post() {
         {post.map((data) => {
           return (
             <PostMainProjectBox
-              key={data.ID_ettoday}
-              toLink={data.ID_ettoday}
-              tittle={data.Title_ettoday}
-              subtitle1={data.Class}
-              date={data.Day}
-              imgSrc={data.Picurl_ettoday}
+              key={data.crawler_No}
+              toLink={data.crawler_No}
+              tittle={data.crawler_Title}
+              subtitle1={data.crawler_Type}
+              subtitle2={`${data.crawler_Keyword.substr(0, 10)} ...`}
+              date={data.crawler_Date}
+              imgSrc={data.crawler_PicUrl}
             />
           );
         })}
@@ -349,12 +362,13 @@ export default function Post() {
         {post.map((data) => {
           return (
             <PostMainProjectBox
-              key={data.ID_ettoday}
-              toLink={data.ID_ettoday}
-              tittle={data.Title_ettoday}
-              subtitle1={data.Class}
-              date={data.Day}
-              imgSrc={data.Picurl_ettoday}
+              key={data.crawler_No}
+              toLink={data.crawler_No}
+              tittle={data.crawler_Title}
+              subtitle1={data.crawler_Type}
+              subtitle2={`${data.crawler_Keyword.substr(0, 10)} ...`}
+              date={data.crawler_Date}
+              imgSrc={data.crawler_PicUrl}
             />
           );
         })}

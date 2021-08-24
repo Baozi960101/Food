@@ -1,8 +1,9 @@
-let API = "https://www.jiantong.com.tw/test_web/Back/index.php/News/selectdata";
+let API = "http://food.argus.work/venus/index.php/GetData/getData";
 
 export const ArticleNumber = (number) => {
   let fd = new FormData();
-  fd.append("Limit", number);
+  fd.append("limit", number);
+  fd.append("type", "news");
   return fetch(API, {
     method: "POST",
     body: fd,
@@ -11,7 +12,7 @@ export const ArticleNumber = (number) => {
 
 export const ArticleId = (number) => {
   let fdId = new FormData();
-  fdId.append("Id", number);
+  fdId.append("id", number);
   return fetch(API, {
     method: "POST",
     body: fdId,

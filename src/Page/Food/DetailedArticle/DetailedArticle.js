@@ -11,6 +11,7 @@ const DetailedArticleBox = styled.div`
   max-width: 88%;
   margin-right: 6%;
   margin-left: 6%;
+  position: relative;
 `;
 
 const DetailedArticleBoxLeft = styled.div`
@@ -233,34 +234,53 @@ const DetailedArticleBoxLeftMain = ({
   );
 };
 
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 1250px;
+  overflow: hidden;
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  position: absolute;
+  background-color: white;
+  z-index: 5;
+`;
+
 export default function DetailedArticle() {
   const { fooDSlug } = useContext(SlugContext);
   const [detailedArticlePost, setDetailedArticlePost] = useState([]);
   const [detailedArticleOnlyPost, setDetailedArticleOnlyPost] = useState([]);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    ArticleNumber(3).then((data) => {
-      setDetailedArticlePost(data);
-    });
+    setLoad(true);
     ArticleId(fooDSlug).then((data) => {
       setDetailedArticleOnlyPost(data);
+    });
+    ArticleNumber(3).then((data) => {
+      setDetailedArticlePost(data);
+      setLoad(false);
     });
   }, []);
 
   return (
     <>
+      {load && <Loading>載入中 ...</Loading>}
       <DetailedArticleBox>
         <DetailedArticleBoxLeft>
           {detailedArticleOnlyPost.map((data) => {
             return (
               <DetailedArticleBoxLeftMain
-                key={data.ID_ettoday}
-                title={data.Title_ettoday}
-                text={`${data.Content_ettoday.substr(0, 100)} ...`}
-                srcImg={data.Picurl_ettoday}
-                tag1={data.Class}
-                time={data.Day}
-                toLink={data.Url_ettoday}
+                key={data.crawler_No}
+                title={data.crawler_Title}
+                text={`${data.crawler_Content.substr(0, 100)} ...`}
+                srcImg={data.crawler_PicUrl}
+                tag1={data.crawler_Type}
+                tag2={data.crawler_Keyword}
+                time={data.crawler_Date}
+                toLink={data.crawler_Url}
               />
             );
           })}
@@ -270,11 +290,12 @@ export default function DetailedArticle() {
           {detailedArticlePost.map((data) => {
             return (
               <DetailedArticleBoxRightTextMain
-                key={data.ID_ettoday}
-                text={data.Title_ettoday}
-                srcImg={data.Picurl_ettoday}
-                tag1={data.Class}
-                toLink={data.ID_ettoday}
+                key={data.crawler_No}
+                text={data.crawler_Title}
+                srcImg={data.crawler_PicUrl}
+                tag1={data.crawler_Type}
+                tag2={`${data.crawler_Keyword.substr(0, 10)} ...`}
+                toLink={data.crawler_No}
               />
             );
           })}
