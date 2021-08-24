@@ -320,7 +320,7 @@ export default function Post() {
             <PostMainProjectBox
               key={data.crawler_No}
               toLink={data.crawler_No}
-              tittle={data.crawler_Title}
+              tittle={`${data.crawler_Title.substr(0, 27)} ...`}
               subtitle1={data.crawler_Type}
               subtitle2={`${data.crawler_Keyword.substr(0, 10)} ...`}
               date={data.crawler_Date}
@@ -342,7 +342,7 @@ export default function Post() {
             <PostMainProjectBox
               key={data.crawler_No}
               toLink={data.crawler_No}
-              tittle={data.crawler_Title}
+              tittle={`${data.crawler_Title.substr(0, 27)} ...`}
               subtitle1={data.crawler_Type}
               subtitle2={`${data.crawler_Keyword.substr(0, 10)} ...`}
               date={data.crawler_Date}
@@ -364,7 +364,7 @@ export default function Post() {
             <PostMainProjectBox
               key={data.crawler_No}
               toLink={data.crawler_No}
-              tittle={data.crawler_Title}
+              tittle={`${data.crawler_Title.substr(0, 27)} ...`}
               subtitle1={data.crawler_Type}
               subtitle2={`${data.crawler_Keyword.substr(0, 10)} ...`}
               date={data.crawler_Date}

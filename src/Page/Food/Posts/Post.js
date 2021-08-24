@@ -212,6 +212,20 @@ const PageBox = styled.div`
   font-size: 23px;
 `;
 
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 2300px;
+  overflow: hidden;
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  position: absolute;
+  background-color: white;
+  z-index: 5;
+`;
+
 const FoodBlock = ({ number }) => {
   return <div style={{ width: "100%", height: `${number}` }}></div>;
 };
@@ -219,11 +233,14 @@ const FoodBlock = ({ number }) => {
 export default function FoodPost() {
   const [post, setPost] = useState([]);
   const [page, setPage] = useState(0);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    ArticleNumber(40).then((data) => {
+    setLoad(true);
+    ArticleNumber(50).then((data) => {
       const newChunk = chunk(data, 9);
       setPost(newChunk);
+      setLoad(false);
     });
   }, []);
 
@@ -270,6 +287,7 @@ export default function FoodPost() {
 
   return (
     <>
+      {load && <Loading>載入中 ...</Loading>}
       <FoodGridPostBox>
         <FoodGridPostLeftBox
           tag1="# 下午茶"
