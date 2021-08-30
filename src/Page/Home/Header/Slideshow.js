@@ -13,8 +13,9 @@ export default function Slideshow() {
   const fadeProperties = {
     duration: 1500,
     canSwipe: false,
-    autoplay: true,
-    transitionDuration: 300,
+    autoplay: false,
+    // 之後改成true
+    transitionDuration: 800,
     infinite: true,
     arrows: true,
   };
@@ -25,12 +26,12 @@ export default function Slideshow() {
         <div className="each-slide">
           <CoverImg src={cover} />
         </div>
-        <div className="each-slide">
+        {/* <div className="each-slide">
           <CoverImg src={text01} />
         </div>
         <div className="each-slide">
           <CoverImg src={text02} />
-        </div>
+        </div> */}
       </Slide>
     </div>
   );
