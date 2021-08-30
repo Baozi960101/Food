@@ -231,7 +231,11 @@ export default function Featurd() {
               toLink={data.crawler_No}
               tittle={`${data.crawler_Title.substr(0, 27)} ...`}
               subtitle1={data.crawler_Type}
-              subtitle2={`${data.crawler_Keyword.substr(0, 10)} ...`}
+              subtitle2={
+                data.crawler_Keyword === ""
+                  ? ""
+                  : `${data.crawler_Keyword.substr(0, 10)} ...`
+              }
               date={data.crawler_Date}
               imgSrc={data.crawler_PicUrl}
             />

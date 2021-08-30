@@ -25,7 +25,7 @@ const DetailedArticleBoxRight = styled.div`
 
 const DetailedArticleBoxLeftTitle = styled.div`
   width: 100%;
-  height: 120px;
+  height: auto;
   margin-bottom: 19px;
   font-size: 48px;
   letter-spacing: 6.5px;
@@ -291,7 +291,7 @@ export default function DetailedArticle() {
             return (
               <DetailedArticleBoxRightTextMain
                 key={data.crawler_No}
-                text={data.crawler_Title}
+                text={`${data.crawler_Title.substr(0, 30)} ...`}
                 srcImg={data.crawler_PicUrl}
                 tag1={data.crawler_Type}
                 tag2={`${data.crawler_Keyword.substr(0, 10)} ...`}
