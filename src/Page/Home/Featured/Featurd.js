@@ -8,7 +8,7 @@ import {
 } from "../Posts/Post";
 import FeaturdTitleImg1 from "./images/pexels-valeria-boltneva-842571.png";
 import FeaturdTitleImg2 from "./images/pexels-valeria-boltneva-874254.png";
-import { ArticleNumber } from "../../../API";
+import { RestaurantApi } from "../../../API";
 
 const FeaturedBigTitle = styled.div`
   width: 318px;
@@ -193,11 +193,21 @@ const FeaturdBox = ({
 };
 
 export default function Featurd() {
-  const [post, setPost] = useState([]);
+  const [restaurantPost, setRestaurantPost] = useState([]);
+  const [restaurantPostItems, setRestaurantPostItems] = useState([]);
 
   useEffect(() => {
-    ArticleNumber(4).then((data) => setPost(data));
+    fetch(RestaurantApi)
+      .then((response) => response.json())
+      .then((data) => {
+        setRestaurantPostItems(data.data);
+      });
   }, []);
+
+  useEffect(() => {
+    let restaurantTest = restaurantPostItems.slice(0, 4);
+    setRestaurantPost(restaurantTest);
+  }, [restaurantPostItems]);
 
   return (
     <>
@@ -219,17 +229,17 @@ export default function Featurd() {
       />
       <FeaturdBlock />
       <MainPostTittle
-        tittleHeadder1="熱"
-        tittleHeadder2="食"
+        tittleHeadder1="餐"
+        tittleHeadder2="廳"
         subtitleHeadder="HOT"
       />
       <MainBox>
-        {post.map((data) => {
+        {restaurantPost.map((data) => {
           return (
             <PostMainProjectBox
               key={data.crawler_No}
-              toLink={data.crawler_No}
-              tittle={`${data.crawler_Title.substr(0, 27)} ...`}
+              toLink={data.crawler_Url}
+              tittle={`${data.crawler_Title.substr(0, 25)} ...`}
               subtitle1={data.crawler_Type}
               subtitle2={
                 data.crawler_Keyword === ""

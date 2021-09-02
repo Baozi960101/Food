@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import foodGridImg1 from "./images/pexels-photo-315755.png";
 import foodGridImg2 from "./images/pexels-photo-3737620.png";
-import { ArticleNumber } from "../../../API";
+import { FoodApi } from "../../../API";
 import { Link } from "react-router-dom";
 import RightArrow from "./images/rightArrow.svg";
 import LeftArrow from "./images/leftArrow.svg";
@@ -249,9 +249,7 @@ export default function FoodPost() {
     //   setPost(newChunk);
     //   setLoad(false);
     // });
-    fetch(
-      "https://argus.work/argus/public/api/argus?key=%E7%BE%8E%E9%A3%9F&start_date=2021-08-30&end_date=2021-09-01&crawler_Web=ETtoday,Ptt,Dcard,Ctee,Chinatimes,Udn,Storm,Mirrormedia,Newtalk"
-    )
+    fetch(FoodApi)
       .then((response) => {
         return response.json();
       })

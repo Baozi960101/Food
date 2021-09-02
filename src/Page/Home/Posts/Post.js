@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import RightArrows from "./images/right-arrows-symbol.svg";
 import { Link } from "react-router-dom";
-import { ArticleNumber } from "../../../API";
+import { FoodApi, SportsApi } from "../../../API";
 
 const PostTittleBox = styled.div`
   display: flex;
@@ -300,29 +300,30 @@ export const MainPostTittle = ({
 };
 
 export default function Post() {
-  const [post, setPost] = useState([]);
-  const [postItems, setPostItems] = useState([]);
+  const [foodPost, setFoodPost] = useState([]);
+  const [foodPostItems, setFoodPostItems] = useState([]);
+  const [sportsPost, setSportsPost] = useState([]);
+  const [sportsPostItems, setSportsPostItems] = useState([]);
 
   useEffect(() => {
-    // ArticleNumber(4).then((data) => {
-    //   setPost(data);
-    // });
-    fetch(
-      "https://argus.work/argus/public/api/argus?key=%E7%BE%8E%E9%A3%9F&start_date=2021-08-30&end_date=2021-09-01&crawler_Web=ETtoday,Ptt,Dcard,Ctee,Chinatimes,Udn,Storm,Mirrormedia,Newtalk"
-    )
-      .then((response) => {
-        return response.json();
-      })
+    fetch(FoodApi)
+      .then((response) => response.json())
       .then((data) => {
-        setPostItems(data.data);
-        // setPost(data.data);
+        setFoodPostItems(data.data);
+      });
+    fetch(SportsApi)
+      .then((response) => response.json())
+      .then((data) => {
+        setSportsPostItems(data.data);
       });
   }, []);
 
   useEffect(() => {
-    let postTest = postItems.slice(0, 4);
-    setPost(postTest);
-  }, [postItems]);
+    let foodTest = foodPostItems.slice(0, 4);
+    setFoodPost(foodTest);
+    let sportsTest = sportsPostItems.slice(0, 4);
+    setSportsPost(sportsTest);
+  }, [foodPostItems, sportsPostItems]);
 
   return (
     <>
@@ -332,7 +333,7 @@ export default function Post() {
         subtitleHeadder="FOOD"
       />
       <MainBox>
-        {post.map((data) => {
+        {foodPost.map((data) => {
           return (
             <PostMainProjectBox
               key={data.crawler_No}
@@ -353,16 +354,16 @@ export default function Post() {
       <ReadMore ReadLinkTo="/food" />
       <Block />
       <MainPostTittle
-        tittleHeadder1="熱"
-        tittleHeadder2="門"
-        subtitleHeadder="HOT"
+        tittleHeadder1="運"
+        tittleHeadder2="動"
+        subtitleHeadder="SPORTS"
       />
       <MainBox>
-        {post.map((data) => {
+        {sportsPost.map((data) => {
           return (
             <PostMainProjectBox
               key={data.crawler_No}
-              toLink={data.crawler_No}
+              toLink={data.crawler_Url}
               tittle={`${data.crawler_Title.substr(0, 25)} ...`}
               subtitle1={data.crawler_Type}
               subtitle2={
@@ -384,11 +385,11 @@ export default function Post() {
         subtitleHeadder="HOT"
       />
       <MainBox>
-        {post.map((data) => {
+        {foodPost.map((data) => {
           return (
             <PostMainProjectBox
               key={data.crawler_No}
-              toLink={data.crawler_No}
+              toLink={data.crawler_Url}
               tittle={`${data.crawler_Title.substr(0, 25)} ...`}
               subtitle1={data.crawler_Type}
               subtitle2={
