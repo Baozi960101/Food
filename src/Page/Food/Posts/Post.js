@@ -3,7 +3,6 @@ import styled from "styled-components";
 import foodGridImg1 from "./images/pexels-photo-315755.png";
 import foodGridImg2 from "./images/pexels-photo-3737620.png";
 import { ArticleNumber } from "../../../API";
-import { chunk } from "lodash";
 import { Link } from "react-router-dom";
 import RightArrow from "./images/rightArrow.svg";
 import LeftArrow from "./images/leftArrow.svg";
@@ -112,7 +111,7 @@ const FoodParallelPostImg = styled.img`
   height: auto;
 `;
 
-const FoodParallelPostText = styled(Link)`
+const FoodParallelPostText = styled.a`
   width: 100%;
   height: 60px;
   margin-top: 19px;
@@ -147,6 +146,11 @@ const NextButton = styled.img`
   cursor: pointer;
 `;
 
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
 const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
   return (
     <>
@@ -154,7 +158,7 @@ const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
         <FoodParallelPostImgBox>
           <FoodParallelPostImg src={imgSrc} />
         </FoodParallelPostImgBox>
-        <FoodParallelPostText to={`/food/post/${toLink}`}>
+        <FoodParallelPostText target="_blank" href={toLink}>
           {title}
         </FoodParallelPostText>
         <FoodParallelPostTag>
@@ -234,25 +238,42 @@ export default function FoodPost() {
   const [post, setPost] = useState([]);
   const [page, setPage] = useState(0);
   const [load, setLoad] = useState(false);
+  const [prevPage, setPrevPage] = useState("");
+  const [nextPage, setNextPage] = useState("");
+  const [nowLastPage, setNowLastPage] = useState("");
 
   useEffect(() => {
     setLoad(true);
-    ArticleNumber(50).then((data) => {
-      const newChunk = chunk(data, 9);
-      setPost(newChunk);
-      setLoad(false);
-    });
+    // ArticleNumber(50).then((data) => {
+    //   const newChunk = chunk(data, 9);
+    //   setPost(newChunk);
+    //   setLoad(false);
+    // });
+    fetch(
+      "https://argus.work/argus/public/api/argus?key=%E7%BE%8E%E9%A3%9F&start_date=2021-08-30&end_date=2021-09-01&crawler_Web=ETtoday,Ptt,Dcard,Ctee,Chinatimes,Udn,Storm,Mirrormedia,Newtalk"
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setPost(data.data);
+        setPage(data.current_page);
+        setPrevPage(data.prev_page_url);
+        setNextPage(data.next_page_url);
+        setNowLastPage(data.last_page);
+        setLoad(false);
+      });
   }, []);
 
   function renderContent() {
     return (
       <>
-        {post[page] &&
-          post[page].map((data) => {
+        {post &&
+          post.map((data) => {
             return (
               <FoodParallelPostBox
                 key={data.crawler_No}
-                toLink={data.crawler_No}
+                toLink={data.crawler_Url}
                 imgSrc={data.crawler_PicUrl}
                 title={data.crawler_Title}
                 tag1={data.crawler_Type}
@@ -264,25 +285,44 @@ export default function FoodPost() {
     );
   }
 
-  function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
-
-  function prev() {
-    if (page === 0) {
+  function ChangePrevPage() {
+    if (page === 1) {
+      window.alert("最上層囉");
       return;
     }
-    setPage((prevPage) => prevPage - 1);
     topFunction();
+    setLoad(true);
+    fetch(prevPage)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setPost(data.data);
+        setPage(data.current_page);
+        setPrevPage(data.prev_page_url);
+        setNextPage(data.next_page_url);
+        setLoad(false);
+      });
   }
 
-  function next() {
-    if (page === post.length - 1) {
+  function ChangeNextPage() {
+    if (page === nowLastPage) {
+      window.alert("最後囉");
       return;
     }
-    setPage((prevPage) => prevPage + 1);
     topFunction();
+    setLoad(true);
+    fetch(nextPage)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setPost(data.data);
+        setPage(data.current_page);
+        setPrevPage(data.prev_page_url);
+        setNextPage(data.next_page_url);
+        setLoad(false);
+      });
   }
 
   return (
@@ -304,9 +344,9 @@ export default function FoodPost() {
       </FoodGridPostBox>
       <FoodParallelBox>{renderContent()}</FoodParallelBox>
       <PageBox>
-        <PrevButton onClick={prev} src={LeftArrow} />
-        {page + 1}
-        <NextButton onClick={next} src={RightArrow} />
+        <PrevButton onClick={ChangePrevPage} src={LeftArrow} />
+        {page}
+        <NextButton onClick={ChangeNextPage} src={RightArrow} />
       </PageBox>
       <FoodBlock number="150px" />
     </>

@@ -99,6 +99,7 @@ const PostMainProjectImgBox = styled.div`
   display: flex;
   align-items: center;
   background-color: #fff7ff;
+  overflow: hidden;
 
   @media screen and (max-width: 1050px) {
     max-height: 150px;
@@ -110,7 +111,7 @@ const PostMainProjectImg = styled.img`
   height: auto;
 `;
 
-const PostMainProjectText = styled(Link)`
+const PostMainProjectText = styled.a`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -262,7 +263,7 @@ export const PostMainProjectBox = ({
       <PostMainProjectImgBox>
         <PostMainProjectImg src={imgSrc} />
       </PostMainProjectImgBox>
-      <PostMainProjectText to={`/food/post/${toLink}`}>
+      <PostMainProjectText target="_blank" href={toLink}>
         {tittle}
       </PostMainProjectText>
       <PostMainProjectTextSubtitleMain
@@ -300,12 +301,28 @@ export const MainPostTittle = ({
 
 export default function Post() {
   const [post, setPost] = useState([]);
+  const [postItems, setPostItems] = useState([]);
 
   useEffect(() => {
-    ArticleNumber(4).then((data) => {
-      setPost(data);
-    });
+    // ArticleNumber(4).then((data) => {
+    //   setPost(data);
+    // });
+    fetch(
+      "https://argus.work/argus/public/api/argus?key=%E7%BE%8E%E9%A3%9F&start_date=2021-08-30&end_date=2021-09-01&crawler_Web=ETtoday,Ptt,Dcard,Ctee,Chinatimes,Udn,Storm,Mirrormedia,Newtalk"
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setPostItems(data.data);
+        // setPost(data.data);
+      });
   }, []);
+
+  useEffect(() => {
+    let postTest = postItems.slice(0, 4);
+    setPost(postTest);
+  }, [postItems]);
 
   return (
     <>
@@ -319,7 +336,7 @@ export default function Post() {
           return (
             <PostMainProjectBox
               key={data.crawler_No}
-              toLink={data.crawler_No}
+              toLink={data.crawler_Url}
               tittle={`${data.crawler_Title.substr(0, 25)} ...`}
               subtitle1={data.crawler_Type}
               subtitle2={
