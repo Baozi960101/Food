@@ -9,9 +9,14 @@ const HeadderBox = styled.div`
   align-items: center;
   margin-bottom: 170px;
 `;
+
 const HeadderImg = styled.img`
   max-width: 100%;
   height: auto;
+
+  @media screen and (max-width: 600px) {
+    padding-top: 60px;
+  }
 `;
 
 const HeadderBoText = styled.div`
@@ -28,6 +33,11 @@ const HeadderBoTextTitle = styled.div`
   width: 100%;
   font-size: 68px;
   font-family: "Open Sans", sans-serif;
+
+  @media screen and (max-width: 600px) {
+    font-size: 30px;
+    padding-top: 40px;
+  }
 `;
 
 const HeadderBoTextSubtitle = styled.div`
@@ -38,6 +48,10 @@ const HeadderBoTextSubtitle = styled.div`
   font-size: 25px;
   letter-spacing: 4px;
   margin-top: 15px;
+
+  @media screen and (max-width: 600px) {
+    font-size: 16px;
+  }
 `;
 const FoodHeadderMain = ({ ImgSrc, title, subtitle }) => {
   return (

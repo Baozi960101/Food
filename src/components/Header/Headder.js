@@ -15,8 +15,9 @@ const MainFieldHeadder = styled.div`
   position: absolute;
   z-index: 1;
 
-  @media screen and (max-width: 500px) {
-    display: none;
+  @media screen and (max-width: 600px) {
+    height: 60px;
+    background-color: black;
   }
 `;
 
@@ -27,7 +28,13 @@ const CoverHeadderText = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-right: 10%;
+
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 `;
+
+const MenuBox = styled.div``;
 
 const CoverHeadderTitle = styled(Link)`
   display: flex;
@@ -41,6 +48,10 @@ const CoverHeadderTitle = styled(Link)`
   & + & {
     letter-spacing: 12px;
   }
+
+  @media screen and (max-width: 600px) {
+    font-size: 8px;
+  }
 `;
 
 const ImgSize = styled.img`
@@ -48,6 +59,18 @@ const ImgSize = styled.img`
   height: 7px;
   box-sizing: border-box;
   margin-left: 7px;
+`;
+
+const MenuSize = styled.img`
+  display: none;
+  width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+  margin-right: 20px;
+
+  @media screen and (max-width: 600px) {
+    display: flex;
+  }
 `;
 
 const DownImg = () => {
@@ -133,6 +156,7 @@ export default function Headder() {
             <SearchImg src={search} />
           </CoverHeadderTitle> */}
         </CoverHeadderText>
+        <MenuSize src={down} />
       </MainFieldHeadder>
       {topBottomArise && <TopBottom onClick={topFunction} src={UpArrow} />}
     </>

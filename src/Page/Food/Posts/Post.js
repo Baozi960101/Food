@@ -9,12 +9,17 @@ import LeftArrow from "./images/leftArrow.svg";
 
 const FoodGridPostBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   max-width: 1230px;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
   margin-bottom: 130px;
+
+  @media screen and (max-width: 600px) {
+    padding: 0 10px;
+  }
 `;
 
 const FoodGridPostLeft = styled.div`
@@ -95,10 +100,14 @@ const FoodParallelPost = styled.div`
   height: 469px;
   box-sizing: border-box;
   margin: 15px 0;
+
+  @media screen and (max-width: 600px) {
+    padding: 0 10px;
+  }
 `;
 
 const FoodParallelPostImgBox = styled.div`
-  width: 370px;
+  width: 100%;
   height: 330px;
   display: flex;
   align-items: center;

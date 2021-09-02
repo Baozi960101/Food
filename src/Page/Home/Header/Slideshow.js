@@ -9,6 +9,12 @@ const CoverImg = styled.img`
   width: 100%;
 `;
 
+const RwdBox = styled.div`
+  @media screen and (max-width: 600px) {
+    margin-top: 60px;
+  }
+`;
+
 export default function Slideshow() {
   const fadeProperties = {
     duration: 1500,
@@ -23,9 +29,12 @@ export default function Slideshow() {
   return (
     <div className="slide-container">
       <Slide {...fadeProperties}>
-        <div className="each-slide">
-          <CoverImg src={cover} />
-        </div>
+        <RwdBox>
+          <div className="each-slide">
+            <CoverImg src={cover} />
+          </div>
+        </RwdBox>
+
         {/* <div className="each-slide">
           <CoverImg src={text01} />
         </div>
