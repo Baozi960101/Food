@@ -17,13 +17,20 @@ const FoodGridPostBox = styled.div`
   box-sizing: border-box;
   margin-bottom: 130px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1210px) {
     padding: 0 10px;
   }
 `;
 
 const FoodGridPostLeft = styled.div`
   width: 775px;
+
+  @media screen and (max-width: 1210px) {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 const FoodGridPostRight = styled.div`
@@ -31,8 +38,11 @@ const FoodGridPostRight = styled.div`
   padding-top: 30px;
   box-sizing: border-box;
 
-  @media screen and (min-width: 600px) and (max-width: 1024px) {
-    width: 800px;
+  @media screen and (max-width: 1210px) {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 `;
 
@@ -43,6 +53,10 @@ const FoodGridPostLeftTag = styled.div`
   font-weight: 600;
   display: flex;
   margin-bottom: 10px;
+
+  @media screen and (max-width: 1210px) {
+    justify-content: center;
+  }
 `;
 const FoodGridPostLeftImg = styled.img`
   max-width: 100%;
@@ -75,6 +89,11 @@ const FoodGridPostRightText = styled.div`
   font-weight: 600;
   font-size: 18px;
   box-sizing: border-box;
+
+  @media screen and (max-width: 1210px) {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const FoodGridPostRightBox = ({
@@ -110,7 +129,19 @@ const FoodParallelPost = styled.div`
   margin: 15px 0;
 
   @media screen and (max-width: 600px) {
-    padding: 0 10px;
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+  }
+
+  @media screen and (min-width: 601px) and (max-width: 1050px) {
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
   }
 `;
 
@@ -261,11 +292,6 @@ export default function FoodPost() {
 
   useEffect(() => {
     setLoad(true);
-    // ArticleNumber(50).then((data) => {
-    //   const newChunk = chunk(data, 9);
-    //   setPost(newChunk);
-    //   setLoad(false);
-    // });
     fetch(FoodApi)
       .then((response) => {
         return response.json();
