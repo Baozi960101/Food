@@ -30,6 +30,10 @@ const FoodGridPostRight = styled.div`
   width: 420px;
   padding-top: 30px;
   box-sizing: border-box;
+
+  @media screen and (min-width: 600px) and (max-width: 1024px) {
+    width: 800px;
+  }
 `;
 
 const FoodGridPostLeftTag = styled.div`
@@ -42,7 +46,7 @@ const FoodGridPostLeftTag = styled.div`
 `;
 const FoodGridPostLeftImg = styled.img`
   max-width: 100%;
-  height: 465px;
+  height: auto;
   box-sizing: border-box;
 `;
 const FoodGridPostLeftTitle = styled.div`
@@ -53,6 +57,10 @@ const FoodGridPostLeftTitle = styled.div`
   font-family: "Noto Sans TC", sans-serif;
   letter-spacing: 4px;
   box-sizing: border-box;
+
+  @media screen and (max-width: 600px) {
+    font-size: 18px;
+  }
 `;
 const FoodGridPostRightImg = styled.img`
   max-width: 100%;

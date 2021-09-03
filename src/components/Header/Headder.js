@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import down from "./images/down.svg";
 import search from "./images/search.svg";
+import menu from "./images/menu.svg";
 import { Link } from "react-router-dom";
 import UpArrow from "./images/upArrow.svg";
 
@@ -13,7 +14,7 @@ const MainFieldHeadder = styled.div`
   height: 48px;
   background-color: rgba(0, 0, 0, 0.41);
   position: absolute;
-  z-index: 1;
+  z-index: 3;
 
   @media screen and (max-width: 600px) {
     height: 60px;
@@ -34,7 +35,19 @@ const CoverHeadderText = styled.div`
   }
 `;
 
-const MenuBox = styled.div``;
+const MenuBox = styled.div`
+  display: flex;
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: width 0.3s ease-in-out;
+  z-index: 5;
+
+  ${(props) => props.$move && `width:100%`}
+`;
 
 const CoverHeadderTitle = styled(Link)`
   display: flex;
@@ -63,14 +76,49 @@ const ImgSize = styled.img`
 
 const MenuSize = styled.img`
   display: none;
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
   box-sizing: border-box;
   margin-right: 20px;
 
   @media screen and (max-width: 600px) {
     display: flex;
   }
+`;
+
+const MenuLeft = styled.div`
+  width: 80%;
+  height: 100%;
+  background-color: white;
+`;
+
+const MenuLeftTopHeader = styled.div`
+  width: 100%;
+  height: 60px;
+  background-color: black;
+`;
+
+const MenuLeftMainBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 30px 30px;
+`;
+
+const MenuLeftSubTitle = styled(Link)`
+  width: 80%;
+  height: 50px;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  font-weight: 600;
+`;
+
+const MenuBackground = styled.div`
+  width: 20%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.8;
 `;
 
 const DownImg = () => {
@@ -106,14 +154,28 @@ const TopBottom = styled.img`
   cursor: pointer;
 `;
 
-export default function Headder() {
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
+export default function Header() {
   const [topBottomArise, setTopBottomArise] = useState(false);
+  const [menuOn, setMenuOn] = useState(false);
 
   useEffect(() => {
     window.onscroll = function () {
       scrollFunction();
     };
   }, []);
+
+  function HandleMenu() {
+    if (menuOn) {
+      setMenuOn(false);
+    } else {
+      setMenuOn(true);
+    }
+  }
 
   function scrollFunction() {
     if (
@@ -126,13 +188,22 @@ export default function Headder() {
     }
   }
 
-  function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
-
   return (
     <>
+      <MenuBox $move={menuOn}>
+        <MenuLeft>
+          <MenuLeftTopHeader />
+          <MenuLeftMainBox>
+            <MenuLeftSubTitle onClick={HandleMenu}>戶外運動</MenuLeftSubTitle>
+            <MenuLeftSubTitle onClick={HandleMenu}>旅遊</MenuLeftSubTitle>
+            <MenuLeftSubTitle to="/food" onClick={HandleMenu}>
+              美食
+            </MenuLeftSubTitle>
+            <MenuLeftSubTitle onClick={HandleMenu}>健康</MenuLeftSubTitle>
+          </MenuLeftMainBox>
+        </MenuLeft>
+        <MenuBackground onClick={HandleMenu} />
+      </MenuBox>
       <MainFieldHeadder>
         <MainFieldHeadderTitle to="/">建通股份有限公司</MainFieldHeadderTitle>
         <CoverHeadderText>
@@ -156,7 +227,7 @@ export default function Headder() {
             <SearchImg src={search} />
           </CoverHeadderTitle> */}
         </CoverHeadderText>
-        <MenuSize src={down} />
+        <MenuSize src={menu} onClick={HandleMenu} />
       </MainFieldHeadder>
       {topBottomArise && <TopBottom onClick={topFunction} src={UpArrow} />}
     </>
