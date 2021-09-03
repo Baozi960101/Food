@@ -132,13 +132,12 @@ const SearchImg = styled.img`
 
 const MainFieldHeadderTitle = styled(Link)`
   font-family: "PingFangTC";
-  font-size: 25px;
+  font-size: 26px;
   color: white;
   text-decoration: none;
   margin-left: 10%;
 
-  @media screen and (min-width: 600px) {
-    font-size: 20px;
+  @media screen and (max-width: 600px) {
     width: 250px;
     margin-right: 10%;
     margin-left: 5%;
@@ -205,7 +204,7 @@ export default function Header() {
         <MenuBackground onClick={HandleMenu} />
       </MenuBox>
       <MainFieldHeadder>
-        <MainFieldHeadderTitle to="/">建通股份有限公司</MainFieldHeadderTitle>
+        <MainFieldHeadderTitle to="/">嚐飽途</MainFieldHeadderTitle>
         <CoverHeadderText>
           <CoverHeadderTitle to="/">
             戶外運動
