@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import RightArrows from "./images/right-arrows-symbol.svg";
 import { Link } from "react-router-dom";
-import { FoodApi, SportsApi } from "../../../API";
+import { FoodApi, TravelApi } from "../../../API";
 
 const PostTittleBox = styled.div`
   display: flex;
@@ -302,8 +302,8 @@ export const MainPostTittle = ({
 export default function Post() {
   const [foodPost, setFoodPost] = useState([]);
   const [foodPostItems, setFoodPostItems] = useState([]);
-  const [sportsPost, setSportsPost] = useState([]);
-  const [sportsPostItems, setSportsPostItems] = useState([]);
+  const [travelsPost, setTravelPost] = useState([]);
+  const [travelPostItems, setSTravelPostItems] = useState([]);
 
   useEffect(() => {
     fetch(FoodApi)
@@ -311,19 +311,19 @@ export default function Post() {
       .then((data) => {
         setFoodPostItems(data.data);
       });
-    fetch(SportsApi)
+    fetch(TravelApi)
       .then((response) => response.json())
       .then((data) => {
-        setSportsPostItems(data.data);
+        setSTravelPostItems(data.data);
       });
   }, []);
 
   useEffect(() => {
     let foodTest = foodPostItems.slice(0, 4);
     setFoodPost(foodTest);
-    let sportsTest = sportsPostItems.slice(0, 4);
-    setSportsPost(sportsTest);
-  }, [foodPostItems, sportsPostItems]);
+    let sportsTest = travelPostItems.slice(0, 4);
+    setTravelPost(sportsTest);
+  }, [foodPostItems, travelPostItems]);
 
   return (
     <>
@@ -354,12 +354,12 @@ export default function Post() {
       <ReadMore ReadLinkTo="/food" />
       <Block />
       <MainPostTittle
-        tittleHeadder1="運"
-        tittleHeadder2="動"
-        subtitleHeadder="SPORTS"
+        tittleHeadder1="旅"
+        tittleHeadder2="遊"
+        subtitleHeadder="TRAVEL"
       />
       <MainBox>
-        {sportsPost.map((data) => {
+        {travelsPost.map((data) => {
           return (
             <PostMainProjectBox
               key={data.crawler_No}

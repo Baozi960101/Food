@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Triangle, Square } from "./IrregularGraphics";
-import { ArticleNumber, ArticleId } from "../../../API";
+import { ArticleNumber, ArticleId, FoodApi } from "../../../API";
 import { SlugContext } from "../../../context";
 import { Link } from "react-router-dom";
 
@@ -252,6 +252,7 @@ export default function DetailedArticle() {
   const { fooDSlug } = useContext(SlugContext);
   const [detailedArticlePost, setDetailedArticlePost] = useState([]);
   const [detailedArticleOnlyPost, setDetailedArticleOnlyPost] = useState([]);
+  const [foodPostItems, setFoodPostItems] = useState([]);
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
@@ -259,11 +260,18 @@ export default function DetailedArticle() {
     ArticleId(fooDSlug).then((data) => {
       setDetailedArticleOnlyPost(data);
     });
-    ArticleNumber(3).then((data) => {
-      setDetailedArticlePost(data);
-      setLoad(false);
-    });
+    fetch(FoodApi)
+      .then((response) => response.json())
+      .then((data) => {
+        setDetailedArticlePost(data.data);
+      });
   }, []);
+
+  useEffect(() => {
+    let foodTest = detailedArticlePost.slice(0, 3);
+    setFoodPostItems(foodTest);
+    setLoad(false);
+  }, [detailedArticlePost]);
 
   return (
     <>
@@ -278,7 +286,9 @@ export default function DetailedArticle() {
                 text={`${data.crawler_Content.substr(0, 100)} ...`}
                 srcImg={data.crawler_PicUrl}
                 tag1={data.crawler_Type}
-                tag2={data.crawler_Keyword}
+                tag2={
+                  data.crawler_Keyword === "" ? "" : `${data.crawler_Keyword} `
+                }
                 time={data.crawler_Date}
                 toLink={data.crawler_Url}
               />
@@ -287,14 +297,18 @@ export default function DetailedArticle() {
         </DetailedArticleBoxLeft>
         <DetailedArticleBoxRight>
           <IrregularGraphicsTitle title="HOT & YAMMY" subtitle="美食熱門榜" />
-          {detailedArticlePost.map((data) => {
+          {foodPostItems.map((data) => {
             return (
               <DetailedArticleBoxRightTextMain
                 key={data.crawler_No}
                 text={`${data.crawler_Title.substr(0, 30)} ...`}
                 srcImg={data.crawler_PicUrl}
                 tag1={data.crawler_Type}
-                tag2={`${data.crawler_Keyword.substr(0, 10)} ...`}
+                tag2={
+                  data.crawler_Keyword === ""
+                    ? ""
+                    : `${data.crawler_Keyword.substr(0, 15)} ...`
+                }
                 toLink={data.crawler_No}
               />
             );

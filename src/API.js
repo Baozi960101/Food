@@ -1,8 +1,8 @@
 const API = "http://food.argus.work/venus/index.php/GetData/getData";
 export const FoodApi =
   "https://argus.work/argus/public/api/argus?key=美食&start_date=2021-08-30&end_date=2021-09-01&crawler_Web=ETtoday,Ptt,Dcard,Ctee,Chinatimes,Udn,Storm,Mirrormedia,Newtalk";
-export const SportsApi =
-  "https://argus.work/argus/public/api/argus?key=運動&start_date=2021-08-30&end_date=2021-09-01&crawler_Web=ETtoday,Ptt,Dcard,Ctee,Chinatimes,Udn,Storm,Mirrormedia,Newtalk";
+export const TravelApi =
+  "https://argus.work/argus/public/api/argus?key=旅遊&start_date=2021-08-30&end_date=2021-09-01&crawler_Web=ETtoday,Ptt,Dcard,Ctee,Chinatimes,Udn,Storm,Mirrormedia,Newtalk";
 export const RestaurantApi =
   "https://argus.work/argus/public/api/argus?key=餐廳&start_date=2021-08-30&end_date=2021-09-01&crawler_Web=ETtoday,Ptt,Dcard,Ctee,Chinatimes,Udn,Storm,Mirrormedia,Newtalk";
 

@@ -25,7 +25,7 @@ const MainFieldHeadder = styled.div`
 const CoverHeadderText = styled.div`
   height: 100%;
   display: flex;
-  width: 550px;
+  width: 200px;
   justify-content: space-between;
   align-items: center;
   margin-right: 10%;
@@ -193,12 +193,10 @@ export default function Header() {
         <MenuLeft>
           <MenuLeftTopHeader />
           <MenuLeftMainBox>
-            <MenuLeftSubTitle onClick={HandleMenu}>戶外運動</MenuLeftSubTitle>
             <MenuLeftSubTitle onClick={HandleMenu}>旅遊</MenuLeftSubTitle>
             <MenuLeftSubTitle to="/food" onClick={HandleMenu}>
               美食
             </MenuLeftSubTitle>
-            <MenuLeftSubTitle onClick={HandleMenu}>健康</MenuLeftSubTitle>
           </MenuLeftMainBox>
         </MenuLeft>
         <MenuBackground onClick={HandleMenu} />
@@ -207,19 +205,11 @@ export default function Header() {
         <MainFieldHeadderTitle to="/">嚐飽途</MainFieldHeadderTitle>
         <CoverHeadderText>
           <CoverHeadderTitle to="/">
-            戶外運動
-            <DownImg />
-          </CoverHeadderTitle>
-          <CoverHeadderTitle to="/">
             旅遊
             <DownImg />
           </CoverHeadderTitle>
           <CoverHeadderTitle to="/food">
             美食
-            <DownImg />
-          </CoverHeadderTitle>
-          <CoverHeadderTitle to="/">
-            健康
             <DownImg />
           </CoverHeadderTitle>
           {/* <CoverHeadderTitle to="/">
