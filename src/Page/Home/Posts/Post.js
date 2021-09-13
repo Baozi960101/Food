@@ -98,6 +98,7 @@ const PostMainProjectImgBox = styled.div`
   height: 300px;
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: #fff7ff;
   overflow: hidden;
 
@@ -107,8 +108,7 @@ const PostMainProjectImgBox = styled.div`
 `;
 
 const PostMainProjectImg = styled.img`
-  max-width: 100%;
-  height: auto;
+  height: 100%;
 `;
 
 const PostMainProjectText = styled.a`

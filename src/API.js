@@ -1,4 +1,5 @@
 const API = "http://food.argus.work/venus/index.php/GetData/getData";
+const Source_API = `https://argus.work/argus`;
 
 function getDay(day) {
   let today = new Date();
@@ -21,12 +22,13 @@ function doHandleMonth(month) {
 }
 
 let nowDate = getDay(0);
+let LastNowDate = getDay(-7);
 
-export const FoodApi = `https://argus.work/argus/public/api/argus?key=美食&start_date=2021-08-30&end_date=${nowDate}&crawler_Web=ETtoday,Ptt,Dcard,Ctee,Chinatimes,Udn,Storm,Mirrormedia,Newtalk`;
+export const FoodApi = `${Source_API}/api/v1/data?key=美食&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=buzzorange,cmmedia,ebc,ftv,ettoday,setn,dcard,ptt`;
 
-export const TravelApi = `https://argus.work/argus/public/api/argus?key=旅遊&start_date=2021-08-30&end_date=${nowDate}&crawler_Web=ETtoday,Ptt,Dcard,Ctee,Chinatimes,Udn,Storm,Mirrormedia,Newtalk`;
+export const TravelApi = `${Source_API}/api/v1/data?key=旅遊&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=buzzorange,cmmedia,ebc,ftv,ettoday,setn,dcard,ptt`;
 
-export const RestaurantApi = `https://argus.work/argus/public/api/argus?key=餐廳&start_date=2021-08-30&end_date=${nowDate}&crawler_Web=ETtoday,Ptt,Dcard,Ctee,Chinatimes,Udn,Storm,Mirrormedia,Newtalk`;
+export const RestaurantApi = `${Source_API}/api/v1/data?key=餐廳&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=buzzorange,cmmedia,ebc,ftv,ettoday,setn,dcard,ptt`;
 
 export const ArticleNumber = (number) => {
   let fd = new FormData();
