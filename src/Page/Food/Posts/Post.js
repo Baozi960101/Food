@@ -316,7 +316,7 @@ export default function FoodPost() {
                 key={data.crawler_No}
                 toLink={data.crawler_Url}
                 imgSrc={data.crawler_PicUrl}
-                title={data.crawler_Title}
+                title={`${data.crawler_Title.substr(0, 28)} ...`}
                 tag1={data.crawler_Type}
                 tag2={`${data.crawler_Keyword.substr(0, 20)} ...`}
               />
