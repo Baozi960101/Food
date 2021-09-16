@@ -8,7 +8,7 @@ import {
 } from "../Posts/Post";
 import FeaturdTitleImg1 from "./images/pexels-valeria-boltneva-842571.png";
 import FeaturdTitleImg2 from "./images/pexels-valeria-boltneva-874254.png";
-import { RestaurantApi } from "../../../API";
+import { TodayRestaurantApi } from "../../../API";
 
 const FeaturedBigTitle = styled.div`
   width: 318px;
@@ -197,7 +197,7 @@ export default function Featurd() {
   const [restaurantPostItems, setRestaurantPostItems] = useState([]);
 
   useEffect(() => {
-    fetch(RestaurantApi)
+    fetch(TodayRestaurantApi)
       .then((response) => response.json())
       .then((data) => {
         setRestaurantPostItems(data.data);
@@ -238,7 +238,7 @@ export default function Featurd() {
           return (
             <PostMainProjectBox
               key={data.crawler_No}
-              toLink={data.crawler_Url}
+              toLink={data.crawler_No}
               tittle={`${data.crawler_Title.substr(0, 25)} ...`}
               subtitle1={data.crawler_Type}
               subtitle2={

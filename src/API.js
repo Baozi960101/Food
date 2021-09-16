@@ -1,5 +1,4 @@
-const API = "http://food.argus.work/venus/index.php/GetData/getData";
-const Source_API = `https://argus.work/argus`;
+const Source_API = `https://argus.work/argus/api/v1/data`;
 
 function getDay(day) {
   let today = new Date();
@@ -24,27 +23,18 @@ function doHandleMonth(month) {
 let nowDate = getDay(0);
 let LastNowDate = getDay(-7);
 
-export const FoodApi = `${Source_API}/api/v1/data?key=美食&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=buzzorange,cmmedia,ebc,ftv,ettoday,setn,dcard,ptt`;
+export const TodayFoodApi = `${Source_API}?key=美食&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
 
-export const TravelApi = `${Source_API}/api/v1/data?key=旅遊&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=buzzorange,cmmedia,ebc,ftv,ettoday,setn,dcard,ptt`;
+export const FoodApi = `${Source_API}?key=美食&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
 
-export const RestaurantApi = `${Source_API}/api/v1/data?key=餐廳&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=buzzorange,cmmedia,ebc,ftv,ettoday,setn,dcard,ptt`;
+export const TodayTravelApi = `${Source_API}?key=旅遊&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
 
-export const ArticleNumber = (number) => {
-  let fd = new FormData();
-  fd.append("limit", number);
-  fd.append("type", "news");
-  return fetch(API, {
-    method: "POST",
-    body: fd,
-  }).then((res) => res.json());
-};
+export const TravelApi = `${Source_API}?key=旅遊&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=all`;
 
-export const ArticleId = (number) => {
-  let fdId = new FormData();
-  fdId.append("id", number);
-  return fetch(API, {
-    method: "POST",
-    body: fdId,
-  }).then((res) => res.json());
+export const TodayRestaurantApi = `${Source_API}?key=餐廳&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
+
+export const RestaurantApi = `${Source_API}?key=餐廳&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=all`;
+
+export const AloneFoodApi = (id) => {
+  return `${Source_API}/${id}`;
 };

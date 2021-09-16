@@ -159,7 +159,7 @@ const FoodParallelPostImg = styled.img`
   height: auto;
 `;
 
-const FoodParallelPostText = styled.a`
+const FoodParallelPostText = styled(Link)`
   width: 100%;
   height: 60px;
   margin-top: 19px;
@@ -206,7 +206,7 @@ const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
         <FoodParallelPostImgBox>
           <FoodParallelPostImg src={imgSrc} />
         </FoodParallelPostImgBox>
-        <FoodParallelPostText target="_blank" href={toLink}>
+        <FoodParallelPostText to={`/food/post/${toLink}`}>
           {title}
         </FoodParallelPostText>
         <FoodParallelPostTag>
@@ -298,10 +298,10 @@ export default function FoodPost() {
       })
       .then((data) => {
         setPost(data.data);
-        setPage(data.current_page);
-        setPrevPage(data.prev_page_url);
-        setNextPage(data.next_page_url);
-        setNowLastPage(data.last_page);
+        setPage(data.meta.current_page);
+        setPrevPage(data.links.prev);
+        setNextPage(data.links.next);
+        setNowLastPage(data.meta.last_page);
         setLoad(false);
       });
   }, []);
@@ -314,7 +314,7 @@ export default function FoodPost() {
             return (
               <FoodParallelPostBox
                 key={data.crawler_No}
-                toLink={data.crawler_Url}
+                toLink={data.crawler_No}
                 imgSrc={data.crawler_PicUrl}
                 title={`${data.crawler_Title.substr(0, 28)} ...`}
                 tag1={data.crawler_Type}
@@ -339,9 +339,9 @@ export default function FoodPost() {
       })
       .then((data) => {
         setPost(data.data);
-        setPage(data.current_page);
-        setPrevPage(data.prev_page_url);
-        setNextPage(data.next_page_url);
+        setPage(data.meta.current_page);
+        setPrevPage(data.links.prev);
+        setNextPage(data.links.next);
         setLoad(false);
       });
   }
@@ -359,9 +359,9 @@ export default function FoodPost() {
       })
       .then((data) => {
         setPost(data.data);
-        setPage(data.current_page);
-        setPrevPage(data.prev_page_url);
-        setNextPage(data.next_page_url);
+        setPage(data.meta.current_page);
+        setPrevPage(data.links.prev);
+        setNextPage(data.links.next);
         setLoad(false);
       });
   }

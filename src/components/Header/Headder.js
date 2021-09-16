@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import down from "./images/down.svg";
-import search from "./images/search.svg";
 import menu from "./images/menu.svg";
 import { Link } from "react-router-dom";
 import UpArrow from "./images/upArrow.svg";
+import travel from "./images/travel.png";
 
 const MainFieldHeadder = styled.div`
   display: flex;
@@ -125,14 +125,10 @@ const DownImg = () => {
   return <ImgSize src={down} />;
 };
 
-const SearchImg = styled.img`
-  width: 14px;
-  height: 14px;
-`;
-
 const MainFieldHeadderTitle = styled(Link)`
-  font-family: "PingFangTC";
-  font-size: 26px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
   color: white;
   text-decoration: none;
   margin-left: 10%;
@@ -202,7 +198,14 @@ export default function Header() {
         <MenuBackground onClick={HandleMenu} />
       </MenuBox>
       <MainFieldHeadder>
-        <MainFieldHeadderTitle to="/">嚐飽途</MainFieldHeadderTitle>
+        <MainFieldHeadderTitle to="/">
+          <img
+            style={{ width: "103px", marginRight: "5px" }}
+            alt="嚐飽途"
+            src={travel}
+          />
+          最懂你的生活網
+        </MainFieldHeadderTitle>
         <CoverHeadderText>
           <CoverHeadderTitle to="/">
             旅遊

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import RightArrows from "./images/right-arrows-symbol.svg";
 import { Link } from "react-router-dom";
-import { FoodApi, TravelApi } from "../../../API";
+import { TodayFoodApi, TodayTravelApi } from "../../../API";
 
 const PostTittleBox = styled.div`
   display: flex;
@@ -111,7 +111,7 @@ const PostMainProjectImg = styled.img`
   height: 100%;
 `;
 
-const PostMainProjectText = styled.a`
+const PostMainProjectText = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -263,7 +263,7 @@ export const PostMainProjectBox = ({
       <PostMainProjectImgBox>
         <PostMainProjectImg src={imgSrc} />
       </PostMainProjectImgBox>
-      <PostMainProjectText target="_blank" href={toLink}>
+      <PostMainProjectText to={`/food/post/${toLink}`}>
         {tittle}
       </PostMainProjectText>
       <PostMainProjectTextSubtitleMain
@@ -306,12 +306,12 @@ export default function Post() {
   const [travelPostItems, setSTravelPostItems] = useState([]);
 
   useEffect(() => {
-    fetch(FoodApi)
+    fetch(TodayFoodApi)
       .then((response) => response.json())
       .then((data) => {
         setFoodPostItems(data.data);
       });
-    fetch(TravelApi)
+    fetch(TodayTravelApi)
       .then((response) => response.json())
       .then((data) => {
         setSTravelPostItems(data.data);
@@ -337,7 +337,7 @@ export default function Post() {
           return (
             <PostMainProjectBox
               key={data.crawler_No}
-              toLink={data.crawler_Url}
+              toLink={`${data.crawler_No}`}
               tittle={`${data.crawler_Title.substr(0, 25)} ...`}
               subtitle1={data.crawler_Type}
               subtitle2={
@@ -389,7 +389,7 @@ export default function Post() {
           return (
             <PostMainProjectBox
               key={data.crawler_No}
-              toLink={data.crawler_Url}
+              toLink={data.crawler_No}
               tittle={`${data.crawler_Title.substr(0, 25)} ...`}
               subtitle1={data.crawler_Type}
               subtitle2={

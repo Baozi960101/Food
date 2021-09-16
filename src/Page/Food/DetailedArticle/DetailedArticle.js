@@ -1,26 +1,43 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Triangle, Square } from "./IrregularGraphics";
-import { ArticleNumber, ArticleId, FoodApi } from "../../../API";
+import { AloneFoodApi, TodayFoodApi } from "../../../API";
 import { SlugContext } from "../../../context";
 import { Link } from "react-router-dom";
 
 const DetailedArticleBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  max-width: 88%;
-  margin-right: 6%;
-  margin-left: 6%;
-  position: relative;
+  justify-content: space-around;
+  max-width: 100%;
+  padding-right: 6%;
+  padding-left: 6%;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 599px) {
+    flex-wrap: wrap;
+  }
+
+  @media screen and (min-width: 600px) and (max-width: 1050px) {
+    justify-content: space-between;
+  }
 `;
 
 const DetailedArticleBoxLeft = styled.div`
-  width: 62%;
+  width: 60%;
   box-sizing: border-box;
+
+  @media screen and (max-width: 599px) {
+    width: 100%;
+  }
 `;
 
 const DetailedArticleBoxRight = styled.div`
   width: 30%;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 599px) {
+    width: 100%;
+  }
 `;
 
 const DetailedArticleBoxLeftTitle = styled.div`
@@ -30,6 +47,10 @@ const DetailedArticleBoxLeftTitle = styled.div`
   font-size: 48px;
   letter-spacing: 6.5px;
   font-weight: 800;
+
+  @media screen and (max-width: 599px) {
+    font-size: 28px;
+  }
 `;
 
 const DetailedArticleBoxLeftImgBox = styled.div`
@@ -54,13 +75,14 @@ const DetailedArticleBoxLeftSubtitle = styled.div`
 `;
 
 const DetailedArticleBoxLeftText = styled.div`
-  width: 500px;
+  width: 100%;
   display: flex;
   justify-content: center;
   font-size: 21px;
   letter-spacing: 2.84px;
   font-weight: 700;
   margin: 83px auto 30px auto;
+  box-sizing: border-box;
 `;
 
 const IrregularGraphicsTextTop = styled.div`
@@ -73,6 +95,10 @@ const IrregularGraphicsTextTop = styled.div`
   position: absolute;
   z-index: 4;
   padding-top: 15px;
+
+  @media screen and (min-width: 600px) and (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const IrregularGraphicsTextBottom = styled.div`
@@ -85,6 +111,10 @@ const IrregularGraphicsTextBottom = styled.div`
   position: absolute;
   z-index: 4;
   padding-top: 35px;
+
+  @media screen and (min-width: 600px) and (max-width: 768px) {
+    font-size: 28px;
+  }
 `;
 
 const DetailedArticleBoxLeftReadMore = styled.a`
@@ -98,25 +128,27 @@ const DetailedArticleBoxLeftReadMore = styled.a`
   font-size: 25px;
   cursor: pointer;
   text-decoration: none;
+
+  @media screen and (max-width: 599px) {
+    margin-bottom: 100px;
+  }
+`;
+
+const IrregularGraphicsTitleBox = styled.div`
+  padding: 0 10%;
+  margin-bottom: 70px;
 `;
 
 const IrregularGraphicsTitle = ({ title, subtitle }) => {
   return (
     <>
-      <div
-        style={{
-          paddingLeft: "10%",
-          paddingRight: "10%",
-          marginBottom: "70px",
-        }}
-      >
-        <Triangle />
+      <IrregularGraphicsTitleBox>
         <div style={{ width: "100%", position: "relative" }}>
           <IrregularGraphicsTextTop>{title}</IrregularGraphicsTextTop>
           <IrregularGraphicsTextBottom>{subtitle}</IrregularGraphicsTextBottom>
         </div>
         <Square />
-      </div>
+      </IrregularGraphicsTitleBox>
     </>
   );
 };
@@ -129,19 +161,21 @@ const DetailedArticleBoxRightText = styled.div`
 `;
 
 const DetailedArticleBoxRightImgBox = styled.div`
-  width: 100%;
+  width: 40%;
   height: 170px;
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: #fff7ff;
+  overflow: hidden;
 `;
 
 const DetailedArticleBoxRightImg = styled.img`
-  max-width: 100%;
-  height: auto;
+  height: 100%;
 `;
 
 const DetailedArticleBoxRightTextTitle = styled(Link)`
+  width: 60%;
   font-size: 21px;
   letter-spacing: 2px;
   font-weight: 600;
@@ -149,6 +183,7 @@ const DetailedArticleBoxRightTextTitle = styled(Link)`
   padding-top: 10px;
   text-decoration: none;
   color: black;
+  box-sizing: border-box;
 `;
 
 const DetailedArticleBoxRightTextTag = styled.div`
@@ -257,15 +292,19 @@ export default function DetailedArticle() {
 
   useEffect(() => {
     setLoad(true);
-    ArticleId(fooDSlug).then((data) => {
-      setDetailedArticleOnlyPost(data);
-    });
-    fetch(FoodApi)
+    if (fooDSlug !== "") {
+      fetch(AloneFoodApi(fooDSlug))
+        .then((res) => res.json())
+        .then((data) => {
+          setDetailedArticleOnlyPost([data.data]);
+        });
+    }
+    fetch(TodayFoodApi)
       .then((response) => response.json())
       .then((data) => {
         setDetailedArticlePost(data.data);
       });
-  }, []);
+  }, [fooDSlug]);
 
   useEffect(() => {
     let foodTest = detailedArticlePost.slice(0, 3);

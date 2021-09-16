@@ -7,6 +7,8 @@ export const Triangle = styled.div`
   border-right: 350px solid transparent;
   position: absolute;
   z-index: 1;
+  box-sizing: border-box;
+  background-color: blue;
 `;
 
 export const Square = styled.div`

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import travel from "./images/travel.png";
 
 const Bottom = styled.div`
   display: flex;
@@ -13,7 +14,9 @@ const Bottom = styled.div`
 export default function HtmlBottom() {
   return (
     <>
-      <Bottom />
+      <Bottom>
+        <img width="200px" alt="嚐飽途" src={travel} />
+      </Bottom>
     </>
   );
 }

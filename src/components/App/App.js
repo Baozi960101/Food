@@ -22,6 +22,7 @@ export default function App() {
     let location = useLocation();
     useEffect(() => {
       setFooDSlug(slug);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location]);
     return <DetailedArticle />;
   }
