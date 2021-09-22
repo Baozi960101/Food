@@ -11,7 +11,7 @@ const MainFieldHeadder = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 48px;
+  height: 60px;
   background-color: rgba(0, 0, 0, 0.41);
   position: absolute;
   z-index: 3;
@@ -128,10 +128,11 @@ const DownImg = () => {
 const MainFieldHeadderTitle = styled(Link)`
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px;
   color: white;
   text-decoration: none;
   margin-left: 10%;
+  font-family: "PingFangTC";
 
   @media screen and (max-width: 600px) {
     width: 250px;
@@ -200,7 +201,7 @@ export default function Header() {
       <MainFieldHeadder>
         <MainFieldHeadderTitle to="/">
           <img
-            style={{ width: "103px", marginRight: "5px" }}
+            style={{ width: "140px", marginRight: "5px" }}
             alt="嚐飽途"
             src={travel}
           />

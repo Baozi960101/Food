@@ -21,11 +21,11 @@ function doHandleMonth(month) {
 }
 
 let nowDate = getDay(0);
-let LastNowDate = getDay(-7);
+let LastNowDate = getDay(-3);
 
 export const TodayFoodApi = `${Source_API}?key=美食&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
 
-export const FoodApi = `${Source_API}?key=美食&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
+export const FoodApi = `${Source_API}?key=美食&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=all`;
 
 export const TodayTravelApi = `${Source_API}?key=旅遊&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
 
