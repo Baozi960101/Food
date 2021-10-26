@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
-import { Triangle, Square } from "./IrregularGraphics";
+import { Square } from "./IrregularGraphics";
 import { AloneFoodApi, TodayFoodApi } from "../../../API";
 import { SlugContext } from "../../../context";
 import { Link } from "react-router-dom";
@@ -204,7 +204,7 @@ const DetailedArticleBoxRightTextMain = ({
     <>
       <DetailedArticleBoxRightText>
         <DetailedArticleBoxRightImgBox>
-          <DetailedArticleBoxRightImg src={srcImg} />
+          <DetailedArticleBoxRightImg alt="美食圖片" src={srcImg} />
         </DetailedArticleBoxRightImgBox>
         <DetailedArticleBoxRightTextTitle to={`/food/post/${toLink}`}>
           {text}
@@ -242,7 +242,7 @@ const DetailedArticleBoxLeftMain = ({
     <>
       <DetailedArticleBoxLeftTitle>{title}</DetailedArticleBoxLeftTitle>
       <DetailedArticleBoxLeftImgBox>
-        <DetailedArticleBoxLeftImg src={srcImg} />
+        <DetailedArticleBoxLeftImg alt="美食圖片" src={srcImg} />
       </DetailedArticleBoxLeftImgBox>
       <DetailedArticleBoxLeftSubtitle>
         <div style={{ display: "flex" }}>
@@ -262,7 +262,11 @@ const DetailedArticleBoxLeftMain = ({
         <div style={{ color: "#a4a4a4" }}>{time}</div>
       </DetailedArticleBoxLeftSubtitle>
       <DetailedArticleBoxLeftText>{text}</DetailedArticleBoxLeftText>
-      <DetailedArticleBoxLeftReadMore target="_blank" href={toLink}>
+      <DetailedArticleBoxLeftReadMore
+        target="_blank"
+        href={toLink}
+        rel="nofollow"
+      >
         點我閱讀更多...
       </DetailedArticleBoxLeftReadMore>
     </>
@@ -283,6 +287,54 @@ const Loading = styled.div`
   z-index: 5;
 `;
 
+async function fetchAloneFood(fooDSlug, setDetailedArticleOnlyPost) {
+  const res = await fetch(AloneFoodApi(fooDSlug));
+  const { data } = await res.json();
+  setDetailedArticleOnlyPost([data]);
+}
+
+async function fetchTodayFood(setDetailedArticlePost) {
+  const res = await fetch(TodayFoodApi);
+  const { data } = await res.json();
+  setDetailedArticlePost(data);
+}
+
+function liftPost(detailedArticleOnlyPost) {
+  return detailedArticleOnlyPost.map((data) => {
+    return (
+      <DetailedArticleBoxLeftMain
+        key={data.crawler_No}
+        title={data.crawler_Title}
+        text={`${data.crawler_Content.substr(0, 100)} ...`}
+        srcImg={data.crawler_PicUrl}
+        tag1={data.crawler_Type}
+        tag2={data.crawler_Keyword === "" ? "" : `${data.crawler_Keyword} `}
+        time={data.crawler_Date}
+        toLink={data.crawler_Url}
+      />
+    );
+  });
+}
+
+function rightPost(foodPostItems) {
+  return foodPostItems.map((data) => {
+    return (
+      <DetailedArticleBoxRightTextMain
+        key={data.crawler_No}
+        text={`${data.crawler_Title.substr(0, 30)} ...`}
+        srcImg={data.crawler_PicUrl}
+        tag1={data.crawler_Type}
+        tag2={
+          data.crawler_Keyword === ""
+            ? ""
+            : `${data.crawler_Keyword.substr(0, 15)} ...`
+        }
+        toLink={data.crawler_No}
+      />
+    );
+  });
+}
+
 export default function DetailedArticle() {
   const { fooDSlug } = useContext(SlugContext);
   const [detailedArticlePost, setDetailedArticlePost] = useState([]);
@@ -293,22 +345,17 @@ export default function DetailedArticle() {
   useEffect(() => {
     setLoad(true);
     if (fooDSlug !== "") {
-      fetch(AloneFoodApi(fooDSlug))
-        .then((res) => res.json())
-        .then((data) => {
-          setDetailedArticleOnlyPost([data.data]);
-        });
+      fetchAloneFood(fooDSlug, setDetailedArticleOnlyPost);
     }
-    fetch(TodayFoodApi)
-      .then((response) => response.json())
-      .then((data) => {
-        setDetailedArticlePost(data.data);
-      });
+    fetchTodayFood(setDetailedArticlePost);
+    return () => {};
   }, [fooDSlug]);
 
   useEffect(() => {
-    let foodTest = detailedArticlePost.slice(0, 3);
-    setFoodPostItems(foodTest);
+    if (detailedArticlePost.length === 0) {
+      return;
+    }
+    setFoodPostItems(detailedArticlePost.slice(0, 3));
     setLoad(false);
   }, [detailedArticlePost]);
 
@@ -317,41 +364,11 @@ export default function DetailedArticle() {
       {load && <Loading>載入中 ...</Loading>}
       <DetailedArticleBox>
         <DetailedArticleBoxLeft>
-          {detailedArticleOnlyPost.map((data) => {
-            return (
-              <DetailedArticleBoxLeftMain
-                key={data.crawler_No}
-                title={data.crawler_Title}
-                text={`${data.crawler_Content.substr(0, 100)} ...`}
-                srcImg={data.crawler_PicUrl}
-                tag1={data.crawler_Type}
-                tag2={
-                  data.crawler_Keyword === "" ? "" : `${data.crawler_Keyword} `
-                }
-                time={data.crawler_Date}
-                toLink={data.crawler_Url}
-              />
-            );
-          })}
+          {liftPost(detailedArticleOnlyPost)}
         </DetailedArticleBoxLeft>
         <DetailedArticleBoxRight>
           <IrregularGraphicsTitle title="HOT & YAMMY" subtitle="美食熱門榜" />
-          {foodPostItems.map((data) => {
-            return (
-              <DetailedArticleBoxRightTextMain
-                key={data.crawler_No}
-                text={`${data.crawler_Title.substr(0, 30)} ...`}
-                srcImg={data.crawler_PicUrl}
-                tag1={data.crawler_Type}
-                tag2={
-                  data.crawler_Keyword === ""
-                    ? ""
-                    : `${data.crawler_Keyword.substr(0, 15)} ...`
-                }
-                toLink={data.crawler_No}
-              />
-            );
-          })}
+          {rightPost(foodPostItems)}
           <div style={{ width: "100%", height: "50px" }}></div>
         </DetailedArticleBoxRight>
       </DetailedArticleBox>

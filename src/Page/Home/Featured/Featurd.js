@@ -177,7 +177,7 @@ const FeaturdBox = ({
   return (
     <>
       <FeaturdImgBox>
-        <FeaturdImg src={srcImg} />
+        <FeaturdImg alt="美食圖片" src={srcImg} />
       </FeaturdImgBox>
       <FeaturdImgLabel>
         <FeaturdImgLabelLeft>
@@ -192,21 +192,25 @@ const FeaturdBox = ({
   );
 };
 
+async function fetchTodayRestaurantApi(setRestaurantPostItems) {
+  const res = await fetch(TodayRestaurantApi);
+  const data = await res.json();
+  setRestaurantPostItems(data.data);
+}
+
 export default function Featurd() {
   const [restaurantPost, setRestaurantPost] = useState([]);
   const [restaurantPostItems, setRestaurantPostItems] = useState([]);
 
   useEffect(() => {
-    fetch(TodayRestaurantApi)
-      .then((response) => response.json())
-      .then((data) => {
-        setRestaurantPostItems(data.data);
-      });
+    fetchTodayRestaurantApi(setRestaurantPostItems);
   }, []);
 
   useEffect(() => {
-    let restaurantTest = restaurantPostItems.slice(0, 4);
-    setRestaurantPost(restaurantTest);
+    if (restaurantPostItems.length === 0) {
+      return;
+    }
+    setRestaurantPost(restaurantPostItems.slice(0, 4));
   }, [restaurantPostItems]);
 
   return (

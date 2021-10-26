@@ -190,7 +190,9 @@ export default function Header() {
         <MenuLeft>
           <MenuLeftTopHeader />
           <MenuLeftMainBox>
-            <MenuLeftSubTitle onClick={HandleMenu}>旅遊</MenuLeftSubTitle>
+            <MenuLeftSubTitle to="/" onClick={HandleMenu}>
+              旅遊
+            </MenuLeftSubTitle>
             <MenuLeftSubTitle to="/food" onClick={HandleMenu}>
               美食
             </MenuLeftSubTitle>

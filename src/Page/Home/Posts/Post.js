@@ -299,6 +299,38 @@ export const MainPostTittle = ({
   );
 };
 
+async function fetchTodayFood(setFoodPostItems) {
+  const res = await fetch(TodayFoodApi);
+  const { data } = await res.json();
+  setFoodPostItems(data);
+}
+
+async function fetchTodayTravel(setSTravelPostItems) {
+  const res = await fetch(TodayTravelApi);
+  const { data } = await res.json();
+  setSTravelPostItems(data);
+}
+
+function mainPost(foodPost) {
+  return foodPost.map((data) => {
+    return (
+      <PostMainProjectBox
+        key={data.crawler_No}
+        toLink={`${data.crawler_No}`}
+        tittle={`${data.crawler_Title.substr(0, 25)} ...`}
+        subtitle1={data.crawler_Type}
+        subtitle2={
+          data.crawler_Keyword === ""
+            ? ""
+            : `${data.crawler_Keyword.substr(0, 10)} ...`
+        }
+        date={data.crawler_Date}
+        imgSrc={data.crawler_PicUrl}
+      />
+    );
+  });
+}
+
 export default function Post() {
   const [foodPost, setFoodPost] = useState([]);
   const [foodPostItems, setFoodPostItems] = useState([]);
@@ -306,23 +338,16 @@ export default function Post() {
   const [travelPostItems, setSTravelPostItems] = useState([]);
 
   useEffect(() => {
-    fetch(TodayFoodApi)
-      .then((response) => response.json())
-      .then((data) => {
-        setFoodPostItems(data.data);
-      });
-    fetch(TodayTravelApi)
-      .then((response) => response.json())
-      .then((data) => {
-        setSTravelPostItems(data.data);
-      });
+    fetchTodayFood(setFoodPostItems);
+    fetchTodayTravel(setSTravelPostItems);
   }, []);
 
   useEffect(() => {
-    let foodTest = foodPostItems.slice(0, 4);
-    setFoodPost(foodTest);
-    let sportsTest = travelPostItems.slice(0, 4);
-    setTravelPost(sportsTest);
+    if (foodPostItems.length === 0 && travelPostItems.length === 0) {
+      return;
+    }
+    setFoodPost(foodPostItems.slice(0, 4));
+    setTravelPost(travelPostItems.slice(0, 4));
   }, [foodPostItems, travelPostItems]);
 
   return (
@@ -332,25 +357,7 @@ export default function Post() {
         tittleHeadder2="食"
         subtitleHeadder="FOOD"
       />
-      <MainBox>
-        {foodPost.map((data) => {
-          return (
-            <PostMainProjectBox
-              key={data.crawler_No}
-              toLink={`${data.crawler_No}`}
-              tittle={`${data.crawler_Title.substr(0, 25)} ...`}
-              subtitle1={data.crawler_Type}
-              subtitle2={
-                data.crawler_Keyword === ""
-                  ? ""
-                  : `${data.crawler_Keyword.substr(0, 10)} ...`
-              }
-              date={data.crawler_Date}
-              imgSrc={data.crawler_PicUrl}
-            />
-          );
-        })}
-      </MainBox>
+      <MainBox>{mainPost(foodPost)}</MainBox>
       <ReadMore ReadLinkTo="/food" />
       <Block />
       <MainPostTittle
@@ -358,52 +365,16 @@ export default function Post() {
         tittleHeadder2="遊"
         subtitleHeadder="TRAVEL"
       />
-      <MainBox>
-        {travelsPost.map((data) => {
-          return (
-            <PostMainProjectBox
-              key={data.crawler_No}
-              toLink={data.crawler_Url}
-              tittle={`${data.crawler_Title.substr(0, 25)} ...`}
-              subtitle1={data.crawler_Type}
-              subtitle2={
-                data.crawler_Keyword === ""
-                  ? ""
-                  : `${data.crawler_Keyword.substr(0, 10)} ...`
-              }
-              date={data.crawler_Date}
-              imgSrc={data.crawler_PicUrl}
-            />
-          );
-        })}
-      </MainBox>
-      <ReadMore />
+      <MainBox>{mainPost(travelsPost)}</MainBox>
+      <ReadMore ReadLinkTo="/" />
       <Block />
       <MainPostTittle
         tittleHeadder1="熱"
         tittleHeadder2="門"
         subtitleHeadder="HOT"
       />
-      <MainBox>
-        {foodPost.map((data) => {
-          return (
-            <PostMainProjectBox
-              key={data.crawler_No}
-              toLink={data.crawler_No}
-              tittle={`${data.crawler_Title.substr(0, 25)} ...`}
-              subtitle1={data.crawler_Type}
-              subtitle2={
-                data.crawler_Keyword === ""
-                  ? ""
-                  : `${data.crawler_Keyword.substr(0, 10)} ...`
-              }
-              date={data.crawler_Date}
-              imgSrc={data.crawler_PicUrl}
-            />
-          );
-        })}
-      </MainBox>
-      <ReadMore />
+      <MainBox>{mainPost(foodPost)}</MainBox>
+      <ReadMore ReadLinkTo="/" />
     </>
   );
 }

@@ -61,7 +61,7 @@ const FoodHeadderMain = ({ ImgSrc, title, subtitle }) => {
           <HeadderBoTextTitle>{title}</HeadderBoTextTitle>
           <HeadderBoTextSubtitle>{subtitle}</HeadderBoTextSubtitle>
         </HeadderBoText>
-        <HeadderImg src={ImgSrc} />
+        <HeadderImg alt="美食" src={ImgSrc} />
       </HeadderBox>
     </>
   );

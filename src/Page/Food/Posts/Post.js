@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import foodGridImg1 from "./images/pexels-photo-315755.png";
 import foodGridImg2 from "./images/pexels-photo-3737620.png";
@@ -107,7 +107,7 @@ const FoodGridPostRightBox = ({
       <FoodGridPostRight>
         <FoodGridPostRightImg src={imgSrcTop} />
         <FoodGridPostRightText>{TextTop}</FoodGridPostRightText>
-        <FoodGridPostRightImg src={imgSrcBottom} />
+        <FoodGridPostRightImg alt="美食圖片" src={imgSrcBottom} />
         <FoodGridPostRightText>{TextBottom}</FoodGridPostRightText>
       </FoodGridPostRight>
     </>
@@ -204,7 +204,7 @@ const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
     <>
       <FoodParallelPost>
         <FoodParallelPostImgBox>
-          <FoodParallelPostImg src={imgSrc} />
+          <FoodParallelPostImg alt="美食圖片" src={imgSrc} />
         </FoodParallelPostImgBox>
         <FoodParallelPostText to={`/food/post/${toLink}`}>
           {title}
@@ -246,7 +246,7 @@ const FoodGridPostLeftBox = ({ tag1, tag2, tag3, imgSrc, title }) => {
             {tag3}
           </div>
         </FoodGridPostLeftTag>
-        <FoodGridPostLeftImg src={imgSrc} />
+        <FoodGridPostLeftImg alt="美食圖片" src={imgSrc} />
         <FoodGridPostLeftTitle>{title}</FoodGridPostLeftTitle>
       </FoodGridPostLeft>
     </>
@@ -282,6 +282,43 @@ const FoodBlock = ({ number }) => {
   return <div style={{ width: "100%", height: `${number}` }}></div>;
 };
 
+async function fetchFood(
+  setLoad,
+  setPost,
+  setPage,
+  setPrevPage,
+  setNextPage,
+  setNowLastPage
+) {
+  setLoad(true);
+  const res = await fetch(FoodApi);
+  const data = await res.json();
+  setPost(data.data);
+  setPage(data.meta.current_page);
+  setPrevPage(data.links.prev);
+  setNextPage(data.links.next);
+  setNowLastPage(data.meta.last_page);
+  setLoad(false);
+}
+
+async function ChangePage(
+  setLoad,
+  PageApi,
+  setPost,
+  setPage,
+  setPrevPage,
+  setNextPage
+) {
+  setLoad(true);
+  const res = await fetch(PageApi);
+  const data = await res.json();
+  setPost(data.data);
+  setPage(data.meta.current_page);
+  setPrevPage(data.links.prev);
+  setNextPage(data.links.next);
+  setLoad(false);
+}
+
 export default function FoodPost() {
   const [post, setPost] = useState([]);
   const [page, setPage] = useState(0);
@@ -291,40 +328,32 @@ export default function FoodPost() {
   const [nowLastPage, setNowLastPage] = useState("");
 
   useEffect(() => {
-    setLoad(true);
-    fetch(FoodApi)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setPost(data.data);
-        setPage(data.meta.current_page);
-        setPrevPage(data.links.prev);
-        setNextPage(data.links.next);
-        setNowLastPage(data.meta.last_page);
-        setLoad(false);
-      });
+    fetchFood(
+      setLoad,
+      setPost,
+      setPage,
+      setPrevPage,
+      setNextPage,
+      setNowLastPage
+    );
   }, []);
 
-  function renderContent() {
-    return (
-      <>
-        {post &&
-          post.map((data) => {
-            return (
-              <FoodParallelPostBox
-                key={data.crawler_No}
-                toLink={data.crawler_No}
-                imgSrc={data.crawler_PicUrl}
-                title={`${data.crawler_Title.substr(0, 28)} ...`}
-                tag1={data.crawler_Type}
-                tag2={`${data.crawler_Keyword.substr(0, 20)} ...`}
-              />
-            );
-          })}
-      </>
-    );
-  }
+  const renderContent = useMemo(
+    () =>
+      post.map((data) => {
+        return (
+          <FoodParallelPostBox
+            key={data.crawler_No}
+            toLink={data.crawler_No}
+            imgSrc={data.crawler_PicUrl}
+            title={`${data.crawler_Title.substr(0, 28)} ...`}
+            tag1={data.crawler_Type}
+            tag2={`${data.crawler_Keyword.substr(0, 20)} ...`}
+          />
+        );
+      }),
+    [post]
+  );
 
   function ChangePrevPage() {
     if (page === 1) {
@@ -332,18 +361,7 @@ export default function FoodPost() {
       return;
     }
     topFunction();
-    setLoad(true);
-    fetch(prevPage)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setPost(data.data);
-        setPage(data.meta.current_page);
-        setPrevPage(data.links.prev);
-        setNextPage(data.links.next);
-        setLoad(false);
-      });
+    ChangePage(setLoad, prevPage, setPost, setPage, setPrevPage, setNextPage);
   }
 
   function ChangeNextPage() {
@@ -352,18 +370,7 @@ export default function FoodPost() {
       return;
     }
     topFunction();
-    setLoad(true);
-    fetch(nextPage)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setPost(data.data);
-        setPage(data.meta.current_page);
-        setPrevPage(data.links.prev);
-        setNextPage(data.links.next);
-        setLoad(false);
-      });
+    ChangePage(setLoad, nextPage, setPost, setPage, setPrevPage, setNextPage);
   }
 
   return (
@@ -383,7 +390,7 @@ export default function FoodPost() {
           TextBottom="減碳新生活, 生活中實用小妙招, 原來家裡都有的「這個」可以輕鬆實現！"
         />
       </FoodGridPostBox>
-      <FoodParallelBox>{renderContent()}</FoodParallelBox>
+      <FoodParallelBox>{renderContent}</FoodParallelBox>
       <PageBox>
         <PrevButton onClick={ChangePrevPage} src={LeftArrow} />
         {page}
