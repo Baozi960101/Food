@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import RightArrows from "./images/right-arrows-symbol.svg";
+import foodGridImg1 from "./images/pexels-photo-315755.png";
 import { Link } from "react-router-dom";
 import { TodayFoodApi, TodayTravelApi } from "../../../API";
 
@@ -261,7 +262,7 @@ export const PostMainProjectBox = ({
   return (
     <PostMainProject>
       <PostMainProjectImgBox>
-        <PostMainProjectImg src={imgSrc} />
+        <PostMainProjectImg alt="美食圖片" src={imgSrc} />
       </PostMainProjectImgBox>
       <PostMainProjectText to={`/food/post/${toLink}`}>
         {tittle}
@@ -325,7 +326,13 @@ function mainPost(foodPost) {
             : `${data.crawler_Keyword.substr(0, 10)} ...`
         }
         date={data.crawler_Date}
-        imgSrc={data.crawler_PicUrl}
+        imgSrc={
+          data.crawler_Web === "facebook" ||
+          data.crawler_Web === "dcard" ||
+          data.crawler_Web === "ptt"
+            ? foodGridImg1
+            : data.crawler_PicUrl
+        }
       />
     );
   });
