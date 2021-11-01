@@ -277,6 +277,33 @@ export const PostMainProjectBox = ({
   );
 };
 
+export const TravelMainProjectBox = ({
+  toLink,
+  imgSrc,
+  tittle,
+  subtitle1,
+  subtitle2,
+  subtitle3,
+  date,
+}) => {
+  return (
+    <PostMainProject>
+      <PostMainProjectImgBox>
+        <PostMainProjectImg alt="旅遊圖片" src={imgSrc} />
+      </PostMainProjectImgBox>
+      <PostMainProjectText to={`/travel/post/${toLink}`}>
+        {tittle}
+      </PostMainProjectText>
+      <PostMainProjectTextSubtitleMain
+        subtitle1={subtitle1}
+        subtitle2={subtitle2}
+        subtitle3={subtitle3}
+        date={date}
+      />
+    </PostMainProject>
+  );
+};
+
 const Block = styled.div`
   width: 100%;
   height: 107px;
@@ -312,10 +339,36 @@ async function fetchTodayTravel(setSTravelPostItems) {
   setSTravelPostItems(data);
 }
 
-function mainPost(foodPost) {
-  return foodPost.map((data) => {
+function mainPost(post) {
+  return post.map((data) => {
     return (
       <PostMainProjectBox
+        key={data.crawler_No}
+        toLink={`${data.crawler_No}`}
+        tittle={`${data.crawler_Title.substr(0, 25)} ...`}
+        subtitle1={data.crawler_Type}
+        subtitle2={
+          data.crawler_Keyword === ""
+            ? ""
+            : `${data.crawler_Keyword.substr(0, 10)} ...`
+        }
+        date={data.crawler_Date}
+        imgSrc={
+          data.crawler_Web === "facebook" ||
+          data.crawler_Web === "dcard" ||
+          data.crawler_Web === "ptt"
+            ? foodGridImg1
+            : data.crawler_PicUrl
+        }
+      />
+    );
+  });
+}
+
+function mainTravelPost(post) {
+  return post.map((data) => {
+    return (
+      <TravelMainProjectBox
         key={data.crawler_No}
         toLink={`${data.crawler_No}`}
         tittle={`${data.crawler_Title.substr(0, 25)} ...`}
@@ -372,7 +425,7 @@ export default function Post() {
         tittleHeadder2="遊"
         subtitleHeadder="TRAVEL"
       />
-      <MainBox>{mainPost(travelsPost)}</MainBox>
+      <MainBox>{mainTravelPost(travelsPost)}</MainBox>
       <ReadMore ReadLinkTo="/travel" />
       <Block />
       <MainPostTittle

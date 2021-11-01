@@ -376,7 +376,7 @@ export default function DetailedArticle() {
           {liftPost(detailedArticleOnlyPost)}
         </DetailedArticleBoxLeft>
         <DetailedArticleBoxRight>
-          <IrregularGraphicsTitle title="HOT & YAMMY" subtitle="美食熱門榜" />
+          <IrregularGraphicsTitle title="HOT & YAMMY" subtitle="旅遊熱門榜" />
           {rightPost(travelPostItems)}
           <div style={{ width: "100%", height: "50px" }}></div>
         </DetailedArticleBoxRight>
