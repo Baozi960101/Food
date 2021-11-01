@@ -373,7 +373,7 @@ export default function Post() {
         subtitleHeadder="TRAVEL"
       />
       <MainBox>{mainPost(travelsPost)}</MainBox>
-      <ReadMore ReadLinkTo="/" />
+      <ReadMore ReadLinkTo="/travel" />
       <Block />
       <MainPostTittle
         tittleHeadder1="熱"

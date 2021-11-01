@@ -3,7 +3,9 @@ import Cover from "../../Page/Home";
 import TopHeadder from "../Header";
 import Bottom from "../Bottom";
 import FoodHome from "../../Page/Food/Home/HomeIndex";
+import TravelHome from "../../Page/Travel/Home/HomeIndex";
 import DetailedArticle from "../../Page/Food/Home/DetailedArticleIndex";
+import TravelDetailedArticle from "../../Page/Travel/Home/DetailedArticleIndex";
 import {
   HashRouter as Router,
   Switch,
@@ -16,8 +18,9 @@ import { ScrollToTop } from "../../ScrollToTop";
 
 export default function App() {
   const [fooDSlug, setFooDSlug] = useState("");
+  const [travelSlug, setTravelSlug] = useState("");
 
-  function BlogPost() {
+  function BlogFoodPost() {
     let { slug } = useParams();
     let location = useLocation();
     useEffect(() => {
@@ -27,9 +30,21 @@ export default function App() {
     return <DetailedArticle />;
   }
 
+  function BlogTravelPost() {
+    let { slug } = useParams();
+    let location = useLocation();
+    useEffect(() => {
+      setTravelSlug(slug);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location]);
+    return <TravelDetailedArticle />;
+  }
+
   return (
     <>
-      <SlugContext.Provider value={{ fooDSlug, setFooDSlug }}>
+      <SlugContext.Provider
+        value={{ fooDSlug, setFooDSlug, travelSlug, setTravelSlug }}
+      >
         <Router>
           <ScrollToTop />
           <TopHeadder />
@@ -40,8 +55,14 @@ export default function App() {
             <Route exact path="/food">
               <FoodHome />
             </Route>
+            <Route exact path="/travel">
+              <TravelHome />
+            </Route>
             <Route path="/food/post/:slug">
-              <BlogPost />
+              <BlogFoodPost />
+            </Route>
+            <Route path="/travel/post/:slug">
+              <BlogTravelPost />
             </Route>
           </Switch>
           <Bottom />

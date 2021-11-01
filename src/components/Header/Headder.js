@@ -57,10 +57,7 @@ const CoverHeadderTitle = styled(Link)`
   cursor: pointer;
   font-family: "PingFangTC";
   text-decoration: none;
-
-  & + & {
-    letter-spacing: 12px;
-  }
+  letter-spacing: 12px;
 
   @media screen and (max-width: 600px) {
     font-size: 8px;
@@ -190,7 +187,7 @@ export default function Header() {
         <MenuLeft>
           <MenuLeftTopHeader />
           <MenuLeftMainBox>
-            <MenuLeftSubTitle to="/" onClick={HandleMenu}>
+            <MenuLeftSubTitle to="/travel" onClick={HandleMenu}>
               旅遊
             </MenuLeftSubTitle>
             <MenuLeftSubTitle to="/food" onClick={HandleMenu}>
@@ -210,7 +207,7 @@ export default function Header() {
           最懂你的生活網
         </MainFieldHeadderTitle>
         <CoverHeadderText>
-          <CoverHeadderTitle to="/">
+          <CoverHeadderTitle to="/travel">
             旅遊
             <DownImg />
           </CoverHeadderTitle>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Square } from "./IrregularGraphics";
-import { AloneFoodApi, TodayFoodApi } from "../../../API";
+import { AloneFoodApi, TodayTravelApi } from "../../../API";
 import { SlugContext } from "../../../context";
 import { Link } from "react-router-dom";
 import foodGridImg1 from "./images/pexels-photo-315755.png";
@@ -205,7 +205,7 @@ const DetailedArticleBoxRightTextMain = ({
     <>
       <DetailedArticleBoxRightText>
         <DetailedArticleBoxRightImgBox>
-          <DetailedArticleBoxRightImg alt="美食圖片" src={srcImg} />
+          <DetailedArticleBoxRightImg alt="旅遊圖片" src={srcImg} />
         </DetailedArticleBoxRightImgBox>
         <DetailedArticleBoxRightTextTitle to={`/food/post/${toLink}`}>
           {text}
@@ -243,7 +243,7 @@ const DetailedArticleBoxLeftMain = ({
     <>
       <DetailedArticleBoxLeftTitle>{title}</DetailedArticleBoxLeftTitle>
       <DetailedArticleBoxLeftImgBox>
-        <DetailedArticleBoxLeftImg alt="美食圖片" src={srcImg} />
+        <DetailedArticleBoxLeftImg alt="旅遊圖片" src={srcImg} />
       </DetailedArticleBoxLeftImgBox>
       <DetailedArticleBoxLeftSubtitle>
         <div style={{ display: "flex" }}>
@@ -284,14 +284,14 @@ const Loading = styled.div`
   z-index: 5;
 `;
 
-async function fetchAloneFood(fooDSlug, setDetailedArticleOnlyPost) {
-  const res = await fetch(AloneFoodApi(fooDSlug));
+async function fetchAloneFood(travelSlug, setDetailedArticleOnlyPost) {
+  const res = await fetch(AloneFoodApi(travelSlug));
   const { data } = await res.json();
   setDetailedArticleOnlyPost([data]);
 }
 
 async function fetchTodayFood(setDetailedArticlePost) {
-  const res = await fetch(TodayFoodApi);
+  const res = await fetch(TodayTravelApi);
   const { data } = await res.json();
   setDetailedArticlePost(data);
 }
@@ -345,26 +345,26 @@ function rightPost(foodPostItems) {
 }
 
 export default function DetailedArticle() {
-  const { fooDSlug } = useContext(SlugContext);
+  const { travelSlug } = useContext(SlugContext);
   const [detailedArticlePost, setDetailedArticlePost] = useState([]);
   const [detailedArticleOnlyPost, setDetailedArticleOnlyPost] = useState([]);
-  const [foodPostItems, setFoodPostItems] = useState([]);
+  const [travelPostItems, setTravelPostItems] = useState([]);
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
     setLoad(true);
-    if (fooDSlug !== "") {
-      fetchAloneFood(fooDSlug, setDetailedArticleOnlyPost);
+    if (travelSlug !== "") {
+      fetchAloneFood(travelSlug, setDetailedArticleOnlyPost);
     }
     fetchTodayFood(setDetailedArticlePost);
     return () => {};
-  }, [fooDSlug]);
+  }, [travelSlug]);
 
   useEffect(() => {
     if (detailedArticlePost.length === 0) {
       return;
     }
-    setFoodPostItems(detailedArticlePost.slice(0, 3));
+    setTravelPostItems(detailedArticlePost.slice(0, 3));
     setLoad(false);
   }, [detailedArticlePost]);
 
@@ -377,7 +377,7 @@ export default function DetailedArticle() {
         </DetailedArticleBoxLeft>
         <DetailedArticleBoxRight>
           <IrregularGraphicsTitle title="HOT & YAMMY" subtitle="美食熱門榜" />
-          {rightPost(foodPostItems)}
+          {rightPost(travelPostItems)}
           <div style={{ width: "100%", height: "50px" }}></div>
         </DetailedArticleBoxRight>
       </DetailedArticleBox>

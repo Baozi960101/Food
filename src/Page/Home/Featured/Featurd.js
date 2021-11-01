@@ -134,33 +134,13 @@ const FeaturdImgBigTitle = styled.div`
 
   @media screen and (min-width: 600px) {
     font-size: 30px;
-    margin-bottom: 50px;
-  }
-`;
-const FeaturdBorder = styled.div`
-  max-width: 1050px;
-  height: 2px;
-  background-color: #979797;
-  margin: 106px auto 117px auto;
-  box-sizing: border-box;
-
-  @media screen and (max-width: 1050px) {
-    background-color: white;
-    margin: 20px 0;
+    margin-bottom: 100px;
   }
 `;
 
-const FeaturdBlock = styled.div`
-  width: 100%;
-  height: 146px;
-
-  @media screen and (max-width: 1050px) {
-    height: 80px;
-  }
-`;
 const FeaturBottomBlock = styled.div`
   width: 100%;
-  height: 400px;
+  height: 300px;
 
   @media screen and (max-width: 1050px) {
     height: 200px;
@@ -224,15 +204,15 @@ export default function Featurd() {
         heaturdText2="#下午茶"
         date="2021/07/07"
       />
-      <FeaturdBorder />
-      <FeaturdBox
+      {/* <FeaturdBorder /> */}
+      {/* <FeaturdBox
         srcImg={FeaturdTitleImg2}
         heaturdTitle="疫情要吃什麼？折扣外帶懶人包！"
         heaturdText1="#甜點"
         heaturdText2="#下午茶"
         date="2021/07/07"
       />
-      <FeaturdBlock />
+      <FeaturdBlock /> */}
       <MainPostTittle
         tittleHeadder1="餐"
         tittleHeadder2="廳"
