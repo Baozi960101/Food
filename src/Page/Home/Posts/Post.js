@@ -1,13 +1,16 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import RightArrows from "./images/right-arrows-symbol.svg";
-import foodGridImg1 from "./images/pexels-photo-315755.png";
 import { Link } from "react-router-dom";
 import { TodayFoodApi, TodayTravelApi } from "../../../API";
 import randomFood01 from "./images/randomFood01.png";
 import randomFood02 from "./images/randomFood02.jpg";
 import randomFood03 from "./images/randomFood03.jpg";
 import randomFood04 from "./images/randomFood04.png";
+import randomFood05 from "./images/randomFood05.jpg";
+import randomFood06 from "./images/randomFood06.jpg";
+import randomFood07 from "./images/randomFood07.jpg";
+import randomFood08 from "./images/randomFood08.jpg";
 
 const PostTittleBox = styled.div`
   display: flex;
@@ -231,18 +234,39 @@ const ReadMoreText = styled(Link)`
   text-decoration: none;
 `;
 
-export function judgmentSourseShowImage(crawler_Web, originalImage) {
+export function judgmentSourseShowImage(
+  crawler_No,
+  crawler_Web,
+  originalImage
+) {
+  //算NO 雙偶
   if (crawler_Web === "facebook") {
-    return randomFood01;
+    if (crawler_No % 2 === 0) {
+      return randomFood01;
+    } else {
+      return randomFood08;
+    }
   }
   if (crawler_Web === "dcard") {
-    return randomFood02;
+    if (crawler_No % 2 === 0) {
+      return randomFood02;
+    } else {
+      return randomFood07;
+    }
   }
   if (crawler_Web === "ptt") {
-    return randomFood03;
+    if (crawler_No % 2 === 0) {
+      return randomFood04;
+    } else {
+      return randomFood05;
+    }
   }
   if (crawler_Web === "ctee") {
-    return randomFood04;
+    if (crawler_No % 2 === 0) {
+      return randomFood06;
+    } else {
+      return randomFood03;
+    }
   }
   return originalImage;
 }
@@ -373,7 +397,11 @@ function mainPost(post) {
             : `${data.crawler_Keyword.substr(0, 10)} ...`
         }
         date={data.crawler_Date}
-        imgSrc={judgmentSourseShowImage(data.crawler_Web, data.crawler_PicUrl)}
+        imgSrc={judgmentSourseShowImage(
+          data.crawler_No,
+          data.crawler_Web,
+          data.crawler_PicUrl
+        )}
       />
     );
   });
@@ -393,7 +421,11 @@ function mainTravelPost(post) {
             : `${data.crawler_Keyword.substr(0, 10)} ...`
         }
         date={data.crawler_Date}
-        imgSrc={judgmentSourseShowImage(data.crawler_Web, data.crawler_PicUrl)}
+        imgSrc={judgmentSourseShowImage(
+          data.crawler_No,
+          data.crawler_Web,
+          data.crawler_PicUrl
+        )}
       />
     );
   });

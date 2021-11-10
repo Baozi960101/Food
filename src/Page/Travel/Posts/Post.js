@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import foodGridImg1 from "./images/pexels-photo-315755.png";
-import foodGridImg2 from "./images/pexels-photo-3737620.png";
 import { TravelApi, TodayTravelApi } from "../../../API";
 import { Link } from "react-router-dom";
 import RightArrow from "./images/rightArrow.svg";
@@ -120,6 +118,7 @@ const TravelGridPostRightImgBox = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin-bottom:20px;
 `;
 
 const TravelGridPostRightBox = ({
@@ -137,7 +136,7 @@ const TravelGridPostRightBox = ({
           <TravelGridPostRightImg alt="美食圖片" src={imgSrcTop} />
         </TravelGridPostRightImgBox>
         <TravelGridPostRightText to={toTop}>{TextTop}</TravelGridPostRightText>
-        <TravelGridPostRightImgBox>
+        <TravelGridPostRightImgBox style={{marginTop:"30px"}} >
           <TravelGridPostRightImg alt="美食圖片" src={imgSrcBottom} />
         </TravelGridPostRightImgBox>
         <TravelGridPostRightText to={toBottom}>
@@ -385,10 +384,12 @@ const FoodGridPost = ({ latestPost }) => {
       />
       <TravelGridPostRightBox
         imgSrcTop={judgmentSourseShowImage(
+          latestPost[1].crawler_No,
           latestPost[1].crawler_Web,
           latestPost[1].crawler_PicUrl
         )}
         imgSrcBottom={judgmentSourseShowImage(
+          latestPost[2].crawler_No,
           latestPost[2].crawler_Web,
           latestPost[2].crawler_PicUrl
         )}
@@ -436,6 +437,7 @@ export default function FoodPost() {
             key={data.crawler_No}
             toLink={data.crawler_No}
             imgSrc={judgmentSourseShowImage(
+              data.crawler_No,
               data.crawler_Web,
               data.crawler_PicUrl
             )}

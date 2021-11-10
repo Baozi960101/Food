@@ -120,6 +120,7 @@ const FoodGridPostRightImgBox = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin-bottom:20px;
 `;
 
 const FoodGridPostRightBox = ({
@@ -137,7 +138,7 @@ const FoodGridPostRightBox = ({
           <FoodGridPostRightImg alt="美食圖片" src={imgSrcTop} />
         </FoodGridPostRightImgBox>
         <FoodGridPostRightText to={toTop}>{TextTop}</FoodGridPostRightText>
-        <FoodGridPostRightImgBox>
+        <FoodGridPostRightImgBox style={{marginTop:"30px"}} >
           <FoodGridPostRightImg alt="美食圖片" src={imgSrcBottom} />
         </FoodGridPostRightImgBox>
         <FoodGridPostRightText to={toBottom}>
@@ -391,10 +392,12 @@ const FoodGridPost = ({ latestPost }) => {
       />
       <FoodGridPostRightBox
         imgSrcTop={judgmentSourseShowImage(
+          latestPost[1].crawler_No,
           latestPost[1].crawler_Web,
           latestPost[1].crawler_PicUrl
         )}
         imgSrcBottom={judgmentSourseShowImage(
+          latestPost[2].crawler_No,
           latestPost[2].crawler_Web,
           latestPost[2].crawler_PicUrl
         )}
@@ -436,6 +439,7 @@ export default function FoodPost() {
             key={data.crawler_No}
             toLink={data.crawler_No}
             imgSrc={judgmentSourseShowImage(
+              data.crawler_No,
               data.crawler_Web,
               data.crawler_PicUrl
             )}

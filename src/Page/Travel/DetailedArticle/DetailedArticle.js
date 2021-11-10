@@ -4,7 +4,6 @@ import { Square } from "./IrregularGraphics";
 import { AloneFoodApi, TodayTravelApi } from "../../../API";
 import { SlugContext } from "../../../context";
 import { Link } from "react-router-dom";
-import foodGridImg1 from "./images/pexels-photo-315755.png";
 import { judgmentSourseShowImage } from "../../Home/Posts/Post";
 
 const DetailedArticleBox = styled.div`
@@ -304,7 +303,11 @@ function liftPost(detailedArticleOnlyPost) {
         key={data.crawler_No}
         title={data.crawler_Title}
         text={`${data.crawler_Content.substr(0, 200)} ...`}
-        srcImg={judgmentSourseShowImage(data.crawler_Web, data.crawler_PicUrl)}
+        srcImg={judgmentSourseShowImage(
+          data.crawler_No,
+          data.crawler_Web,
+          data.crawler_PicUrl
+        )}
         tag1={data.crawler_Type}
         tag2={data.crawler_Keyword === "" ? "" : `${data.crawler_Keyword} `}
         time={data.crawler_Date}
@@ -320,7 +323,11 @@ function rightPost(foodPostItems) {
       <DetailedArticleBoxRightTextMain
         key={data.crawler_No}
         text={`${data.crawler_Title.substr(0, 30)} ...`}
-        srcImg={judgmentSourseShowImage(data.crawler_Web, data.crawler_PicUrl)}
+        srcImg={judgmentSourseShowImage(
+          data.crawler_No,
+          data.crawler_Web,
+          data.crawler_PicUrl
+        )}
         tag1={data.crawler_Type}
         tag2={
           data.crawler_Keyword === ""

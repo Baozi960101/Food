@@ -232,6 +232,7 @@ export default function Featurd() {
               }
               date={data.crawler_Date}
               imgSrc={judgmentSourseShowImage(
+                data.crawler_No,
                 data.crawler_Web,
                 data.crawler_PicUrl
               )}

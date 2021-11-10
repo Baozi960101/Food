@@ -4,7 +4,6 @@ import { Square } from "./IrregularGraphics";
 import { AloneFoodApi, TodayFoodApi } from "../../../API";
 import { SlugContext } from "../../../context";
 import { Link } from "react-router-dom";
-import foodGridImg1 from "./images/pexels-photo-315755.png";
 import { judgmentSourseShowImage } from "../../Home/Posts/Post";
 
 const DetailedArticleBox = styled.div`
@@ -78,13 +77,12 @@ const DetailedArticleBoxLeftSubtitle = styled.div`
 
 const DetailedArticleBoxLeftText = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: center;
   font-size: 21px;
-  letter-spacing: 2.84px;
+  letter-spacing: 1.84px;
   font-weight: 700;
-  margin: 83px auto 30px auto;
+  margin: 50px 0 50px 0;
   box-sizing: border-box;
+  word-wrap: break-word;
 `;
 
 const IrregularGraphicsTextTop = styled.div`
@@ -297,14 +295,18 @@ async function fetchTodayFood(setDetailedArticlePost) {
   setDetailedArticlePost(data);
 }
 
-function liftPost(detailedArticleOnlyPost) {
+function leftPost(detailedArticleOnlyPost) {
   return detailedArticleOnlyPost.map((data) => {
     return (
       <DetailedArticleBoxLeftMain
         key={data.crawler_No}
         title={data.crawler_Title}
         text={`${data.crawler_Content.substr(0, 200)} ...`}
-        srcImg={judgmentSourseShowImage(data.crawler_Web, data.crawler_PicUrl)}
+        srcImg={judgmentSourseShowImage(
+          data.crawler_No,
+          data.crawler_Web,
+          data.crawler_PicUrl
+        )}
         tag1={data.crawler_Type}
         tag2={data.crawler_Keyword === "" ? "" : `${data.crawler_Keyword} `}
         time={data.crawler_Date}
@@ -320,7 +322,11 @@ function rightPost(foodPostItems) {
       <DetailedArticleBoxRightTextMain
         key={data.crawler_No}
         text={`${data.crawler_Title.substr(0, 30)} ...`}
-        srcImg={judgmentSourseShowImage(data.crawler_Web, data.crawler_PicUrl)}
+        srcImg={judgmentSourseShowImage(
+          data.crawler_No,
+          data.crawler_Web,
+          data.crawler_PicUrl
+        )}
         tag1={data.crawler_Type}
         tag2={
           data.crawler_Keyword === ""
@@ -362,7 +368,7 @@ export default function DetailedArticle() {
       {load && <Loading>載入中 ...</Loading>}
       <DetailedArticleBox>
         <DetailedArticleBoxLeft>
-          {liftPost(detailedArticleOnlyPost)}
+          {leftPost(detailedArticleOnlyPost)}
         </DetailedArticleBoxLeft>
         <DetailedArticleBoxRight>
           <IrregularGraphicsTitle title="HOT & YAMMY" subtitle="美食熱門榜" />
