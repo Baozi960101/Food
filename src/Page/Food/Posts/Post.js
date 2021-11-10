@@ -1,11 +1,27 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import foodGridImg1 from "./images/pexels-photo-315755.png";
-import foodGridImg2 from "./images/pexels-photo-3737620.png";
 import { FoodApi } from "../../../API";
 import { Link } from "react-router-dom";
 import RightArrow from "./images/rightArrow.svg";
 import LeftArrow from "./images/leftArrow.svg";
+import { judgmentSourseShowImage } from "../../Home/Posts/Post";
+import { TodayFoodApi } from "../../../API";
+
+const FoodMainTitle = styled.div`
+  border-bottom: 2px solid black;
+  max-width: 1230px;
+  margin: 10px auto 50px auto;
+  box-sizing: border-box;
+  font-size: 30px;
+  font-weight: 600;
+  color: black;
+  padding-bottom: 10px;
+  letter-spacing: 1.5px;
+
+  @media screen and (max-width: 1210px) {
+    width: 95%;
+  }
+`;
 
 const FoodGridPostBox = styled.div`
   display: flex;
@@ -22,8 +38,10 @@ const FoodGridPostBox = styled.div`
   }
 `;
 
-const FoodGridPostLeft = styled.div`
+const FoodGridPostLeft = styled(Link)`
   width: 775px;
+  text-decoration: none;
+  color: black;
 
   @media screen and (max-width: 1210px) {
     width: 100%;
@@ -59,9 +77,7 @@ const FoodGridPostLeftTag = styled.div`
   }
 `;
 const FoodGridPostLeftImg = styled.img`
-  max-width: 100%;
-  height: auto;
-  box-sizing: border-box;
+  width: 100%;
 `;
 const FoodGridPostLeftTitle = styled.div`
   margin-top: 15px;
@@ -77,11 +93,10 @@ const FoodGridPostLeftTitle = styled.div`
   }
 `;
 const FoodGridPostRightImg = styled.img`
-  max-width: 100%;
-  height: 170px;
-  box-sizing: border-box;
+  width: 100%;
 `;
-const FoodGridPostRightText = styled.div`
+
+const FoodGridPostRightText = styled(Link)`
   margin-top: 5px;
   width: 100%;
   height: 60px;
@@ -89,6 +104,8 @@ const FoodGridPostRightText = styled.div`
   font-weight: 600;
   font-size: 18px;
   box-sizing: border-box;
+  color: black;
+  text-decoration: none;
 
   @media screen and (max-width: 1210px) {
     display: flex;
@@ -96,19 +113,36 @@ const FoodGridPostRightText = styled.div`
   }
 `;
 
+const FoodGridPostRightImgBox = styled.div`
+  width: 420px;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`;
+
 const FoodGridPostRightBox = ({
   imgSrcTop,
   TextTop,
   imgSrcBottom,
   TextBottom,
+  toTop,
+  toBottom,
 }) => {
   return (
     <>
       <FoodGridPostRight>
-        <FoodGridPostRightImg src={imgSrcTop} />
-        <FoodGridPostRightText>{TextTop}</FoodGridPostRightText>
-        <FoodGridPostRightImg alt="美食圖片" src={imgSrcBottom} />
-        <FoodGridPostRightText>{TextBottom}</FoodGridPostRightText>
+        <FoodGridPostRightImgBox>
+          <FoodGridPostRightImg alt="美食圖片" src={imgSrcTop} />
+        </FoodGridPostRightImgBox>
+        <FoodGridPostRightText to={toTop}>{TextTop}</FoodGridPostRightText>
+        <FoodGridPostRightImgBox>
+          <FoodGridPostRightImg alt="美食圖片" src={imgSrcBottom} />
+        </FoodGridPostRightImgBox>
+        <FoodGridPostRightText to={toBottom}>
+          {TextBottom}
+        </FoodGridPostRightText>
       </FoodGridPostRight>
     </>
   );
@@ -199,6 +233,16 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
+const FoodGridPostLeftImgBox = styled.div`
+  overflow: hidden;
+  width: 100%;
+  height: 410px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
   return (
     <>
@@ -228,10 +272,10 @@ const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
   );
 };
 
-const FoodGridPostLeftBox = ({ tag1, tag2, tag3, imgSrc, title }) => {
+const FoodGridPostLeftBox = ({ tag1, tag2, tag3, imgSrc, title, to }) => {
   return (
     <>
-      <FoodGridPostLeft>
+      <FoodGridPostLeft to={to}>
         <FoodGridPostLeftTag>
           <div>
             {tag1 ? "# " : ""}
@@ -246,7 +290,9 @@ const FoodGridPostLeftBox = ({ tag1, tag2, tag3, imgSrc, title }) => {
             {tag3}
           </div>
         </FoodGridPostLeftTag>
-        <FoodGridPostLeftImg alt="美食圖片" src={imgSrc} />
+        <FoodGridPostLeftImgBox>
+          <FoodGridPostLeftImg alt="美食圖片" src={imgSrc} />
+        </FoodGridPostLeftImgBox>
         <FoodGridPostLeftTitle>{title}</FoodGridPostLeftTitle>
       </FoodGridPostLeft>
     </>
@@ -265,15 +311,17 @@ const PageBox = styled.div`
 `;
 
 const Loading = styled.div`
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 2300px;
+  height: 100%;
   overflow: hidden;
   font-size: 36px;
   font-weight: 600;
   letter-spacing: 2px;
-  position: absolute;
   background-color: white;
   z-index: 5;
 `;
@@ -319,7 +367,48 @@ async function ChangePage(
   setLoad(false);
 }
 
+async function fetchTodayFood(setLatestPost) {
+  const res = await fetch(TodayFoodApi);
+  const { data } = await res.json();
+  setLatestPost(data.slice(0, 3));
+  console.log(data.slice(0, 3));
+}
+
+const FoodGridPost = ({ latestPost }) => {
+  //把最新3筆傳過來  做資料處理   明天繼續
+  return (
+    <FoodGridPostBox>
+      <FoodGridPostLeftBox
+        to={`${latestPost[0].crawler_No}`}
+        tag1={latestPost[0].crawler_Cate}
+        tag2={
+          latestPost[0].crawler_Keyword === ""
+            ? ""
+            : `${latestPost[0].crawler_Keyword.substr(0, 30)} ...`
+        }
+        imgSrc={latestPost[0].crawler_PicUrl}
+        title={`${latestPost[0].crawler_Title.substr(0, 20)}...`}
+      />
+      <FoodGridPostRightBox
+        imgSrcTop={judgmentSourseShowImage(
+          latestPost[1].crawler_Web,
+          latestPost[1].crawler_PicUrl
+        )}
+        imgSrcBottom={judgmentSourseShowImage(
+          latestPost[2].crawler_Web,
+          latestPost[2].crawler_PicUrl
+        )}
+        toTop={`${latestPost[1].crawler_No}`}
+        toBottom={`${latestPost[2].crawler_No}`}
+        TextTop={`${latestPost[1].crawler_Title.substr(0, 22)}...`}
+        TextBottom={`${latestPost[2].crawler_Title.substr(0, 22)}...`}
+      />
+    </FoodGridPostBox>
+  );
+};
+
 export default function FoodPost() {
+  const [latestPost, setLatestPost] = useState([]);
   const [post, setPost] = useState([]);
   const [page, setPage] = useState(0);
   const [load, setLoad] = useState(false);
@@ -328,6 +417,7 @@ export default function FoodPost() {
   const [nowLastPage, setNowLastPage] = useState("");
 
   useEffect(() => {
+    fetchTodayFood(setLatestPost);
     fetchFood(
       setLoad,
       setPost,
@@ -341,18 +431,14 @@ export default function FoodPost() {
   const renderContent = useMemo(
     () =>
       post.map((data) => {
-        console.log(data);
         return (
           <FoodParallelPostBox
             key={data.crawler_No}
             toLink={data.crawler_No}
-            imgSrc={
-              data.crawler_Web === "facebook" ||
-              data.crawler_Web === "dcard" ||
-              data.crawler_Web === "ptt"
-                ? foodGridImg1
-                : data.crawler_PicUrl
-            }
+            imgSrc={judgmentSourseShowImage(
+              data.crawler_Web,
+              data.crawler_PicUrl
+            )}
             title={`${data.crawler_Title.substr(0, 28)} ...`}
             tag1={data.crawler_Type}
             tag2={`${data.crawler_Keyword.substr(0, 20)} ...`}
@@ -383,20 +469,9 @@ export default function FoodPost() {
   return (
     <>
       {load && <Loading>載入中 ...</Loading>}
-      <FoodGridPostBox>
-        <FoodGridPostLeftBox
-          tag1="# 下午茶"
-          tag2="# 甜點"
-          imgSrc={foodGridImg1}
-          title="食指大動！私房窯烤PIZZA超正宗, 必吃3家店"
-        />
-        <FoodGridPostRightBox
-          imgSrcTop={foodGridImg2}
-          imgSrcBottom={foodGridImg2}
-          TextTop="國內旅遊！熱門台灣世界級景點有哪些？網狂推1仙境：絕對夠格"
-          TextBottom="減碳新生活, 生活中實用小妙招, 原來家裡都有的「這個」可以輕鬆實現！"
-        />
-      </FoodGridPostBox>
+      <FoodMainTitle>最新消息</FoodMainTitle>
+      {latestPost.length !== 0 && <FoodGridPost latestPost={latestPost} />}
+      <FoodMainTitle style={{ maxWidth: "1260px" }}>所有</FoodMainTitle>
       <FoodParallelBox>{renderContent}</FoodParallelBox>
       <PageBox>
         <PrevButton onClick={ChangePrevPage} src={LeftArrow} />

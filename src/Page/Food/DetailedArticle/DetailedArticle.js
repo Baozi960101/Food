@@ -5,6 +5,7 @@ import { AloneFoodApi, TodayFoodApi } from "../../../API";
 import { SlugContext } from "../../../context";
 import { Link } from "react-router-dom";
 import foodGridImg1 from "./images/pexels-photo-315755.png";
+import { judgmentSourseShowImage } from "../../Home/Posts/Post";
 
 const DetailedArticleBox = styled.div`
   display: flex;
@@ -302,14 +303,8 @@ function liftPost(detailedArticleOnlyPost) {
       <DetailedArticleBoxLeftMain
         key={data.crawler_No}
         title={data.crawler_Title}
-        text={`${data.crawler_Content.substr(0, 100)} ...`}
-        srcImg={
-          data.crawler_Web === "facebook" ||
-          data.crawler_Web === "dcard" ||
-          data.crawler_Web === "ptt"
-            ? foodGridImg1
-            : data.crawler_PicUrl
-        }
+        text={`${data.crawler_Content.substr(0, 200)} ...`}
+        srcImg={judgmentSourseShowImage(data.crawler_Web, data.crawler_PicUrl)}
         tag1={data.crawler_Type}
         tag2={data.crawler_Keyword === "" ? "" : `${data.crawler_Keyword} `}
         time={data.crawler_Date}
@@ -325,13 +320,7 @@ function rightPost(foodPostItems) {
       <DetailedArticleBoxRightTextMain
         key={data.crawler_No}
         text={`${data.crawler_Title.substr(0, 30)} ...`}
-        srcImg={
-          data.crawler_Web === "facebook" ||
-          data.crawler_Web === "dcard" ||
-          data.crawler_Web === "ptt"
-            ? foodGridImg1
-            : data.crawler_PicUrl
-        }
+        srcImg={judgmentSourseShowImage(data.crawler_Web, data.crawler_PicUrl)}
         tag1={data.crawler_Type}
         tag2={
           data.crawler_Keyword === ""

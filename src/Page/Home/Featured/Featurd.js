@@ -6,15 +6,14 @@ import {
   ReadMore,
   MainPostTittle,
 } from "../Posts/Post";
-import foodGridImg1 from "./images/pexels-photo-315755.png";
+import { judgmentSourseShowImage } from "../Posts/Post";
 import FeaturdTitleImg1 from "./images/pexels-valeria-boltneva-842571.png";
-import FeaturdTitleImg2 from "./images/pexels-valeria-boltneva-874254.png";
 import { TodayRestaurantApi } from "../../../API";
 
 const FeaturedBigTitle = styled.div`
   width: 318px;
   max-height: 113px;
-  margin: 243px auto 253px auto;
+  margin: 150px auto 150px auto;
   box-sizing: border-box;
 
   @media screen and (max-width: 500px) {
@@ -232,13 +231,10 @@ export default function Featurd() {
                   : `${data.crawler_Keyword.substr(0, 10)} ...`
               }
               date={data.crawler_Date}
-              imgSrc={
-                data.crawler_Web === "facebook" ||
-                data.crawler_Web === "dcard" ||
-                data.crawler_Web === "ptt"
-                  ? foodGridImg1
-                  : data.crawler_PicUrl
-              }
+              imgSrc={judgmentSourseShowImage(
+                data.crawler_Web,
+                data.crawler_PicUrl
+              )}
             />
           );
         })}

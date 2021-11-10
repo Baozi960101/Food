@@ -4,6 +4,10 @@ import RightArrows from "./images/right-arrows-symbol.svg";
 import foodGridImg1 from "./images/pexels-photo-315755.png";
 import { Link } from "react-router-dom";
 import { TodayFoodApi, TodayTravelApi } from "../../../API";
+import randomFood01 from "./images/randomFood01.png";
+import randomFood02 from "./images/randomFood02.jpg";
+import randomFood03 from "./images/randomFood03.jpg";
+import randomFood04 from "./images/randomFood04.png";
 
 const PostTittleBox = styled.div`
   display: flex;
@@ -227,6 +231,22 @@ const ReadMoreText = styled(Link)`
   text-decoration: none;
 `;
 
+export function judgmentSourseShowImage(crawler_Web, originalImage) {
+  if (crawler_Web === "facebook") {
+    return randomFood01;
+  }
+  if (crawler_Web === "dcard") {
+    return randomFood02;
+  }
+  if (crawler_Web === "ptt") {
+    return randomFood03;
+  }
+  if (crawler_Web === "ctee") {
+    return randomFood04;
+  }
+  return originalImage;
+}
+
 export const ReadMore = ({ ReadLinkTo }) => {
   return (
     <ReadMoreBox>
@@ -353,13 +373,7 @@ function mainPost(post) {
             : `${data.crawler_Keyword.substr(0, 10)} ...`
         }
         date={data.crawler_Date}
-        imgSrc={
-          data.crawler_Web === "facebook" ||
-          data.crawler_Web === "dcard" ||
-          data.crawler_Web === "ptt"
-            ? foodGridImg1
-            : data.crawler_PicUrl
-        }
+        imgSrc={judgmentSourseShowImage(data.crawler_Web, data.crawler_PicUrl)}
       />
     );
   });
@@ -379,13 +393,7 @@ function mainTravelPost(post) {
             : `${data.crawler_Keyword.substr(0, 10)} ...`
         }
         date={data.crawler_Date}
-        imgSrc={
-          data.crawler_Web === "facebook" ||
-          data.crawler_Web === "dcard" ||
-          data.crawler_Web === "ptt"
-            ? foodGridImg1
-            : data.crawler_PicUrl
-        }
+        imgSrc={judgmentSourseShowImage(data.crawler_Web, data.crawler_PicUrl)}
       />
     );
   });
@@ -427,14 +435,6 @@ export default function Post() {
       />
       <MainBox>{mainTravelPost(travelsPost)}</MainBox>
       <ReadMore ReadLinkTo="/travel" />
-      <Block />
-      <MainPostTittle
-        tittleHeadder1="熱"
-        tittleHeadder2="門"
-        subtitleHeadder="HOT"
-      />
-      <MainBox>{mainPost(foodPost)}</MainBox>
-      <ReadMore ReadLinkTo="/" />
     </>
   );
 }

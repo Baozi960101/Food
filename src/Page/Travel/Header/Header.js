@@ -7,7 +7,7 @@ const HeadderBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 170px;
+  margin-bottom: 100px;
 `;
 
 const HeadderImg = styled.img`

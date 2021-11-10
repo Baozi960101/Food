@@ -2,12 +2,29 @@ import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import foodGridImg1 from "./images/pexels-photo-315755.png";
 import foodGridImg2 from "./images/pexels-photo-3737620.png";
-import { TravelApi } from "../../../API";
+import { TravelApi, TodayTravelApi } from "../../../API";
 import { Link } from "react-router-dom";
 import RightArrow from "./images/rightArrow.svg";
 import LeftArrow from "./images/leftArrow.svg";
+import { judgmentSourseShowImage } from "../../Home/Posts/Post";
 
-const FoodGridPostBox = styled.div`
+const TravelMainTitle = styled.div`
+  border-bottom: 2px solid black;
+  max-width: 1230px;
+  margin: 10px auto 50px auto;
+  box-sizing: border-box;
+  font-size: 30px;
+  font-weight: 600;
+  color: black;
+  padding-bottom: 10px;
+  letter-spacing: 1.5px;
+
+  @media screen and (max-width: 1210px) {
+    width: 95%;
+  }
+`;
+
+const TravelGridPostBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -22,8 +39,10 @@ const FoodGridPostBox = styled.div`
   }
 `;
 
-const FoodGridPostLeft = styled.div`
+const TravelGridPostLeft = styled(Link)`
   width: 775px;
+  text-decoration: none;
+  color: black;
 
   @media screen and (max-width: 1210px) {
     width: 100%;
@@ -33,7 +52,7 @@ const FoodGridPostLeft = styled.div`
   }
 `;
 
-const FoodGridPostRight = styled.div`
+const TravelGridPostRight = styled.div`
   width: 420px;
   padding-top: 30px;
   box-sizing: border-box;
@@ -46,7 +65,7 @@ const FoodGridPostRight = styled.div`
   }
 `;
 
-const FoodGridPostLeftTag = styled.div`
+const TravelGridPostLeftTag = styled.div`
   width: 100%;
   height: 20px;
   color: black;
@@ -58,12 +77,10 @@ const FoodGridPostLeftTag = styled.div`
     justify-content: center;
   }
 `;
-const FoodGridPostLeftImg = styled.img`
-  max-width: 100%;
-  height: auto;
-  box-sizing: border-box;
+const TravelGridPostLeftImg = styled.img`
+  width: 100%;
 `;
-const FoodGridPostLeftTitle = styled.div`
+const TravelGridPostLeftTitle = styled.div`
   margin-top: 15px;
   display: flex;
   justify-content: center;
@@ -76,12 +93,10 @@ const FoodGridPostLeftTitle = styled.div`
     font-size: 18px;
   }
 `;
-const FoodGridPostRightImg = styled.img`
-  max-width: 100%;
-  height: 170px;
-  box-sizing: border-box;
+const TravelGridPostRightImg = styled.img`
+  width: 100%;
 `;
-const FoodGridPostRightText = styled.div`
+const TravelGridPostRightText = styled(Link)`
   margin-top: 5px;
   width: 100%;
   height: 60px;
@@ -89,6 +104,8 @@ const FoodGridPostRightText = styled.div`
   font-weight: 600;
   font-size: 18px;
   box-sizing: border-box;
+  color: black;
+  text-decoration: none;
 
   @media screen and (max-width: 1210px) {
     display: flex;
@@ -96,33 +113,51 @@ const FoodGridPostRightText = styled.div`
   }
 `;
 
-const FoodGridPostRightBox = ({
+const TravelGridPostRightImgBox = styled.div`
+  width: 420px;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`;
+
+const TravelGridPostRightBox = ({
   imgSrcTop,
   TextTop,
   imgSrcBottom,
   TextBottom,
+  toTop,
+  toBottom,
 }) => {
   return (
     <>
-      <FoodGridPostRight>
-        <FoodGridPostRightImg src={imgSrcTop} />
-        <FoodGridPostRightText>{TextTop}</FoodGridPostRightText>
-        <FoodGridPostRightImg alt="旅遊圖片" src={imgSrcBottom} />
-        <FoodGridPostRightText>{TextBottom}</FoodGridPostRightText>
-      </FoodGridPostRight>
+      <TravelGridPostRight>
+        <TravelGridPostRightImgBox>
+          <TravelGridPostRightImg alt="美食圖片" src={imgSrcTop} />
+        </TravelGridPostRightImgBox>
+        <TravelGridPostRightText to={toTop}>{TextTop}</TravelGridPostRightText>
+        <TravelGridPostRightImgBox>
+          <TravelGridPostRightImg alt="美食圖片" src={imgSrcBottom} />
+        </TravelGridPostRightImgBox>
+        <TravelGridPostRightText to={toBottom}>
+          {TextBottom}
+        </TravelGridPostRightText>
+      </TravelGridPostRight>
     </>
   );
 };
 
-const FoodParallelBox = styled.div`
+const TravelParallelBox = styled.div`
   max-width: 1260px;
   margin: 0 auto 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  box-sizing: border-box;
 `;
 
-const FoodParallelPost = styled.div`
+const TravelParallelPost = styled.div`
   width: 370px;
   height: 469px;
   box-sizing: border-box;
@@ -145,7 +180,7 @@ const FoodParallelPost = styled.div`
   }
 `;
 
-const FoodParallelPostImgBox = styled.div`
+const TravelParallelPostImgBox = styled.div`
   width: 100%;
   height: 330px;
   display: flex;
@@ -154,12 +189,12 @@ const FoodParallelPostImgBox = styled.div`
   overflow: hidden;
 `;
 
-const FoodParallelPostImg = styled.img`
+const TravelParallelPostImg = styled.img`
   max-width: 100%;
   height: auto;
 `;
 
-const FoodParallelPostText = styled(Link)`
+const TravelParallelPostText = styled(Link)`
   width: 100%;
   height: 60px;
   margin-top: 19px;
@@ -172,7 +207,7 @@ const FoodParallelPostText = styled(Link)`
   color: black;
 `;
 
-const FoodParallelPostTag = styled.div`
+const TravelParallelPostTag = styled.div`
   display: flex;
   width: 100%;
   height: 20px;
@@ -199,17 +234,17 @@ function topFunction() {
   document.documentElement.scrollTop = 0;
 }
 
-const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
+const TravelParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
   return (
     <>
-      <FoodParallelPost>
-        <FoodParallelPostImgBox>
-          <FoodParallelPostImg alt="美食圖片" src={imgSrc} />
-        </FoodParallelPostImgBox>
-        <FoodParallelPostText to={`/travel/post/${toLink}`}>
+      <TravelParallelPost>
+        <TravelParallelPostImgBox>
+          <TravelParallelPostImg alt="美食圖片" src={imgSrc} />
+        </TravelParallelPostImgBox>
+        <TravelParallelPostText to={`/travel/post/${toLink}`}>
           {title}
-        </FoodParallelPostText>
-        <FoodParallelPostTag>
+        </TravelParallelPostText>
+        <TravelParallelPostTag>
           <div>
             {tag1 ? "# " : ""}
             {tag1}
@@ -222,17 +257,27 @@ const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
             {tag3 ? "# " : ""}
             {tag3}
           </div>
-        </FoodParallelPostTag>
-      </FoodParallelPost>
+        </TravelParallelPostTag>
+      </TravelParallelPost>
     </>
   );
 };
 
-const FoodGridPostLeftBox = ({ tag1, tag2, tag3, imgSrc, title }) => {
+const TravelGridPostLeftImgBox = styled.div`
+  overflow: hidden;
+  width: 100%;
+  height: 410px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const TravelGridPostLeftBox = ({ tag1, tag2, tag3, imgSrc, title, to }) => {
   return (
     <>
-      <FoodGridPostLeft>
-        <FoodGridPostLeftTag>
+      <TravelGridPostLeft to={to}>
+        <TravelGridPostLeftTag>
           <div>
             {tag1 ? "# " : ""}
             {tag1}
@@ -245,10 +290,12 @@ const FoodGridPostLeftBox = ({ tag1, tag2, tag3, imgSrc, title }) => {
             {tag3 ? "# " : ""}
             {tag3}
           </div>
-        </FoodGridPostLeftTag>
-        <FoodGridPostLeftImg alt="旅遊圖片" src={imgSrc} />
-        <FoodGridPostLeftTitle>{title}</FoodGridPostLeftTitle>
-      </FoodGridPostLeft>
+        </TravelGridPostLeftTag>
+        <TravelGridPostLeftImgBox>
+          <TravelGridPostLeftImg alt="旅遊圖片" src={imgSrc} />
+        </TravelGridPostLeftImgBox>
+        <TravelGridPostLeftTitle>{title}</TravelGridPostLeftTitle>
+      </TravelGridPostLeft>
     </>
   );
 };
@@ -265,20 +312,22 @@ const PageBox = styled.div`
 `;
 
 const Loading = styled.div`
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 2300px;
+  height: 100%;
   overflow: hidden;
   font-size: 36px;
   font-weight: 600;
   letter-spacing: 2px;
-  position: absolute;
   background-color: white;
   z-index: 5;
 `;
 
-const FoodBlock = ({ number }) => {
+const TravelBlock = ({ number }) => {
   return <div style={{ width: "100%", height: `${number}` }}></div>;
 };
 
@@ -319,7 +368,47 @@ async function ChangePage(
   setLoad(false);
 }
 
+const FoodGridPost = ({ latestPost }) => {
+  //把最新3筆傳過來  做資料處理   明天繼續
+  return (
+    <TravelGridPostBox>
+      <TravelGridPostLeftBox
+        to={`${latestPost[0].crawler_No}`}
+        tag1={latestPost[0].crawler_Cate}
+        tag2={
+          latestPost[0].crawler_Keyword === ""
+            ? ""
+            : `${latestPost[0].crawler_Keyword.substr(0, 30)} ...`
+        }
+        imgSrc={latestPost[0].crawler_PicUrl}
+        title={`${latestPost[0].crawler_Title.substr(0, 20)}...`}
+      />
+      <TravelGridPostRightBox
+        imgSrcTop={judgmentSourseShowImage(
+          latestPost[1].crawler_Web,
+          latestPost[1].crawler_PicUrl
+        )}
+        imgSrcBottom={judgmentSourseShowImage(
+          latestPost[2].crawler_Web,
+          latestPost[2].crawler_PicUrl
+        )}
+        toTop={`${latestPost[1].crawler_No}`}
+        toBottom={`${latestPost[2].crawler_No}`}
+        TextTop={`${latestPost[1].crawler_Title.substr(0, 22)}...`}
+        TextBottom={`${latestPost[2].crawler_Title.substr(0, 22)}...`}
+      />
+    </TravelGridPostBox>
+  );
+};
+
+async function fetchTodayFood(setLatestPost) {
+  const res = await fetch(TodayTravelApi);
+  const { data } = await res.json();
+  setLatestPost(data.slice(0, 3));
+}
+
 export default function FoodPost() {
+  const [latestPost, setLatestPost] = useState([]);
   const [post, setPost] = useState([]);
   const [page, setPage] = useState(0);
   const [load, setLoad] = useState(false);
@@ -328,6 +417,7 @@ export default function FoodPost() {
   const [nowLastPage, setNowLastPage] = useState("");
 
   useEffect(() => {
+    fetchTodayFood(setLatestPost);
     fetchFood(
       setLoad,
       setPost,
@@ -341,18 +431,14 @@ export default function FoodPost() {
   const renderContent = useMemo(
     () =>
       post.map((data) => {
-        console.log(data);
         return (
-          <FoodParallelPostBox
+          <TravelParallelPostBox
             key={data.crawler_No}
             toLink={data.crawler_No}
-            imgSrc={
-              data.crawler_Web === "facebook" ||
-              data.crawler_Web === "dcard" ||
-              data.crawler_Web === "ptt"
-                ? foodGridImg1
-                : data.crawler_PicUrl
-            }
+            imgSrc={judgmentSourseShowImage(
+              data.crawler_Web,
+              data.crawler_PicUrl
+            )}
             title={`${data.crawler_Title.substr(0, 28)} ...`}
             tag1={data.crawler_Type}
             tag2={`${data.crawler_Keyword.substr(0, 20)} ...`}
@@ -383,27 +469,16 @@ export default function FoodPost() {
   return (
     <>
       {load && <Loading>載入中 ...</Loading>}
-      <FoodGridPostBox>
-        <FoodGridPostLeftBox
-          tag1="# 下午茶"
-          tag2="# 甜點"
-          imgSrc={foodGridImg1}
-          title="食指大動！私房窯烤PIZZA超正宗, 必吃3家店"
-        />
-        <FoodGridPostRightBox
-          imgSrcTop={foodGridImg2}
-          imgSrcBottom={foodGridImg2}
-          TextTop="國內旅遊！熱門台灣世界級景點有哪些？網狂推1仙境：絕對夠格"
-          TextBottom="減碳新生活, 生活中實用小妙招, 原來家裡都有的「這個」可以輕鬆實現！"
-        />
-      </FoodGridPostBox>
-      <FoodParallelBox>{renderContent}</FoodParallelBox>
+      <TravelMainTitle>最新消息</TravelMainTitle>
+      {latestPost.length !== 0 && <FoodGridPost latestPost={latestPost} />}
+      <TravelMainTitle style={{ maxWidth: "1260px" }}>所有</TravelMainTitle>
+      <TravelParallelBox>{renderContent}</TravelParallelBox>
       <PageBox>
         <PrevButton onClick={ChangePrevPage} src={LeftArrow} />
         {page}
         <NextButton onClick={ChangeNextPage} src={RightArrow} />
       </PageBox>
-      <FoodBlock number="150px" />
+      <TravelBlock number="150px" />
     </>
   );
 }

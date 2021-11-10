@@ -1,9 +1,9 @@
 import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
 import text01 from "./images/text01.jpg";
 import text02 from "./images/text02.jpg";
 import cover from "./images/cover.png";
 import styled from "styled-components";
-import "react-slideshow-image/dist/styles.css";
 
 const CoverImg = styled.img`
   width: 100%;
