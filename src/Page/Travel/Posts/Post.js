@@ -150,54 +150,55 @@ const TravelGridPostRightBox = ({
 };
 
 const TravelParallelBox = styled.div`
-  max-width: 1260px;
-  margin: 0 auto 0 auto;
+  max-width: 960px;
+  margin: 50px auto 0 auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  box-sizing: border-box;
+
+  @media screen and (min-width: 765px) and (max-width: 1000px) {
+    max-width: 720px;
+  }
+
+  @media screen and (max-width: 764px) {
+    max-width: 100%;
+    margin: 20px auto 0 auto;
+  }
 `;
 
 const TravelParallelPost = styled.div`
-  width: 370px;
-  height: 469px;
+  width: 32%;
+  height: 310px;
   box-sizing: border-box;
-  margin: 15px 0;
 
-  @media screen and (max-width: 600px) {
-    width: 90%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: auto;
-  }
-
-  @media screen and (min-width: 601px) and (max-width: 1050px) {
-    width: 40%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: auto;
+  @media screen and (max-width: 765px) {
+    width: 100%;
+    height: 400px;
   }
 `;
 
 const TravelParallelPostImgBox = styled.div`
   width: 100%;
-  height: 330px;
+  height: 160px;
   display: flex;
   align-items: center;
+  justify-content: center;
   background-color: #fff7ff;
   overflow: hidden;
+  border-radius: 20px;
+
+  @media screen and (max-width: 765px) {
+    height: 300px;
+  }
 `;
 
 const TravelParallelPostImg = styled.img`
   max-width: 100%;
-  height: auto;
 `;
 
 const TravelParallelPostText = styled(Link)`
   width: 100%;
-  height: 60px;
+  height: 75px;
   margin-top: 19px;
   margin-bottom: 20px;
   font-weight: 700;
@@ -206,15 +207,24 @@ const TravelParallelPostText = styled(Link)`
   box-sizing: border-box;
   text-decoration: none;
   color: black;
+
+  @media screen and (max-width: 765px) {
+    padding-left: 20px;
+  }
 `;
 
 const TravelParallelPostTag = styled.div`
   display: flex;
   width: 100%;
-  height: 20px;
+  height: 30px;
   font-size: 14px;
   font-weight: 600;
   margin-top: 10px;
+  box-sizing: border-box;
+
+  @media screen and (max-width: 765px) {
+    padding-left: 20px;
+  }
 `;
 
 const PrevButton = styled.img`
@@ -473,9 +483,6 @@ export default function FoodPost() {
   return (
     <>
       {load && <Loading>載入中 ...</Loading>}
-      <TravelMainTitle>最新消息</TravelMainTitle>
-      {latestPost.length !== 0 && <FoodGridPost latestPost={latestPost} />}
-      <TravelMainTitle style={{ maxWidth: "1260px" }}>所有</TravelMainTitle>
       <TravelParallelBox>{renderContent}</TravelParallelBox>
       <PageBox>
         <PrevButton onClick={ChangePrevPage} src={LeftArrow} />

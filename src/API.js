@@ -21,7 +21,8 @@ function doHandleMonth(month) {
 }
 
 let nowDate = getDay(0);
-let LastNowDate = getDay(-90);
+let LastNowDate = getDay(0);
+//等等改-90
 
 export const TodayFoodApi = `${Source_API}?key=美食&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
 

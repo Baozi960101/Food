@@ -15,6 +15,7 @@ import {
 } from "react-router-dom";
 import { SlugContext } from "../../context";
 import { ScrollToTop } from "../../ScrollToTop";
+import Slideshow from "../../Page/Home/Header/Slideshow";
 
 export default function App() {
   const [fooDSlug, setFooDSlug] = useState("");
@@ -46,11 +47,13 @@ export default function App() {
         value={{ fooDSlug, setFooDSlug, travelSlug, setTravelSlug }}
       >
         <Router>
-          <ScrollToTop />
           <TopHeadder />
+          <ScrollToTop />
+          <Slideshow />
           <Switch>
             <Route exact path="/">
-              <Cover />
+              {/* <Cover /> */}
+              <FoodHome />
             </Route>
             <Route exact path="/food">
               <FoodHome />

@@ -5,6 +5,7 @@ import menu from "./images/menu.svg";
 import { Link } from "react-router-dom";
 import UpArrow from "./images/upArrow.svg";
 import travel from "./images/travel.png";
+import foodTravelLogo from "./images/foodTravelLogo.png";
 
 const MainFieldHeadder = styled.div`
   display: flex;
@@ -12,13 +13,14 @@ const MainFieldHeadder = styled.div`
   align-items: center;
   width: 100%;
   height: 60px;
-  background-color: rgba(0, 0, 0, 0.41);
-  position: absolute;
-  z-index: 3;
+  background-color: white;
+  color: white;
+  position: fixed;
+  z-index: 5;
 
   @media screen and (max-width: 600px) {
     height: 60px;
-    background-color: black;
+    background-color: white;
   }
 `;
 
@@ -29,6 +31,7 @@ const CoverHeadderText = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-right: 10%;
+  color: black;
 
   @media screen and (max-width: 600px) {
     display: none;
@@ -53,7 +56,6 @@ const CoverHeadderTitle = styled(Link)`
   display: flex;
   align-items: center;
   font-size: 16px;
-  color: white;
   cursor: pointer;
   font-family: "PingFangTC";
   text-decoration: none;
@@ -126,7 +128,6 @@ const MainFieldHeadderTitle = styled(Link)`
   display: flex;
   align-items: center;
   font-size: 14px;
-  color: white;
   text-decoration: none;
   margin-left: 10%;
   font-family: "PingFangTC";
@@ -151,6 +152,16 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+const TopBlock = styled.div`
+  width: 100%;
+  height: 70px;
+
+  @media screen and (max-width: 600px) {
+    display: none;
+    height: 80px;
+  }
+`;
 
 export default function Header() {
   const [topBottomArise, setTopBottomArise] = useState(false);
@@ -202,7 +213,7 @@ export default function Header() {
           <img
             style={{ width: "140px", marginRight: "5px" }}
             alt="嚐飽途"
-            src={travel}
+            src={foodTravelLogo}
           />
           最懂你的生活網
         </MainFieldHeadderTitle>
@@ -221,6 +232,7 @@ export default function Header() {
         </CoverHeadderText>
         <MenuSize src={menu} onClick={HandleMenu} />
       </MainFieldHeadder>
+      <TopBlock />
       {topBottomArise && <TopBottom onClick={topFunction} src={UpArrow} />}
     </>
   );

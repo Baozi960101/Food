@@ -5,6 +5,8 @@ import text02 from "./images/text02.jpg";
 import cover from "./images/cover.png";
 import styled from "styled-components";
 
+const SlideMainBox = styled.div``;
+
 const CoverImg = styled.img`
   width: 100%;
 `;
@@ -27,21 +29,23 @@ export default function Slideshow() {
   };
 
   return (
-    <div className="slide-container">
-      <Slide {...fadeProperties}>
-        <RwdBox>
-          <div className="each-slide">
-            <CoverImg src={cover} />
-          </div>
-        </RwdBox>
+    <SlideMainBox>
+      <div className="slide-container">
+        <Slide {...fadeProperties}>
+          <RwdBox>
+            <div className="each-slide">
+              <CoverImg src={cover} />
+            </div>
+          </RwdBox>
 
-        {/* <div className="each-slide">
+          {/* <div className="each-slide">
           <CoverImg src={text01} />
         </div>
         <div className="each-slide">
           <CoverImg src={text02} />
         </div> */}
-      </Slide>
-    </div>
+        </Slide>
+      </div>
+    </SlideMainBox>
   );
 }

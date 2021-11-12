@@ -13,6 +13,7 @@ const DetailedArticleBox = styled.div`
   padding-right: 6%;
   padding-left: 6%;
   box-sizing: border-box;
+  margin-top: 50px;
 
   @media screen and (max-width: 599px) {
     flex-wrap: wrap;

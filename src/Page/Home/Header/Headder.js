@@ -28,7 +28,6 @@ const SelectedImgSize = styled.img`
 export default function Headder() {
   return (
     <>
-      <Slideshow />
       <Selected>
         <SelectedImgSize src={selected01} />
       </Selected>

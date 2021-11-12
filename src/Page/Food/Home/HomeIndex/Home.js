@@ -5,7 +5,6 @@ import Headder from "../../Header";
 export default function Home() {
   return (
     <>
-      <Headder />
       <Post />
     </>
   );
