@@ -120,7 +120,7 @@ const FoodGridPostRightImgBox = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 `;
 
 const FoodGridPostRightBox = ({
@@ -138,7 +138,7 @@ const FoodGridPostRightBox = ({
           <FoodGridPostRightImg alt="美食圖片" src={imgSrcTop} />
         </FoodGridPostRightImgBox>
         <FoodGridPostRightText to={toTop}>{TextTop}</FoodGridPostRightText>
-        <FoodGridPostRightImgBox style={{marginTop:"30px"}} >
+        <FoodGridPostRightImgBox style={{ marginTop: "30px" }}>
           <FoodGridPostRightImg alt="美食圖片" src={imgSrcBottom} />
         </FoodGridPostRightImgBox>
         <FoodGridPostRightText to={toBottom}>

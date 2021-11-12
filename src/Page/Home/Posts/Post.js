@@ -11,6 +11,7 @@ import randomFood05 from "./images/randomFood05.jpg";
 import randomFood06 from "./images/randomFood06.jpg";
 import randomFood07 from "./images/randomFood07.jpg";
 import randomFood08 from "./images/randomFood08.jpg";
+import randomFood09 from "./images/randomFood09.jpg";
 
 const PostTittleBox = styled.div`
   display: flex;
@@ -246,29 +247,29 @@ export function judgmentSourseShowImage(
     } else {
       return randomFood08;
     }
-  }
-  if (crawler_Web === "dcard") {
+  } else if (crawler_Web === "dcard") {
     if (crawler_No % 2 === 0) {
       return randomFood02;
     } else {
       return randomFood07;
     }
-  }
-  if (crawler_Web === "ptt") {
+  } else if (crawler_Web === "ptt") {
     if (crawler_No % 2 === 0) {
       return randomFood04;
     } else {
       return randomFood05;
     }
-  }
-  if (crawler_Web === "ctee") {
+  } else if (crawler_Web === "ctee") {
     if (crawler_No % 2 === 0) {
       return randomFood06;
     } else {
       return randomFood03;
     }
+  } else if (originalImage === "") {
+    return randomFood09;
+  } else {
+    return originalImage;
   }
-  return originalImage;
 }
 
 export const ReadMore = ({ ReadLinkTo }) => {

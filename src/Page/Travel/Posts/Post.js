@@ -118,7 +118,7 @@ const TravelGridPostRightImgBox = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 `;
 
 const TravelGridPostRightBox = ({
@@ -136,7 +136,7 @@ const TravelGridPostRightBox = ({
           <TravelGridPostRightImg alt="美食圖片" src={imgSrcTop} />
         </TravelGridPostRightImgBox>
         <TravelGridPostRightText to={toTop}>{TextTop}</TravelGridPostRightText>
-        <TravelGridPostRightImgBox style={{marginTop:"30px"}} >
+        <TravelGridPostRightImgBox style={{ marginTop: "30px" }}>
           <TravelGridPostRightImg alt="美食圖片" src={imgSrcBottom} />
         </TravelGridPostRightImgBox>
         <TravelGridPostRightText to={toBottom}>
