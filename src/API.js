@@ -24,17 +24,20 @@ let nowDate = getDay(0);
 let LastNowDate = getDay(0);
 //等等改-90
 
-export const TodayFoodApi = `${Source_API}?key=美食&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
+let temporarySourse =
+  "anntw,anue,chinatimes,cmmedia,cna,ebc,epochtimes,ettoday,ftv,gvm,ltn,mirrormedia,newtalk,nownews,rti,setn,storm,thenewslens,ttv,tvbs,udn,upmedia,yahoo,yam,reuters";
 
-export const FoodApi = `${Source_API}?key=美食&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=all`;
+export const TodayFoodApi = `${Source_API}?key=美食&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
 
-export const TodayTravelApi = `${Source_API}?key=旅遊&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
+export const FoodApi = `${Source_API}?key=美食&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
 
-export const TravelApi = `${Source_API}?key=旅遊&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=all`;
+export const TodayTravelApi = `${Source_API}?key=旅遊&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
 
-export const TodayRestaurantApi = `${Source_API}?key=餐廳&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=all`;
+export const TravelApi = `${Source_API}?key=旅遊&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
 
-export const RestaurantApi = `${Source_API}?key=餐廳&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=all`;
+export const TodayRestaurantApi = `${Source_API}?key=餐廳&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
+
+export const RestaurantApi = `${Source_API}?key=餐廳&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
 
 export const AloneFoodApi = (id) => {
   return `${Source_API}/${id}`;
