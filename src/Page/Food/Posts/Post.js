@@ -137,11 +137,13 @@ const FoodGridPostRightBox = ({
         <FoodGridPostRightImgBox>
           <FoodGridPostRightImg alt="美食圖片" src={imgSrcTop} />
         </FoodGridPostRightImgBox>
-        <FoodGridPostRightText to={toTop}>{TextTop}</FoodGridPostRightText>
+        <FoodGridPostRightText to={`/food/post/${toTop}`}>
+          {TextTop}
+        </FoodGridPostRightText>
         <FoodGridPostRightImgBox style={{ marginTop: "30px" }}>
           <FoodGridPostRightImg alt="美食圖片" src={imgSrcBottom} />
         </FoodGridPostRightImgBox>
-        <FoodGridPostRightText to={toBottom}>
+        <FoodGridPostRightText to={`/food/post/${toBottom}`}>
           {TextBottom}
         </FoodGridPostRightText>
       </FoodGridPostRight>
@@ -276,7 +278,7 @@ const FoodParallelPostBox = ({ toLink, imgSrc, title, tag1, tag2, tag3 }) => {
 const FoodGridPostLeftBox = ({ tag1, tag2, tag3, imgSrc, title, to }) => {
   return (
     <>
-      <FoodGridPostLeft to={to}>
+      <FoodGridPostLeft to={`/food/post/${to}`}>
         <FoodGridPostLeftTag>
           <div>
             {tag1 ? "# " : ""}
@@ -372,7 +374,6 @@ async function fetchTodayFood(setLatestPost) {
   const res = await fetch(TodayFoodApi);
   const { data } = await res.json();
   setLatestPost(data.slice(0, 3));
-  console.log(data.slice(0, 3));
 }
 
 const FoodGridPost = ({ latestPost }) => {

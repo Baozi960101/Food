@@ -135,11 +135,13 @@ const TravelGridPostRightBox = ({
         <TravelGridPostRightImgBox>
           <TravelGridPostRightImg alt="美食圖片" src={imgSrcTop} />
         </TravelGridPostRightImgBox>
-        <TravelGridPostRightText to={toTop}>{TextTop}</TravelGridPostRightText>
+        <TravelGridPostRightText to={`/Travel/post/${toTop}`}>
+          {TextTop}
+        </TravelGridPostRightText>
         <TravelGridPostRightImgBox style={{ marginTop: "30px" }}>
           <TravelGridPostRightImg alt="美食圖片" src={imgSrcBottom} />
         </TravelGridPostRightImgBox>
-        <TravelGridPostRightText to={toBottom}>
+        <TravelGridPostRightText to={`/Travel/post/${toBottom}`}>
           {TextBottom}
         </TravelGridPostRightText>
       </TravelGridPostRight>
@@ -275,7 +277,7 @@ const TravelGridPostLeftImgBox = styled.div`
 const TravelGridPostLeftBox = ({ tag1, tag2, tag3, imgSrc, title, to }) => {
   return (
     <>
-      <TravelGridPostLeft to={to}>
+      <TravelGridPostLeft to={`/Travel/post/${to}`}>
         <TravelGridPostLeftTag>
           <div>
             {tag1 ? "# " : ""}

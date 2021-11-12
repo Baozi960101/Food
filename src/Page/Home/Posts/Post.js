@@ -266,7 +266,11 @@ export function judgmentSourseShowImage(
       return randomFood03;
     }
   } else if (originalImage === "") {
-    return randomFood09;
+    if (crawler_No % 2 === 0) {
+      return randomFood06;
+    } else {
+      return randomFood09;
+    }
   } else {
     return originalImage;
   }
