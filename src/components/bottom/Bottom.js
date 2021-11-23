@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import travel from "./images/travel.png";
 import foodTravelLogo from "./images/foodTravelLogo.png";
 
 const Bottom = styled.div`

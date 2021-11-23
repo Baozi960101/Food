@@ -1,7 +1,5 @@
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-import text01 from "./images/text01.jpg";
-import text02 from "./images/text02.jpg";
 import cover from "./images/cover.png";
 import styled from "styled-components";
 import coverTest01 from "./images/coverTest01.jpg";
@@ -37,6 +35,7 @@ export default function Slideshow() {
     transitionDuration: 800,
     infinite: true,
     arrows: true,
+    indicators: true,
   };
 
   return (

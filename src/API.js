@@ -21,7 +21,7 @@ function doHandleMonth(month) {
 }
 
 let nowDate = getDay(0);
-let LastNowDate = getDay(0);
+let LastNowDate = getDay(-7);
 //等等改-90
 
 let temporarySourse =

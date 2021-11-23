@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Cover from "../../Page/Home";
 import TopHeadder from "../Header";
 import Bottom from "../Bottom";
 import FoodHome from "../../Page/Food/Home/HomeIndex";
