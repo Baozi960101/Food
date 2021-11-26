@@ -104,6 +104,14 @@ const MenuLeft = styled.div`
   width: 80%;
   height: 100%;
   background-color: white;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 0px;
+    background-color: #eee8d3;
+  }
 `;
 
 const MenuLeftTopHeader = styled.div`
@@ -119,13 +127,16 @@ const MenuLeftMainBox = styled.div`
   padding: 30px 30px;
 `;
 
-const MenuLeftSubTitle = styled(Link)`
+const MenuLeftSubTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
   width: 80%;
   height: 50px;
   text-decoration: none;
   font-size: 20px;
   color: black;
   font-weight: 600;
+  cursor: pointer;
 `;
 
 const MenuBackground = styled.div`
@@ -207,8 +218,19 @@ const FoodDown = styled.div`
   transition: max-height 0.3s ease-in-out;
   z-index: 3;
   box-sizing: border-box;
+  border-top: 0;
 
-  ${(props) => props.$move && `max-height:600px`}
+  ${(props) => props.$move && `max-height:600px;border-top:1px solid black;`}
+`;
+
+const WebLogoText = styled.div`
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 `;
 
 const HeaderDownTitleBox = ({ to, text, letter }) => {
@@ -221,6 +243,20 @@ const HeaderDownTitleBox = ({ to, text, letter }) => {
   );
 };
 
+const MenuLeftSubTitleText = styled(Link)`
+  width: 80%;
+  height: 0px;
+  text-decoration: none;
+  font-size: 16px;
+  color: black;
+  font-weight: 600;
+  padding-left: 30px;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+
+  ${(props) => props.$move && `height:50px;`}
+`;
+
 export default function Header() {
   const [topBottomArise, setTopBottomArise] = useState(false);
   const [menuOn, setMenuOn] = useState(false);
@@ -228,6 +264,12 @@ export default function Header() {
   const [travelDropDown, setTravelDropDown] = useState(false);
   const [healthyDropDown, setHealthyDropDown] = useState(false);
   const [entertainmentDropDown, setEntertainmentDropDown] = useState(false);
+
+  const [foodDropDownRwd, setFoodDropDownRwd] = useState(false);
+  const [travelDropDownRwd, setTravelDropDownRwd] = useState(false);
+  const [healthyDropDownRwd, setHealthyDropDownRwd] = useState(false);
+  const [entertainmentDropDownRwd, setEntertainmentDropDownRwd] =
+    useState(false);
 
   useEffect(() => {
     window.onscroll = function () {
@@ -262,18 +304,238 @@ export default function Header() {
     setDropDown(false);
   }
 
+  function handleDropDown(foodDropDownRwd, setFoodDropDownRwd) {
+    setFoodDropDownRwd(!foodDropDownRwd);
+  }
+
   return (
     <>
       <MenuBox $move={menuOn}>
         <MenuLeft>
           <MenuLeftTopHeader />
           <MenuLeftMainBox>
-            <MenuLeftSubTitle to="/travel" onClick={HandleMenu}>
+            <MenuLeftSubTitle
+              onClick={() => {
+                handleDropDown(travelDropDownRwd, setTravelDropDownRwd);
+              }}
+            >
               旅遊
+              <ImgSize
+                style={{ width: "12px", height: "12px", marginTop: "6px" }}
+                src={down}
+              />
             </MenuLeftSubTitle>
-            <MenuLeftSubTitle to="/food" onClick={HandleMenu}>
+            <MenuLeftSubTitleText
+              $move={travelDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              景點
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={travelDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              攝影
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={travelDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              露營
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={travelDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              老街
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={travelDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              旅拍
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={travelDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              外拍
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={travelDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              風景區
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={travelDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              一日遊
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={travelDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              懶人包
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={travelDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              打卡地標
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitle
+              onClick={() => {
+                handleDropDown(foodDropDownRwd, setFoodDropDownRwd);
+              }}
+            >
               美食
+              <ImgSize
+                style={{ width: "12px", height: "12px", marginTop: "6px" }}
+                src={down}
+              />
             </MenuLeftSubTitle>
+            <MenuLeftSubTitleText
+              $move={foodDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              甜點
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={foodDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              私房
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={foodDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              餐具
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={foodDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              食譜
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={foodDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              團購
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={foodDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              料理包
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={foodDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              異國美食
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={foodDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              寵物餐廳
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={foodDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              親子餐廳
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitle
+              onClick={() => {
+                handleDropDown(healthyDropDownRwd, setHealthyDropDownRwd);
+              }}
+            >
+              健康
+              <ImgSize
+                style={{ width: "12px", height: "12px", marginTop: "6px" }}
+                src={down}
+              />
+            </MenuLeftSubTitle>
+            <MenuLeftSubTitleText
+              $move={healthyDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              保健資訊
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={healthyDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              健康食譜
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={healthyDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              健康餐推薦
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitle
+              onClick={() => {
+                handleDropDown(
+                  entertainmentDropDownRwd,
+                  setEntertainmentDropDownRwd
+                );
+              }}
+            >
+              娛樂
+              <ImgSize
+                style={{ width: "12px", height: "12px", marginTop: "6px" }}
+                src={down}
+              />
+            </MenuLeftSubTitle>
+            <MenuLeftSubTitleText
+              $move={entertainmentDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              影評
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={entertainmentDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              電影
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={entertainmentDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              遊樂園優惠
+            </MenuLeftSubTitleText>
           </MenuLeftMainBox>
         </MenuLeft>
         <MenuBackground onClick={HandleMenu} />
@@ -285,7 +547,7 @@ export default function Header() {
             alt="嚐飽途"
             src={foodTravelLogo}
           />
-          最懂你的生活網
+          <WebLogoText>最懂你的生活網</WebLogoText>
         </MainFieldHeadderTitle>
         <CoverHeadderText>
           <CoverHeadderTitle
@@ -306,6 +568,9 @@ export default function Header() {
               <HeaderDownTitleBox text="攝影" />
               <HeaderDownTitleBox text="露營" />
               <HeaderDownTitleBox text="老街" />
+              <HeaderDownTitleBox text="旅拍" />
+              <HeaderDownTitleBox text="外拍" />
+              <HeaderDownTitleBox letter="8px" text="風景區" />
               <HeaderDownTitleBox letter="8px" text="一日遊" />
               <HeaderDownTitleBox letter="8px" text="懶人包" />
               <HeaderDownTitleBox letter="5px" text="打卡地標" />
@@ -326,8 +591,10 @@ export default function Header() {
             </HeaderTitle>
             <FoodDown $move={foodDropDown}>
               <HeaderDownTitleBox text="甜點" />
+              <HeaderDownTitleBox text="私房" />
               <HeaderDownTitleBox text="餐具" />
               <HeaderDownTitleBox text="食譜" />
+              <HeaderDownTitleBox text="團購" />
               <HeaderDownTitleBox letter="8px" text="料理包" />
               <HeaderDownTitleBox letter="5px" text="異國美食" />
               <HeaderDownTitleBox letter="5px" text="寵物餐廳" />

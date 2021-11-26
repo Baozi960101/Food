@@ -3,15 +3,13 @@ import React, { useEffect, useState } from "react";
 import RightArrows from "./images/right-arrows-symbol.svg";
 import { Link } from "react-router-dom";
 import { TodayFoodApi, TodayTravelApi } from "../../../API";
-import randomFood01 from "./images/randomFood01.png";
-import randomFood02 from "./images/randomFood02.jpg";
-import randomFood03 from "./images/randomFood03.jpg";
-import randomFood04 from "./images/randomFood04.png";
-import randomFood05 from "./images/randomFood05.jpg";
-import randomFood06 from "./images/randomFood06.jpg";
-import randomFood07 from "./images/randomFood07.jpg";
-import randomFood08 from "./images/randomFood08.jpg";
-import randomFood09 from "./images/randomFood09.jpg";
+import randomFood02 from "../../../images/randomFood02.jpg";
+import randomFood06 from "../../../images/randomFood06.jpg";
+import randomFood07 from "../../../images/randomFood07.jpg";
+import randomFood09 from "../../../images/randomFood09.jpg";
+import foodFbLogo from "../../../images/foodFbLogo.jpeg";
+import foodNewsLogo from "../../../images/foodNewsLogo.jpeg";
+import foodPttLogo from "../../../images/foodPttLogo.jpeg";
 
 const PostTittleBox = styled.div`
   display: flex;
@@ -242,11 +240,7 @@ export function judgmentSourseShowImage(
 ) {
   //算NO 雙偶
   if (crawler_Web === "facebook") {
-    if (crawler_No % 2 === 0) {
-      return randomFood01;
-    } else {
-      return randomFood08;
-    }
+    return foodFbLogo;
   } else if (crawler_Web === "dcard") {
     if (crawler_No % 2 === 0) {
       return randomFood02;
@@ -254,17 +248,9 @@ export function judgmentSourseShowImage(
       return randomFood07;
     }
   } else if (crawler_Web === "ptt") {
-    if (crawler_No % 2 === 0) {
-      return randomFood04;
-    } else {
-      return randomFood05;
-    }
+    return foodPttLogo;
   } else if (crawler_Web === "ctee") {
-    if (crawler_No % 2 === 0) {
-      return randomFood06;
-    } else {
-      return randomFood03;
-    }
+    return foodNewsLogo;
   } else if (originalImage === "") {
     if (crawler_No % 2 === 0) {
       return randomFood06;

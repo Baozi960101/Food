@@ -25,7 +25,7 @@ let LastNowDate = getDay(-7);
 //等等改-90
 
 let temporarySourse =
-  "anntw,anue,chinatimes,cmmedia,cna,ebc,epochtimes,ettoday,ftv,gvm,ltn,mirrormedia,newtalk,nownews,rti,setn,storm,thenewslens,ttv,tvbs,udn,upmedia,yahoo,yam,reuters";
+  "anntw,anue,chinatimes,cmmedia,cna,ebc,epochtimes,ettoday,ftv,gvm,ltn,mirrormedia,newtalk,nownews,rti,setn,storm,thenewslens,ttv,tvbs,udn,upmedia,yahoo,yam,reuters,facebook,ptt,ctee";
 
 export const TodayFoodApi = `${Source_API}?key=美食&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
 
