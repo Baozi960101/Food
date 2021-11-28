@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import foodTravelLogo from "./images/foodTravelLogo.png";
+import foodTravelLogo from "../../images/foodTravelLogo.png";
 
 const Bottom = styled.div`
   display: flex;

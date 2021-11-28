@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TopHeadder from "../Header";
-import Bottom from "../Bottom";
+import Bottom from "../Bottom/Bottom";
 import FoodHome from "../../Page/Food/Home/HomeIndex";
 import TravelHome from "../../Page/Travel/Home/HomeIndex";
 import DetailedArticle from "../../Page/Food/Home/DetailedArticleIndex";

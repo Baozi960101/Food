@@ -3,8 +3,8 @@ import styled from "styled-components";
 import down from "./images/down.svg";
 import menu from "./images/menu.svg";
 import { Link } from "react-router-dom";
-import UpArrow from "./images/upArrow.svg";
-import foodTravelLogo from "./images/foodTravelLogo.png";
+import upArrow from "./images/upArrow.svg";
+import foodTravelLogo from "../../images/foodTravelLogo.png";
 
 const MainFieldHeadder = styled.div`
   display: flex;
@@ -485,21 +485,14 @@ export default function Header() {
               onClick={HandleMenu}
               to="/"
             >
-              保健資訊
+              資訊
             </MenuLeftSubTitleText>
             <MenuLeftSubTitleText
               $move={healthyDropDownRwd}
               onClick={HandleMenu}
               to="/"
             >
-              健康食譜
-            </MenuLeftSubTitleText>
-            <MenuLeftSubTitleText
-              $move={healthyDropDownRwd}
-              onClick={HandleMenu}
-              to="/"
-            >
-              健康餐推薦
+              食譜
             </MenuLeftSubTitleText>
             <MenuLeftSubTitle
               onClick={() => {
@@ -534,7 +527,7 @@ export default function Header() {
               onClick={HandleMenu}
               to="/"
             >
-              遊樂園優惠
+              優惠
             </MenuLeftSubTitleText>
           </MenuLeftMainBox>
         </MenuLeft>
@@ -543,7 +536,7 @@ export default function Header() {
       <MainFieldHeadder>
         <MainFieldHeadderTitle to="/">
           <img
-            style={{ width: "140px", marginRight: "5px" }}
+            style={{ width: "100px", marginRight: "5px" }}
             alt="嚐飽途"
             src={foodTravelLogo}
           />
@@ -615,9 +608,8 @@ export default function Header() {
               <DownImg />
             </HeaderTitle>
             <FoodDown $move={healthyDropDown}>
-              <HeaderDownTitleBox letter="5px" text="保健資訊" />
-              <HeaderDownTitleBox letter="5px" text="健康食譜" />
-              <HeaderDownTitleBox letter="3px" text="健康餐推薦" />
+              <HeaderDownTitleBox text="資訊" />
+              <HeaderDownTitleBox text="食譜" />
             </FoodDown>
           </CoverHeadderTitle>
           <CoverHeadderTitle
@@ -636,7 +628,7 @@ export default function Header() {
             <FoodDown $move={entertainmentDropDown}>
               <HeaderDownTitleBox text="影評" />
               <HeaderDownTitleBox text="電影" />
-              <HeaderDownTitleBox letter="3px" text="遊樂園優惠" />
+              <HeaderDownTitleBox text="優惠" />
             </FoodDown>
           </CoverHeadderTitle>
           {/* <CoverHeadderTitle to="/">
@@ -646,7 +638,7 @@ export default function Header() {
         <MenuSize src={menu} onClick={HandleMenu} />
       </MainFieldHeadder>
       <TopBlock />
-      {topBottomArise && <TopBottom onClick={topFunction} src={UpArrow} />}
+      {topBottomArise && <TopBottom onClick={topFunction} src={upArrow} />}
     </>
   );
 }
