@@ -527,7 +527,7 @@ export default function Header() {
               onClick={HandleMenu}
               to="/"
             >
-              電影
+              電影戲劇
             </MenuLeftSubTitleText>
             <MenuLeftSubTitleText
               $move={entertainmentDropDownRwd}
@@ -649,7 +649,7 @@ export default function Header() {
             </HeaderTitle>
             <FoodDown $move={entertainmentDropDown}>
               <HeaderDownTitleBox text="影評" />
-              <HeaderDownTitleBox text="電影" />
+              <HeaderDownTitleBox letter="3px" text="電影戲劇" />
               <HeaderDownTitleBox text="優惠" />
               <HeaderDownTitleBox text="遊戲" />
               <HeaderDownTitleBox text="動漫" />
