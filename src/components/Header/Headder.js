@@ -485,13 +485,6 @@ export default function Header() {
               onClick={HandleMenu}
               to="/"
             >
-              資訊
-            </MenuLeftSubTitleText>
-            <MenuLeftSubTitleText
-              $move={healthyDropDownRwd}
-              onClick={HandleMenu}
-              to="/"
-            >
               食譜
             </MenuLeftSubTitleText>
             <MenuLeftSubTitleText
@@ -500,6 +493,13 @@ export default function Header() {
               to="/"
             >
               健身
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={healthyDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              保健資訊
             </MenuLeftSubTitleText>
             <MenuLeftSubTitle
               onClick={() => {
@@ -520,21 +520,7 @@ export default function Header() {
               onClick={HandleMenu}
               to="/"
             >
-              影評
-            </MenuLeftSubTitleText>
-            <MenuLeftSubTitleText
-              $move={entertainmentDropDownRwd}
-              onClick={HandleMenu}
-              to="/"
-            >
               電影戲劇
-            </MenuLeftSubTitleText>
-            <MenuLeftSubTitleText
-              $move={entertainmentDropDownRwd}
-              onClick={HandleMenu}
-              to="/"
-            >
-              優惠
             </MenuLeftSubTitleText>
             <MenuLeftSubTitleText
               $move={entertainmentDropDownRwd}
@@ -549,6 +535,13 @@ export default function Header() {
               to="/"
             >
               動漫
+            </MenuLeftSubTitleText>
+            <MenuLeftSubTitleText
+              $move={entertainmentDropDownRwd}
+              onClick={HandleMenu}
+              to="/"
+            >
+              遊樂園
             </MenuLeftSubTitleText>
           </MenuLeftMainBox>
         </MenuLeft>
@@ -629,9 +622,9 @@ export default function Header() {
               <DownImg />
             </HeaderTitle>
             <FoodDown $move={healthyDropDown}>
-              <HeaderDownTitleBox text="資訊" />
               <HeaderDownTitleBox text="食譜" />
               <HeaderDownTitleBox text="健身" />
+              <HeaderDownTitleBox letter="3px" text="保健資訊" />
             </FoodDown>
           </CoverHeadderTitle>
           <CoverHeadderTitle
@@ -648,11 +641,10 @@ export default function Header() {
               <DownImg />
             </HeaderTitle>
             <FoodDown $move={entertainmentDropDown}>
-              <HeaderDownTitleBox text="影評" />
-              <HeaderDownTitleBox letter="3px" text="電影戲劇" />
-              <HeaderDownTitleBox text="優惠" />
               <HeaderDownTitleBox text="遊戲" />
               <HeaderDownTitleBox text="動漫" />
+              <HeaderDownTitleBox letter="5px" text="遊樂園" />
+              <HeaderDownTitleBox letter="3px" text="電影戲劇" />
             </FoodDown>
           </CoverHeadderTitle>
           {/* <CoverHeadderTitle to="/">
