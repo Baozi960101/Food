@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import RightArrows from "./images/right-arrows-symbol.svg";
+import RightArrows from "../../../images/right-arrows-symbol.svg";
 import { Link } from "react-router-dom";
 import { TodayFoodApi, TodayTravelApi } from "../../../API";
 import randomFood02 from "../../../images/randomFood02.jpg";

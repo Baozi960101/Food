@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Slideshow from "./Slideshow";
 import selected01 from "./images/selected01.jpg";
 
 const Selected = styled.div`
