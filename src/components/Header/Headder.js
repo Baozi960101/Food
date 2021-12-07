@@ -550,11 +550,11 @@ export default function Header() {
       <MainFieldHeadder>
         <MainFieldHeadderTitle to="/">
           <img
-            style={{ width: "125px", marginRight: "5px" }}
+            style={{ width: "150px",marginTop:"8px"}}
             alt="嚐飽途"
             src={newLogo}
           />
-          <WebLogoText>最懂你的生活網</WebLogoText>
+          
         </MainFieldHeadderTitle>
         <CoverHeadderText>
           <CoverHeadderTitle
