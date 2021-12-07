@@ -4,7 +4,7 @@ import down from "./images/down.svg";
 import menu from "./images/menu.svg";
 import { Link } from "react-router-dom";
 import upArrow from "./images/upArrow.svg";
-import foodTravelLogo from "../../images/foodTravelLogo.png";
+import newLogo from "../../images/newLogo.jpg";
 
 const MainFieldHeadder = styled.div`
   display: flex;
@@ -550,9 +550,9 @@ export default function Header() {
       <MainFieldHeadder>
         <MainFieldHeadderTitle to="/">
           <img
-            style={{ width: "100px", marginRight: "5px" }}
+            style={{ width: "125px", marginRight: "5px" }}
             alt="嚐飽途"
-            src={foodTravelLogo}
+            src={newLogo}
           />
           <WebLogoText>最懂你的生活網</WebLogoText>
         </MainFieldHeadderTitle>

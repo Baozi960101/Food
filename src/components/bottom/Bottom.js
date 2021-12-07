@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import foodTravelLogo from "../../images/foodTravelLogo.png";
+import newLogo from "../../images/newLogo.jpg";
 
 const Bottom = styled.div`
   display: flex;
@@ -8,14 +8,15 @@ const Bottom = styled.div`
   justify-content: center;
   max-width: 100%;
   height: 150px;
-  background-color: #d8d8d8;
+  background-color: white;
+  border-top: 3px solid gray;
 `;
 
 export default function HtmlBottom() {
   return (
     <>
       <Bottom>
-        <img width="200px" alt="嚐飽途" src={foodTravelLogo} />
+        <img width="250px" alt="嚐飽途" src={newLogo} />
       </Bottom>
     </>
   );
