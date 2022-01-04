@@ -1,4 +1,3 @@
-const Source_API = `https://argus.work/argus/api/v1/data`;
 
 function getDay(day) {
   let today = new Date();
@@ -21,24 +20,21 @@ function doHandleMonth(month) {
 }
 
 let nowDate = getDay(0);
-let LastNowDate = getDay(-7);
+let LastNowDate = getDay(-30);
 //等等改-90
 
-let temporarySourse =
-  "anntw,anue,chinatimes,cmmedia,cna,ebc,epochtimes,ettoday,ftv,gvm,ltn,mirrormedia,newtalk,nownews,rti,setn,storm,thenewslens,ttv,tvbs,udn,upmedia,yahoo,yam,reuters,facebook,ptt,ctee";
-
-export const TodayFoodApi = `${Source_API}?key=美食&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
-
-export const FoodApi = `${Source_API}?key=美食&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
-
-export const TodayTravelApi = `${Source_API}?key=旅遊&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
-
-export const TravelApi = `${Source_API}?key=旅遊&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
-
-export const TodayRestaurantApi = `${Source_API}?key=餐廳&start_date=${nowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
-
-export const RestaurantApi = `${Source_API}?key=餐廳&start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${temporarySourse}`;
-
 export const AloneFoodApi = (id) => {
-  return `${Source_API}/${id}`;
+  return `${main_api}/${id}`;
 };
+
+const main_api = `https://eatravel.info/eatravel/api/v1/data`;
+
+export const SourceApi = `${main_api}/showWeb`;
+
+export function NewsTodayApi(sourse, name) {
+  return `${main_api}?start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}&crawler_Cate=${name}`;
+}
+
+export function NewsApi(sourse) {
+  return `${main_api}?start_date=${LastNowDate}&end_date=${nowDate}&crawler_Web=${sourse}`;
+}

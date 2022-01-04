@@ -223,16 +223,6 @@ const FoodDown = styled.div`
   ${(props) => props.$move && `max-height:600px;border-top:1px solid black;`}
 `;
 
-const WebLogoText = styled.div`
-  color: black;
-  font-size: 16px;
-  font-weight: 500;
-
-  @media screen and (max-width: 900px) {
-    display: none;
-  }
-`;
-
 const HeaderDownTitleBox = ({ to, text, letter }) => {
   return (
     <HeaderDownTitleLink to={to}>
@@ -245,6 +235,7 @@ const HeaderDownTitleBox = ({ to, text, letter }) => {
 
 const MenuLeftSubTitleText = styled(Link)`
   width: 80%;
+
   height: 0px;
   text-decoration: none;
   font-size: 16px;
@@ -550,11 +541,10 @@ export default function Header() {
       <MainFieldHeadder>
         <MainFieldHeadderTitle to="/">
           <img
-            style={{ width: "150px",marginTop:"8px"}}
+            style={{ width: "115px", marginTop: "8px" }}
             alt="嚐飽途"
             src={newLogo}
           />
-          
         </MainFieldHeadderTitle>
         <CoverHeadderText>
           <CoverHeadderTitle
@@ -615,7 +605,7 @@ export default function Header() {
             onMouseOut={() => {
               dropDownOff(setHealthyDropDown);
             }}
-            to="/food"
+            to="/healthy"
           >
             <HeaderTitle>
               健康
@@ -634,7 +624,7 @@ export default function Header() {
             onMouseOut={() => {
               dropDownOff(setEntertainmentDropDown);
             }}
-            to="/food"
+            to="/casual"
           >
             <HeaderTitle>
               娛樂
