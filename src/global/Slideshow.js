@@ -1,9 +1,9 @@
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-import cover from "./images/cover.png";
+import cover from "../images/cover.png";
 import styled from "styled-components";
-import coverTest01 from "./images/coverTest01.jpg";
-import coverTest02 from "./images/coverTest02.jpg";
+import coverTest01 from "../images/coverTest01.jpg";
+import coverTest02 from "../images/coverTest02.jpg";
 
 const SlideMainBox = styled.div`
   margin-bottom: 150px;

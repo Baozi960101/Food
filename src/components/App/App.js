@@ -13,9 +13,9 @@ import {
   useParams,
   useLocation,
 } from "react-router-dom";
-import { SlugContext } from "../../context";
-import { ScrollToTop } from "../../ScrollToTop";
-import Slideshow from "../../Slideshow";
+import { SlugContext } from "../../global/context";
+import { ScrollToTop } from "../../global/ScrollToTop";
+import Slideshow from "../../global/Slideshow";
 
 export default function App() {
   const [fooDSlug, setFooDSlug] = useState("");

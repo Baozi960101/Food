@@ -1,4 +1,3 @@
-
 function getDay(day) {
   let today = new Date();
   let targetday_milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;

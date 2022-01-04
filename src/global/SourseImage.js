@@ -1,10 +1,10 @@
-import randomFood02 from "./images/randomFood02.jpg";
-import randomFood06 from "./images/randomFood06.jpg";
-import randomFood07 from "./images/randomFood07.jpg";
-import randomFood09 from "./images/randomFood09.jpg";
-import foodFbLogo from "./images/foodFbLogo.jpeg";
-import foodNewsLogo from "./images/foodNewsLogo.jpeg";
-import foodPttLogo from "./images/foodPttLogo.jpeg";
+import randomFood02 from "../images/randomFood02.jpg";
+import randomFood06 from "../images/randomFood06.jpg";
+import randomFood07 from "../images/randomFood07.jpg";
+import randomFood09 from "../images/randomFood09.jpg";
+import foodFbLogo from "../images/foodFbLogo.jpeg";
+import foodNewsLogo from "../images/foodNewsLogo.jpeg";
+import foodPttLogo from "../images/foodPttLogo.jpeg";
 
 export function judgmentSourseShowImage(
   crawler_No,

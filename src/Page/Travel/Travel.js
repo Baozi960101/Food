@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import RightArrow from "../../images/rightArrow.svg";
 import LeftArrow from "../../images/leftArrow.svg";
-import { judgmentSourseShowImage } from "../../SourseImage";
-import { NewsTodayApi } from "../../API";
+import { judgmentSourseShowImage } from "../../global/SourseImage";
+import { NewsTodayApi } from "../../global/API";
 
 const FoodParallelBox = styled.div`
   max-width: 960px;

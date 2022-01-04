@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Square } from "./IrregularGraphics";
-import { AloneFoodApi, NewsTodayApi } from "../../global/API";
+import { AloneFoodApi, TodayFoodApi, NewsTodayApi } from "../../global/API";
 import { SlugContext } from "../../global/context";
 import { Link } from "react-router-dom";
 import { judgmentSourseShowImage } from "../../global/SourseImage";
@@ -292,6 +292,12 @@ async function fetchAloneFood(fooDSlug, setDetailedArticleOnlyPost, setLoad) {
   setLoad(false);
 }
 
+async function fetchTodayFood(setDetailedArticlePost) {
+  const res = await fetch(TodayFoodApi);
+  const { data } = await res.json();
+  setDetailedArticlePost(data);
+}
+
 function leftPost(detailedArticleOnlyPost) {
   return detailedArticleOnlyPost.map((data) => {
     return (
@@ -336,8 +342,9 @@ function rightPost(foodPostItems) {
   });
 }
 
-export default function SingleArticle() {
+export default function DetailedArticle() {
   const { fooDSlug } = useContext(SlugContext);
+  const [detailedArticlePost, setDetailedArticlePost] = useState([]);
   const [detailedArticleOnlyPost, setDetailedArticleOnlyPost] = useState([]);
   const [foodPostItems, setFoodPostItems] = useState([]);
   const [load, setLoad] = useState(false);
@@ -345,12 +352,19 @@ export default function SingleArticle() {
   useEffect(() => {
     if (fooDSlug !== "") {
       fetchAloneFood(fooDSlug, setDetailedArticleOnlyPost, setLoad);
-      fetchSingleArticle();
     }
+    fetchTodayFood(setDetailedArticlePost);
     return () => {};
   }, [fooDSlug]);
 
-  async function fetchSingleArticle() {
+  useEffect(() => {
+    if (detailedArticlePost.length === 0) {
+      return;
+    }
+    foodPageArticle();
+  }, [detailedArticlePost]);
+
+  async function foodPageArticle() {
     const res = await fetch(
       `https://eatravel.info/eatravel/api/v1/data/showWeb`
     );
